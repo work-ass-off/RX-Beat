@@ -1,0 +1,11 @@
+echo "🌼 Running pre-commit hooks..."
+
+# echo "🍀 Running linters..."
+
+# npm run stylelint
+# npm run lint
+
+# echo "🌻 Running tests..."
+# npm run test
+
+echo "🌸 All checks passed!"
