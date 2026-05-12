@@ -6,8 +6,6 @@
 
 <!-- Link to the  GitHub issue-->
 
-- Fixes #
-
 ## 🛠️ Type of Change
 
 <!-- Please delete options that are not relevant. -->
