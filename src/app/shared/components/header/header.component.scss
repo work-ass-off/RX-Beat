@@ -1,0 +1,23 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  width: 100%;
+  @include flex($justify: end);
+}
+h1 {
+  @include flex($direction: column, $gap: 0);
+  margin-right: auto;
+  // flex: 0 0 10rem;
+
+  .logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--action-primary);
+    font-family: var(--font-cursive);
+  }
+  .subtitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-sub);
+  }
+}
