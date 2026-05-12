@@ -1,0 +1,32 @@
+@use 'mixins' as *;
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: sans-serif;
+  margin: 0 auto;
+  font-family: var(--font-main);
+}
+
+h1 {
+  color: var(--action-primary);
+  font-family: var(--font-cursive);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  @include flex($direction: column);
+}
+
+.btn {
+  @include btn();
+}
+
+.btn-primary {
+  @include btn(
+    $color: var(--bg-base),
+    $bg: var(--action-primary),
+    $bg-hover: var(--action-primary-hover)
+  );
+}
