@@ -1,3 +1,5 @@
+@use 'mixins' as *;
+
 body {
   background-color: var(--bg-base);
   color: var(--text-main);
@@ -14,6 +16,17 @@ h1 {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
-  text-align: center;
+  @include flex($direction: column);
+}
+
+.btn {
+  @include btn();
+}
+
+.btn-primary {
+  @include btn(
+    $color: var(--bg-base),
+    $bg: var(--action-primary),
+    $bg-hover: var(--action-primary-hover)
+  );
 }

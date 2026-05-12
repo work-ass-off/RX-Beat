@@ -1,7 +1,7 @@
+@use 'app/styles/reset' as *;
 @use 'app/styles/themes' as *;
 @use 'app/styles/fonts' as *;
 @use 'app/styles/base' as *;
-// @use 'app/styles/mixins' as *;
 @use 'app/styles/media' as *;
 
 @include theme-styles;
