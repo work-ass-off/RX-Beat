@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'app/styles/themes' as *;
+@use 'app/styles/fonts' as *;
+@use 'app/styles/base' as *;
+// @use 'app/styles/mixins' as *;
+@use 'app/styles/media' as *;
+
+@include theme-styles;

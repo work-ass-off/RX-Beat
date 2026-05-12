@@ -1,0 +1,45 @@
+@use 'fonts' as fonts;
+
+@mixin theme-styles {
+  :root {
+    // Backgrounds
+    --bg-base: #121212;
+    --bg-surface: #181818;
+    --bg-surface-elevated: #282828;
+
+    // Text
+    --text-main: #ffffff;
+    --text-sub: #b3b3b3;
+    --text-bright: #ffffff;
+
+    // Interactive
+    --action-primary: #1db954;
+    --action-primary-hover: #1ed760;
+    --action-surface: rgba(255, 255, 255, 0.1);
+
+    // Misc
+    --border: #282828;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  [data-theme='light'] {
+    // Backgrounds
+    --bg-base: #ffffff;
+    --bg-surface: #f6f6f6;
+    --bg-surface-elevated: #efefef;
+
+    // Text
+    --text-main: #121212;
+    --text-sub: #535353;
+    --text-bright: #000000;
+
+    // Interactive
+    --action-primary: #1db954;
+    --action-primary-hover: #169c46;
+    --action-surface: rgba(0, 0, 0, 0.05);
+
+    // Misc
+    --border: #e0e0e0;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+}
