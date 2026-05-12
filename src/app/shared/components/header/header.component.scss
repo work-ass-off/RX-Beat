@@ -2,12 +2,12 @@
 
 :host {
   width: 100%;
+  padding: 1rem 0;
   @include flex($justify: end);
 }
 h1 {
   @include flex($direction: column, $gap: 0);
   margin-right: auto;
-  // flex: 0 0 10rem;
 
   .logo {
     font-size: 2rem;
@@ -20,4 +20,10 @@ h1 {
     font-weight: 600;
     color: var(--text-sub);
   }
+}
+
+.sign-up {
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: none;
 }

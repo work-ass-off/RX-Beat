@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { App } from '../../../app';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'header[app-header]',
-  imports: [],
+  imports: [SearchComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  host: { class: 'section' },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   private app = inject(App);
