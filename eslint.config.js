@@ -49,5 +49,11 @@ module.exports = defineConfig([
       'prettier/prettier': ['error', { parser: 'angular' }],
     },
   },
+  {
+    files: ['**/*.abstract.ts'],
+    rules: {
+      '@angular-eslint/prefer-inject': 'off',
+    },
+  },
   eslintConfigPrettier,
 ]);
