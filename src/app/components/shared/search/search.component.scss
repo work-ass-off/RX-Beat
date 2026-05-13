@@ -1,0 +1,49 @@
+@use '../../../styles/mixins' as *;
+.search {
+  position: relative;
+  @include flex($gap: 0.5rem);
+}
+.custom-input {
+  width: 100%;
+  padding: 1rem 3em;
+  font-family: inherit;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-elevated);
+  border-radius: 3rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.custom-input::placeholder {
+  color: var(--text-sub);
+  opacity: 0.8;
+}
+
+.custom-input:hover {
+  border-color: var(--bg-surface);
+}
+
+.custom-input:focus {
+  border-color: var(--action-primary);
+}
+
+.custom-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.custom-input:-webkit-autofill,
+.custom-input:-webkit-autofill:hover,
+.custom-input:-webkit-autofill:focus {
+  transition: all 5000s ease-in-out 0s;
+}
+
+.submit {
+  position: absolute;
+  left: 1rem;
+}
+.browser {
+  position: absolute;
+  right: 1rem;
+}

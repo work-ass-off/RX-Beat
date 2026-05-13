@@ -1,22 +1,23 @@
 @use 'mixins' as *;
+@use 'themes.scss' as *;
+
+@include theme-styles;
 
 body {
   background-color: var(--bg-base);
   color: var(--text-main);
   font-family: sans-serif;
-  margin: 0 auto;
   font-family: var(--font-main);
-}
-
-h1 {
-  color: var(--action-primary);
-  font-family: var(--font-cursive);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  @include flex($direction: column);
+  @include flex($direction: column, $gap: 1rem);
+  padding: 0 1rem;
+}
+.section {
+  width: 100%;
 }
 
 .btn {
@@ -24,9 +25,20 @@ h1 {
 }
 
 .btn-primary {
-  @include btn(
-    $color: var(--bg-base),
-    $bg: var(--action-primary),
-    $bg-hover: var(--action-primary-hover)
-  );
+  @include btn($color: var(--bg-base), $bg: var(--action-primary), $bg-hover: var(--action-primary-hover));
+}
+
+.btn-transparent {
+  @include btn($color: var(--text-main), $bg: transparent, $bg-hover: var(--bg-surface), $border: var(--text-main));
+}
+
+.btn-icon {
+  @include btn($color: var(--text-main), $bg: transparent, $bg-hover: transparent, $padding: 1rem);
+  padding: 0.25rem;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--action-primary);
+      transform: scale(1.2);
+    }
+  }
 }
