@@ -5,4 +5,4 @@
 - **Solutions:** I read Spotify Web API documentation to solve understanding how to connect API with apllication and how to get token.
 - **What I learned:** I learned how to firstly connect Spotify API with application, how to get token for web application with PKCE.
 - **Plans:** I have plan to connect Spotify API with our application.
-- **Time spent:** 6 hours
+- **Time spent:** 7 hours
