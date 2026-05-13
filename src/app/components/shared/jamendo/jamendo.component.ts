@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { JamendoService } from '../../../services/jamendo.service';
+import { JamendoService } from '../../../services/jamendo/jamendo.service';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

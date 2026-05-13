@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { App } from '../../../app';
 import { SearchComponent } from '../search/search.component';
 import { THEME } from '../../../shared/theme/theme';
+import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
 @Component({
   selector: 'header[app-header]',
-  imports: [SearchComponent],
+  imports: [SearchComponent, ThemeButtonComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from './abstract/storage.service.abstract';
+import { StorageService } from '../../abstract/storage.service.abstract';
 import { type Theme } from '../../../shared/theme/theme';
 
 type LocalStorageState = {

@@ -1,20 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { type Observable, map } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
-export interface JamendoTrack {
+export type JamendoTrack = {
   id: string;
   name: string;
   artist_name: string;
   album_name: string;
   image: string;
   audio: string;
-}
-
-interface JamendoResponse {
+};
+export type JamendoResponse = {
   results: JamendoTrack[];
-}
+};
 @Injectable({
   providedIn: 'root',
 })
