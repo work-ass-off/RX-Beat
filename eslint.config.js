@@ -21,6 +21,9 @@ module.exports = defineConfig([
     },
     rules: {
       'prettier/prettier': 'error',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/no-unused-vars': ['error', { caughtErrorsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-non-null-assertion': 'error',
       '@angular-eslint/directive-selector': [
         'error',
         {
