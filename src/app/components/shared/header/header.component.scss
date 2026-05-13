@@ -5,6 +5,7 @@
   padding: 1rem 0;
   @include flex($justify: end);
 }
+
 h1 {
   @include flex($direction: column, $gap: 0);
   margin-right: auto;
@@ -15,6 +16,7 @@ h1 {
     color: var(--action-primary);
     font-family: var(--font-cursive);
   }
+
   .subtitle {
     font-size: 0.75rem;
     font-weight: 600;
