@@ -1,0 +1,9 @@
+@for (track of tracks$ | async; track track.id) {
+  <div>
+    <img [src]="track.image" width="100" [alt]="track.name" />
+    <p>{{ track.name }}</p>
+    <p>{{ track.artist_name }}</p>
+
+    <audio controls [src]="track.audio"></audio>
+  </div>
+}
