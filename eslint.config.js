@@ -21,6 +21,10 @@ module.exports = defineConfig([
     },
     rules: {
       'prettier/prettier': 'error',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/no-unused-vars': ['error', { caughtErrorsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-non-null-assertion': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -47,6 +51,12 @@ module.exports = defineConfig([
     },
     rules: {
       'prettier/prettier': ['error', { parser: 'angular' }],
+    },
+  },
+  {
+    files: ['**/*.abstract.ts'],
+    rules: {
+      '@angular-eslint/prefer-inject': 'off',
     },
   },
   eslintConfigPrettier,

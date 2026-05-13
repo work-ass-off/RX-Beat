@@ -2,6 +2,8 @@
   <span class="logo">{{ title() }}</span
   ><span class="subtitle">inspired by Spotify</span>
 </h1>
+<p>{{ currentTheme() }}</p>
 <app-search></app-search>
+<button class="btn-primary" (click)="toggleTheme()">Theme</button>
 <button class="btn-transparent sign-up">Sign up</button>
 <button class="btn">Log in</button>
