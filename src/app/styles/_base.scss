@@ -4,6 +4,7 @@
 @include theme-styles;
 
 body {
+  box-sizing: border-box;
   background-color: var(--bg-base);
   color: var(--text-main);
   font-family: sans-serif;
@@ -17,6 +18,8 @@ body {
   padding: 0 1rem;
 }
 .section {
+  padding-bottom: 120px;
+  @include flex($direction: column, $gap: 0);
   width: 100%;
 }
 
