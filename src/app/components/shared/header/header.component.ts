@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { App } from '../../../app';
 import { SearchComponent } from '../search/search.component';
-import { THEME } from '../../../shared/theme/theme';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 
 @Component({
@@ -13,12 +12,6 @@ import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 })
 export class HeaderComponent {
   private app = inject(App);
-  private theme = inject(THEME);
-  public currentTheme = computed(() => this.theme());
 
   title = this.app.title;
-
-  toggleTheme() {
-    this.theme.toggle();
-  }
 }
