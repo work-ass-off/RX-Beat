@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { PlayerService } from '../../../services/player/player.service';
 
 @Component({
   selector: 'app-player',
@@ -7,4 +8,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './player.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerComponent {}
+export class PlayerComponent {
+  private trackService = inject(PlayerService);
+
+  track = this.trackService.currentTrack;
+}
