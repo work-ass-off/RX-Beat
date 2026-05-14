@@ -1,0 +1,19 @@
+@use '../../../../styles/themes' as *;
+
+:host {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--bg-surface-elevated);
+  gap: 10px;
+  a {
+    padding: 10px 20px;
+    background-color: var(--action-surface);
+    border-radius: 20px;
+    color: var(--text-main);
+  }
+  .active {
+    background-color: var(--action-primary);
+    color: var(--bg-surface-elevated);
+  }
+}
