@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  min-height: calc(100dvh - 100px);
+  overflow-y: auto;
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--bg-surface);
+  flex-direction: column;
+  justify-content: space-between;
+}
