@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
-type HeaderLink = {
-  name: string;
-  link: string;
-};
+import { HeaderLink } from './header.model';
 
 const HeaderLinks: HeaderLink[] = [
   { name: 'All', link: '/' },
