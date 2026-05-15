@@ -1,0 +1,11 @@
+:host {
+  background: var(--bg-surface);
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+  padding: 1rem;
+
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,18 +1,18 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { JamendoComponent } from './jamendo.component';
+import { FooterComponent } from './footer.component';
 
-describe('JamendoComponent', () => {
-  let component: JamendoComponent;
-  let fixture: ComponentFixture<JamendoComponent>;
+describe('FooterComponent', () => {
+  let component: FooterComponent;
+  let fixture: ComponentFixture<FooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [JamendoComponent],
+      imports: [FooterComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(JamendoComponent);
+    fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
