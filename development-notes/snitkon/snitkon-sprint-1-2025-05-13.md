@@ -1,4 +1,4 @@
-# Sprint 1: Project Setup & Component Basics — 2025-05-12
+# Sprint 1: Project Setup & Component Basics — 2025-05-13
 
 - **What was done:** Add abstract class for storage and create local-storage implemented from abstraction.
 - **Problems:** Spent time analyzing and deciding how to implement a highly reusable, strictly typed, and scalable storage class. The main challenge was designing a flexible architecture that avoids code duplication while remaining easy to scale for future storage requirements (like sessionStorage or other states).
