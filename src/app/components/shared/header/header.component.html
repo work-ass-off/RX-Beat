@@ -4,5 +4,6 @@
 </h1>
 <app-search></app-search>
 <button app-theme-button><ng-content /></button>
-<button class="btn-transparent sign-up">Sign up</button>
-<button class="btn">Log in</button>
+<button appLanguage class="btn" #language="language">{{ language.currentLanguage() | uppercase }}</button>
+<button class="btn-transparent sign-up">{{ 'HEADER.SIGNUP' | translate }}</button>
+<button class="btn">{{ 'HEADER.LOGIN' | translate }}</button>
