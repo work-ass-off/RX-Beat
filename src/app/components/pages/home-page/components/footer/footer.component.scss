@@ -1,0 +1,18 @@
+@use '../../../../../styles/themes' as *;
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-around;
+  padding: 20px;
+  border-top: 2px solid var(--border);
+  a:hover {
+    color: var(--action-primary-hover);
+  }
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
