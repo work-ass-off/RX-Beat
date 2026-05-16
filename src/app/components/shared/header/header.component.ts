@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { App } from '../../../app';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 import { LanguageDirective } from '../../../directives/language/language.directive';
@@ -13,8 +12,4 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
-  private app = inject(App);
-
-  title = this.app.title;
-}
+export class HeaderComponent {}

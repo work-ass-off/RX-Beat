@@ -1,6 +1,7 @@
 {
   "HEADER": {
     "LOGIN": "Log in",
-    "SIGNUP": "Sign up"
+    "SIGNUP": "Sign up",
+    "SEARCH": "Search..."
   }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { PlayerService } from '../../../services/player/player.service';
+import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
 import type { JamendoTrack } from '../../../models/jamendo.model';
 import { JamendoTracksService } from '../../../services/jamendo/jamendo-tracks/jamendo-tracks.service';
 
@@ -12,11 +12,11 @@ import { JamendoTracksService } from '../../../services/jamendo/jamendo-tracks/j
 })
 export class JamendoComponent {
   public jamendoTracksService = inject(JamendoTracksService);
-  private trackService = inject(PlayerService);
+  private trackStoreService = inject(PlayerStoreService);
 
-  tracks = this.jamendoTracksService.popularTracksResource;
+  tracks = this.jamendoTracksService.tracksResource;
 
   onClick(track: JamendoTrack): void {
-    this.trackService.setTrack(track);
+    this.trackStoreService.setTrack(track);
   }
 }
