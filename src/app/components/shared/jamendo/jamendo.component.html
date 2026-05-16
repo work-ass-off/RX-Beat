@@ -1,12 +1,12 @@
 @if (tracks.isLoading()) {
-  <p>Loading...</p>
+  <app-loader></app-loader>
 }
 
 @if (tracks.error()) {
   <p>Error loading tracks</p>
 }
 
-@if (tracks.value(); as tracks) {
+@if (!tracks.isLoading() && !tracks.error() && tracks.value(); as tracks) {
   @for (track of tracks; track track.id) {
     <button class="card" (click)="onClick(track)">
       <img [src]="track.image" width="100" [alt]="track.name" />

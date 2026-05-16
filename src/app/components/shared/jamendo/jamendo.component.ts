@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
 import type { JamendoTrack } from '../../../models/jamendo.model';
 import { JamendoTracksService } from '../../../services/jamendo/jamendo-tracks/jamendo-tracks.service';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-jamendo',
-  imports: [],
+  imports: [LoaderComponent],
   templateUrl: './jamendo.component.html',
   styleUrl: './jamendo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
