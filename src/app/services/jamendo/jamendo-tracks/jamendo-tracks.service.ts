@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, resource, signal } from '@angular/core';
+import { inject, Injectable, resource, signal } from '@angular/core';
 import { JamendoService } from '../jamendo.service';
 import type { JamendoResponse, JamendoTrack } from '../../../models/jamendo.model';
 
@@ -9,11 +9,11 @@ export class JamendoTracksService {
   private jamendoService = inject(JamendoService);
 
   readonly query = signal('');
-  readonly queryTrigger = computed(() => this.query());
+  readonly selectedTrack = signal<JamendoTrack | null>(null);
 
   readonly tracksResource = resource({
     loader: async ({ abortSignal }) => {
-      const query = this.queryTrigger().trim();
+      const query = this.query().trim();
       const response = await this.jamendoService.get<JamendoResponse<JamendoTrack>>(
         'tracks',
         query
@@ -28,6 +28,25 @@ export class JamendoTracksService {
             },
         abortSignal,
       );
+      return response.results;
+    },
+  });
+
+  readonly similarTracksResource = resource({
+    loader: async ({ abortSignal }) => {
+      const track = this.selectedTrack();
+
+      if (!track) return [];
+
+      const response = await this.jamendoService.get<JamendoResponse<JamendoTrack>>(
+        'tracks/similar',
+        {
+          id: track.id,
+          limit: 30,
+        },
+        abortSignal,
+      );
+
       return response.results;
     },
   });

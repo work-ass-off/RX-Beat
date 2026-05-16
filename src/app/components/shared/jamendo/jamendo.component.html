@@ -3,7 +3,10 @@
 }
 
 @if (tracks.error()) {
-  <p>Error loading tracks</p>
+  <div class="error">
+    <p>{{ tracks.error()?.message }}</p>
+    <button class="btn" (click)="tracks.reload()">Click to reload</button>
+  </div>
 }
 
 @if (!tracks.isLoading() && !tracks.error() && tracks.value(); as tracks) {

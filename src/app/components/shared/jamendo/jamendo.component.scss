@@ -3,6 +3,9 @@
 :host {
   @include flex($wrap: wrap, $align: stretch, $justify: center, $gap: 0.2rem);
 }
+.error {
+  @include flex($direction: column);
+}
 .card {
   background: var(--bg-surface-elevated);
   color: var(--text-main);
