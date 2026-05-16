@@ -7,7 +7,7 @@ export type JamendoResponse<T> = {
     results_count: number;
   };
 
-  results: T[];
+  results: T;
 };
 
 export type JamendoBaseQueryParams = {
@@ -35,4 +35,11 @@ export type JamendoTrack = {
 
   image: string;
   audio: string;
+};
+
+export type JamendoAutocompleteResponse = {
+  tracks: string[];
+  artists: string[];
+  albums: string[];
+  tags: string[];
 };
