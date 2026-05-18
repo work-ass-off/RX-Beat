@@ -1,25 +1,25 @@
 export type MusicGenre = 'rock' | 'pop' | 'hip-hop' | 'electronic' | 'jazz';
 
-export interface Track {
+export type Track = {
   id: number;
   title: string;
   artist: string;
   year: number;
   duration: string;
-}
+};
 
-export interface Album {
+export type Album = {
   id: number;
   title: string;
   artist: string;
   year: number;
   tracks: Track[];
-}
+};
 
-export interface GenreCollection {
+export type GenreCollection = {
   genreTitle: string;
   albums: Album[];
-}
+};
 
 export type MusicCollectionByGenre = Record<MusicGenre, GenreCollection>;
 
@@ -400,7 +400,7 @@ export const MUSIC_COLLECTION_MOCK: MusicCollectionByGenre = {
         tracks: [
           {
             id: 24,
-            title: 'They Can\'t Take That Away from Me',
+            title: "They Can't Take That Away from Me",
             artist: 'Ella Fitzgerald & Louis Armstrong',
             year: 1956,
             duration: '4:42',

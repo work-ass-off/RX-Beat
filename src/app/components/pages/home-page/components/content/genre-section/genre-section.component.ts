@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { AlbumPreviewComponent } from './album-preview/album-preview.component';
-import { GenreCollection } from '../music-collection.mock';
+import type { GenreCollection } from '../music-collection.mock';
 
 @Component({
   selector: 'app-genre-section',

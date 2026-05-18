@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Album } from '../../music-collection.mock';
+import type { Album } from '../../music-collection.mock';
 
 @Component({
   selector: 'app-album-preview',
