@@ -4,7 +4,6 @@
 @include theme-styles;
 
 body {
-  box-sizing: border-box;
   background-color: var(--bg-base);
   color: var(--text-main);
   font-family: sans-serif;
@@ -44,4 +43,41 @@ body {
       transform: scale(1.2);
     }
   }
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ticker-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.ticker-wrapper:hover .ticker-text {
+  display: inline-block;
+  overflow: visible;
+  text-overflow: clip;
+  padding-left: 100%;
+  animation: scroll-text 7s linear infinite;
 }

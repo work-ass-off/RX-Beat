@@ -1,24 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { JamendoService } from '../../../services/jamendo/jamendo.service';
-import { AsyncPipe } from '@angular/common';
-import { PlayerService } from '../../../services/player/player.service';
-import type { JamendoTrack } from '../../../models/jamendo.model';
+import { JamendoTracksService } from '../../../services/jamendo/jamendo-tracks/jamendo-tracks.service';
+import { LoaderComponent } from '../loader/loader.component';
+import { TrackCardComponent } from '../track-card/track-card.component';
 
 @Component({
   selector: 'app-jamendo',
-  imports: [AsyncPipe],
+  imports: [LoaderComponent, TrackCardComponent],
   templateUrl: './jamendo.component.html',
   styleUrl: './jamendo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JamendoComponent {
-  private jamendoService = inject(JamendoService);
-  private trackService = inject(PlayerService);
+  public jamendoTracksService = inject(JamendoTracksService);
 
-  tracks$ = this.jamendoService.getPopularTracks();
-
-  onClick(track: JamendoTrack): void {
-    // this.trackService.clearTrack();
-    this.trackService.setTrack(track);
-  }
+  tracks = this.jamendoTracksService.tracksResource;
 }

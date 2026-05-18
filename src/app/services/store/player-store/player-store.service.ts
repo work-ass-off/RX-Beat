@@ -1,10 +1,10 @@
 import { Injectable, signal } from '@angular/core';
-import type { JamendoTrack } from '../../models/jamendo.model';
+import type { JamendoTrack } from '../../../models/jamendo.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlayerService {
+export class PlayerStoreService {
   readonly currentTrack = signal<JamendoTrack | null>(null);
 
   setTrack(track: JamendoTrack): void {

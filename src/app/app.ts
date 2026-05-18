@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { JamendoComponent } from './components/shared/jamendo/jamendo.component';
@@ -11,10 +11,4 @@ import { FooterComponent } from './components/shared/footer/footer.component';
   styleUrl: './app.scss',
   host: { class: 'container' },
 })
-export class App {
-  readonly title = signal('RX-Beat');
-
-  changeTitle(title: string) {
-    this.title.set(title);
-  }
-}
+export class App {}

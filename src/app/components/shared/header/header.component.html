@@ -1,9 +1,6 @@
-<h1>
-  <span class="logo">{{ title() }}</span
-  ><span class="subtitle">inspired by Spotify</span>
-</h1>
+<h1><span class="logo">RX Beat</span><span class="subtitle">inspired by Spotify</span></h1>
 <app-search></app-search>
 <button app-theme-button><ng-content /></button>
-<button appLanguage class="btn" #language="language">{{ language.currentLanguage() | uppercase }}</button>
+<button appLanguage class="btn-icon" #language="language">{{ language.currentLanguage() | uppercase }}</button>
 <button class="btn-transparent sign-up">{{ 'HEADER.SIGNUP' | translate }}</button>
 <button class="btn">{{ 'HEADER.LOGIN' | translate }}</button>
