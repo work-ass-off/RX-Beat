@@ -1,0 +1,3 @@
+@for (link of links; track link.name) {
+  <a [routerLink]="link.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ link.name }}</a>
+}

@@ -1,20 +1,20 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { TrackCardComponent } from './track-card.component';
+import { ContentComponent } from './content.component';
 
-describe('TrackCardComponent', () => {
-  let component: TrackCardComponent;
-  let fixture: ComponentFixture<TrackCardComponent>;
+describe('ContentComponent', () => {
+  let component: ContentComponent;
+  let fixture: ComponentFixture<ContentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrackCardComponent],
+      imports: [ContentComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TrackCardComponent);
+    fixture = TestBed.createComponent(ContentComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {

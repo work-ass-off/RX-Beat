@@ -1,20 +1,20 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { TrackCardComponent } from './track-card.component';
+import { FooterComponent } from './footer.component';
 
-describe('TrackCardComponent', () => {
-  let component: TrackCardComponent;
-  let fixture: ComponentFixture<TrackCardComponent>;
+describe('FooterComponent', () => {
+  let component: FooterComponent;
+  let fixture: ComponentFixture<FooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrackCardComponent],
+      imports: [FooterComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TrackCardComponent);
+    fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
