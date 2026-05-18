@@ -4,7 +4,6 @@ import { GenreSectionComponent } from './genre-section/genre-section.component';
 
 @Component({
   selector: 'app-content',
-  standalone: true,
   imports: [GenreSectionComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss',

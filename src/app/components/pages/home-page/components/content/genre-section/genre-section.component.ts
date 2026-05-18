@@ -4,7 +4,6 @@ import type { GenreCollection } from '../music-collection.mock';
 
 @Component({
   selector: 'app-genre-section',
-  standalone: true,
   imports: [AlbumPreviewComponent],
   templateUrl: './genre-section.component.html',
   styleUrl: './genre-section.component.scss',

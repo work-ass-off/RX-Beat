@@ -5,7 +5,6 @@ import { ContentComponent } from './components/content/content.component';
 
 @Component({
   selector: 'app-home-page',
-  standalone: true,
   imports: [HeaderComponent, FooterComponent, ContentComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
