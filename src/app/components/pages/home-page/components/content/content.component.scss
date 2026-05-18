@@ -1,0 +1,53 @@
+@use '../../../../../styles/themes' as *;
+
+.genre {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px;
+    .albums {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        .album{
+            width: 200px;
+            height: inherit;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            .album-cover {
+                width: 180px;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+            .album-info {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                   justify-content: space-between;
+                   height: 100%;
+                    .album-title {
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                    .album-artist {
+                        font-size: 14px;
+                        color: #666;
+                    }
+                }
+            &:hover {
+                transition: background-color 0.3s ease;
+                background-color: var(--action-surface);
+                cursor: pointer;
+            }
+        }
+          
+    }
+
+  
+}

@@ -1,0 +1,6 @@
+<h2>{{ genre().genreTitle }}</h2>
+<div class="albums">
+  @for (album of genre().albums; track album.id) {
+    <app-album-preview [album]="album"></app-album-preview>
+  }
+</div>
