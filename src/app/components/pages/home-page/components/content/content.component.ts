@@ -16,5 +16,4 @@ export class ContentComponent {
   get genres() {
     return Object.values(this.musicCollectionMock());
   }
-
 }
