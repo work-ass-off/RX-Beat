@@ -1,0 +1,8 @@
+# Sprint 1: Project Setup & Component Basics — 2025-05-19
+
+- **What was done:** Created and configured a GitHub Actions CI pipeline for the Angular project (rx-beat). Set up automatic workflow triggers for Pull Requests (into sprint-* and develop branches) to run strict code validation before any code merge. Integrated automated code linting (ng lint) and code formatting checks via Prettier (prettier --check .). Customized the workflow run name (run-name) for better visibility across the team.
+- **Problems:** Faced an Angular CLI compatibility error due to an outdated default Node.js version (v18) in the workflow environment. The pipeline failed during the formatting check step because Prettier detected unformatted style issues inside the newly added YAML workflow file itself.
+- **Solutions:** Removed the unnecessary matrix strategy and strictly locked the workflow environment to a single, stable Node.js version (v22.x) required by Angular. Ran npm run format locally to automatically fix the YAML file's indentation and aligned it with the project's Prettier rules.
+- **What I learned:** Learned how to set up automatic code checks (CI) via GitHub Actions. Figured out how to use dynamic expressions to display the correct branch name in pipeline runs. Also learned the importance of disabling client-side hooks (HUSKY: 0) so that the server doesn't freeze during automated builds.
+- **Plans:** Proceed to the CD (Continuous Delivery) phase tomorrow. Set up repository secrets (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID) on GitHub and add automated deployment steps to Vercel upon merging code into the develop branch.
+- **Time spent:** 4 hours.
