@@ -1,0 +1,27 @@
+<form class="search" (ngSubmit)="onSelect(searchInput.value)">
+  <button class="btn-icon material-icons submit" type="submit">search</button>
+  <label for="search"></label>
+  <input
+    #searchInput
+    class="custom-input"
+    name="search"
+    autocomplete="off"
+    id="search"
+    type="text"
+    placeholder="{{ 'HEADER.SEARCH' | translate }}"
+    [value]="jamendoTracksService.query()"
+    (input)="onInput(searchInput.value)"
+    (focus)="jamendoTracksService.isAutocompleteOpen.set(true)"
+    (blur)="jamendoTracksService.isAutocompleteOpen.set(false)"
+  />
+  <button class="btn-icon material-icons browser" type="button">browser_updated</button>
+</form>
+@if (jamendoTracksService.isAutocompleteOpen() && jamendoTracksService.autocompleteResource.value(); as suggestions) {
+  <ul class="autocomplete">
+    @for (item of suggestions.tracks; track item) {
+      <li (mousedown)="onSelect(item)">
+        {{ item }}
+      </li>
+    }
+  </ul>
+}

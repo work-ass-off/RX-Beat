@@ -1,0 +1,16 @@
+@if (tracks.isLoading()) {
+  <app-loader></app-loader>
+}
+
+@if (tracks.error()) {
+  <div class="error">
+    <p>{{ tracks.error()?.message }}</p>
+    <button class="btn" (click)="tracks.reload()">Click to reload</button>
+  </div>
+}
+
+@if (!tracks.isLoading() && !tracks.error() && tracks.value(); as tracks) {
+  @for (track of tracks; track track.id) {
+    <app-track-card [track]="track"></app-track-card>
+  }
+}
