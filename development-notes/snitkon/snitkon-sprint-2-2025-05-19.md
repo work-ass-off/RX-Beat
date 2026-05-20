@@ -1,4 +1,4 @@
-# Sprint 1: Project Setup & Component Basics — 2025-05-19
+# Sprint 2:  Routing & Signals — 2025-05-19
 
 - **What was done:** Created and configured a GitHub Actions CI pipeline for the Angular project (rx-beat). Set up automatic workflow triggers for Pull Requests (into sprint-* and develop branches) to run strict code validation before any code merge. Integrated automated code linting (ng lint) and code formatting checks via Prettier (prettier --check .). Customized the workflow run name (run-name) for better visibility across the team.
 - **Problems:** Faced an Angular CLI compatibility error due to an outdated default Node.js version (v18) in the workflow environment. The pipeline failed during the formatting check step because Prettier detected unformatted style issues inside the newly added YAML workflow file itself.
