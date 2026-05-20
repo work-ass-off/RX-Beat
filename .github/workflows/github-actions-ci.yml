@@ -48,8 +48,8 @@ jobs:
 
       - name: Deploy Preview to Vercel
         if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
-        run: npx vercel deploy --prebuilt
+        run: npx vercel deploy
 
       - name: Deploy Production to Vercel
         if: (github.ref_name == 'develop') && github.event_name == 'push'
-        run: npx vercel deploy --prebuilt --prod
+        run: npx vercel deploy --prod
