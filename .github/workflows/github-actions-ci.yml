@@ -1,18 +1,21 @@
-name: RX-Beat CI
+name: RX-Beat CI/CD
 run-name: ${{ github.actor }} triggered RX Beat CI on ${{ github.head_ref || github.ref_name }} 🎧
 
 on:
   push:
-    branches: [main, develop]
+    branches: [develop]
   pull_request:
     branches: [develop, 'sprint-*']
 
 jobs:
-  ci:
+  ci-cd:
     runs-on: ubuntu-latest
 
     env:
       HUSKY: 0
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
     strategy:
       matrix:
@@ -37,5 +40,16 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Pull Vercel Environment Information
+        run: npx vercel pull --yes --environment=preview
+
       - name: Build project
         run: npm run build
+
+      - name: Deploy Preview to Vercel
+        if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
+        run: npx vercel deploy --prebuilt
+
+      - name: Deploy Production to Vercel
+        if: (github.ref_name == 'develop') && github.event_name == 'push'
+        run: npx vercel deploy --prebuilt --prod
