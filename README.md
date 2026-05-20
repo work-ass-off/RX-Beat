@@ -33,7 +33,7 @@ The goal of the project is to practice:
 
 ---
 
-## 🌐[Deployment Vercel](https://rxbeat-spotify-web-player.vercel.app/)
+## 🌐[Deployment Vercel](https://rx-beat.vercel.app/)
 
 ---
 
