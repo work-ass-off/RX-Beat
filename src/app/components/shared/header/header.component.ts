@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 import { LanguageDirective } from '../../../directives/language/language.directive';
 import { UpperCasePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header[app-header]',
@@ -12,4 +13,10 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  private router = inject(Router);
+
+  onLogin(): void {
+    this.router.navigate(['/login']);
+  }
+}

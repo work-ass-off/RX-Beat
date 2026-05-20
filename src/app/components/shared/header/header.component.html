@@ -3,4 +3,4 @@
 <button app-theme-button><ng-content /></button>
 <button appLanguage class="btn-icon" #language="language">{{ language.currentLanguage() | uppercase }}</button>
 <button class="btn-transparent sign-up">{{ 'HEADER.SIGNUP' | translate }}</button>
-<button class="btn">{{ 'HEADER.LOGIN' | translate }}</button>
+<button class="btn" (click)="onLogin()">{{ 'HEADER.LOGIN' | translate }}</button>

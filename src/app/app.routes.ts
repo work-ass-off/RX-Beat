@@ -32,7 +32,6 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
     path: 'login',
     loadComponent: () => import('./components/pages/login-page/login-page.component').then((m) => m.LoginPageComponent),
