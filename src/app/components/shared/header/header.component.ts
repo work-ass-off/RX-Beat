@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 import { LanguageDirective } from '../../../directives/language/language.directive';
