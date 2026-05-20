@@ -7,7 +7,11 @@
 }
 
 h1 {
-  @include flex($direction: column, $gap: 0);
+  .link-wrapper {
+    @include flex($direction: column, $gap: 0);
+    // margin-right: auto;
+  }
+  // @include flex($direction: column, $gap: 0);
   margin-right: auto;
 
   .logo {
