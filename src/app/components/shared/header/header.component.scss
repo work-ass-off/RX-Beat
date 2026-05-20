@@ -9,9 +9,7 @@
 h1 {
   .link-wrapper {
     @include flex($direction: column, $gap: 0);
-    // margin-right: auto;
   }
-  // @include flex($direction: column, $gap: 0);
   margin-right: auto;
 
   .logo {
