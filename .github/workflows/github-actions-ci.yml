@@ -40,16 +40,13 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
-      - name: Pull Vercel Environment Information
-        run: npx vercel pull --yes --environment=preview
-
       - name: Build project
         run: npm run build
 
       - name: Deploy Preview to Vercel
         if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
-        run: npx vercel deploy
+        run: npx vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
 
       - name: Deploy Production to Vercel
         if: (github.ref_name == 'develop') && github.event_name == 'push'
-        run: npx vercel deploy --prod
+        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
