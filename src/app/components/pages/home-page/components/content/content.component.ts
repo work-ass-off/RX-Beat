@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { MUSIC_COLLECTION_MOCK, type MusicCollectionByGenre } from './music-collection.mock';
+import { type GenreCollection, MUSIC_COLLECTION_MOCK, type MusicCollectionByGenre } from './music-collection.mock';
 import { GenreSectionComponent } from './genre-section/genre-section.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { GenreSectionComponent } from './genre-section/genre-section.component';
 export class ContentComponent {
   protected readonly musicCollectionMock = input<MusicCollectionByGenre>(MUSIC_COLLECTION_MOCK);
 
-  public get genres() {
+  public get genres(): GenreCollection[] {
     return Object.values(this.musicCollectionMock());
   }
 }
