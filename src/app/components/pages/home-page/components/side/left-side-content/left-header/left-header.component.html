@@ -1,0 +1,21 @@
+@let collapsed = isCollapsed();
+<div class="top" [class.centered]="collapsed">
+  @if (!collapsed) {
+    <h3 class="top_title">Моя медиатека</h3>
+  }
+  @if (!collapsed) {
+    <button class="btn">
+      <p>Создать</p>
+    </button>
+  } @else {
+    <button class="btn-icon material-icons">add</button>
+  }
+</div>
+@if (!collapsed) {
+  <div class="bottom">
+    <button class="btn">Плейлист</button>
+    <button class="btn">Исполнители</button>
+    <button class="btn">Альбомы</button>
+    <button class="btn">Подкасты</button>
+  </div>
+}

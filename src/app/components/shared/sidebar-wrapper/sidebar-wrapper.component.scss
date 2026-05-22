@@ -1,0 +1,62 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  position: relative;
+  background-color: var(--bg-surface-elevated);
+  transition: width 0.5s cubic-bezier(0.3, 0, 0, 1);
+  border-radius: 20px;
+
+  .sidebar-header {
+    padding: 1rem 1.5rem;
+    .collapse-btn {
+      border: none;
+      transition: all 0.5s ease;
+    }
+
+    ::ng-deep .top_title {
+      transition: transform 0.5s cubic-bezier(0.3, 0, 0, 1);
+    }
+  }
+
+  // TODO: Sidebar Open (Default state)
+  &:not(.collapsed) {
+    .sidebar-header {
+      position: relative;
+
+      .collapse-btn {
+        position: absolute;
+        left: 0;
+        top: 17%;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 10;
+      }
+
+      &:hover {
+        .collapse-btn {
+          opacity: 1;
+          transform: translateX(1rem);
+          visibility: visible;
+        }
+
+        ::ng-deep .top_title {
+          transform: translateX(2rem);
+        }
+      }
+    }
+  }
+
+  // TODO: Sidebar Close
+
+  &.collapsed {
+    @include flex($direction: column, $justify: center);
+
+    .sidebar-header {
+      @include flex($direction: column, $gap: 0.5rem);
+
+      .collapse-btn {
+        position: relative;
+      }
+    }
+  }
+}

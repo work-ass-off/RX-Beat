@@ -1,21 +1,9 @@
-@let collapsed = isCollapsed();
-<div class="sidebar" [class.collapsed]="collapsed" [style.width]="collapsed ? '72px' : expandedWidth">
-  <div class="sidebar-header">
-    <ng-content select="[sidebarHeader]"></ng-content>
+<div class="sidebar-header">
+  <button (click)="toggle()" class="btn-icon material-symbols-rounded collapse-btn">left_panel_close</button>
 
-    @if (showArrow || collapsed) {
-      <button
-        (click)="toggle()"
-        class="collapse-btn"
-        [ngClass]="[collapsed ? 'arrow-right' : 'arrow-left', 'btn']"
-        type="button"
-      >
-        >
-      </button>
-    }
-  </div>
+  <ng-content select="[sidebarHeader]"></ng-content>
+</div>
 
-  <div class="sidebar-content">
-    <ng-content select="[sidebarBody]"></ng-content>
-  </div>
+<div class="sidebar-content">
+  <ng-content select="[sidebarBody]"></ng-content>
 </div>
