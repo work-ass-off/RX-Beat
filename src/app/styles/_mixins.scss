@@ -1,10 +1,9 @@
 @mixin flex($direction: row, $align: center, $justify: center, $wrap: nowrap, $gap: 1rem) {
   display: flex;
-  flex-direction: $direction;
+  flex-flow: $direction $wrap;
+  gap: $gap;
   align-items: $align;
   justify-content: $justify;
-  flex-wrap: $wrap;
-  gap: $gap;
 }
 
 @mixin btn(
@@ -19,13 +18,13 @@
   gap: 0.25rem;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
   padding: $padding;
+  font-weight: 600;
+  color: $color;
+  outline: none;
+  background-color: $bg;
   border: 1px solid $border;
   border-radius: 3rem;
-  color: $color;
-  background-color: $bg;
-  outline: none;
   transform: scale(1);
 
   &:disabled {
@@ -42,6 +41,7 @@
       transform: scale(1.05);
     }
   }
+
   @media (width <= 750px) {
     padding: 1rem 2rem;
   }

@@ -3,6 +3,7 @@
 :host {
   width: 100%;
   padding: 1rem 0;
+
   @include flex($justify: end);
 }
 
@@ -10,13 +11,14 @@ h1 {
   .link-wrapper {
     @include flex($direction: column, $gap: 0);
   }
+
   margin-right: auto;
 
   .logo {
+    font-family: var(--font-cursive);
     font-size: 2rem;
     font-weight: 900;
     color: var(--action-primary);
-    font-family: var(--font-cursive);
   }
 
   .subtitle {

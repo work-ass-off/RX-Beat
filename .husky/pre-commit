@@ -3,11 +3,16 @@ echo "🌼 Running pre-commit hooks..."
 echo "🌺 Running prettier..."
 npm run format
 
-echo "🍀 Running linters..."
+echo "🍀 Running linter..."
 
-# npm run stylelint
+# npm run lint
 npm run lint:fix
 npm run lint
+
+echo "🪻 Running stylelint..."
+npm run stylelint:fix
+npm run stylelint
+
 
 # echo "🌻 Running tests..."
 # npm run test
