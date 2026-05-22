@@ -16,4 +16,5 @@ export class LocalStorageService extends StorageService<LocalStorageState> {
   constructor() {
     super(localStorage, 'rxbeat');
   }
+
 }

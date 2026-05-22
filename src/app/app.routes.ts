@@ -1,5 +1,6 @@
 import type { Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
+import { guestGuard } from './guards/guest/guest.guard';
 
 export const routes: Routes = [
   {
@@ -18,17 +19,32 @@ export const routes: Routes = [
       },
       {
         path: 'all',
-        loadComponent: () => import('./components/pages/all-page/all-page.component').then((m) => m.AllPageComponent),
+        loadComponent: () => import(`./components/pages/home-page/pages/all-page/all-page.component`).then((m) => m.AllPageComponent),
+        canActivateChild: [guestGuard],
+        children:[
+          {path: ':albumName', loadComponent: () => import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent)  
+          }
+        ]        
       },
       {
         path: 'music',
         loadComponent: () =>
-          import('./components/pages/music-page/music-page.component').then((m) => m.MusicPageComponent),
+          import('./components/pages/home-page/pages/music-page/music-page.component').then((m) => m.MusicPageComponent),
+        canActivateChild: [guestGuard],
+        children:[
+          {path: ':albumName', loadComponent: () => import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent)  
+          }
+        ] 
       },
       {
         path: 'podcasts',
         loadComponent: () =>
-          import('./components/pages/podcasts-page/podcasts-page.component').then((m) => m.PodcastsPageComponent),
+          import('./components/pages/home-page/pages/podcasts-page/podcasts-page.component').then((m) => m.PodcastsPageComponent),
+        canActivateChild: [guestGuard],
+        children:[
+          {path: ':albumName', loadComponent: () => import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent)  
+          }
+        ] 
       },
     ],
   },
