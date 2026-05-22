@@ -9,7 +9,6 @@
 
   .btn {
     @include btn($color: var(--text-main), $bg: var(--action-surface), $bg-hover: var(--action-surface));
-
     white-space: nowrap;
     border: none;
   }
