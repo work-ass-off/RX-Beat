@@ -22,10 +22,6 @@ export class AlbumPreviewComponent {
   }
 
   private toSlug(value: string): string {
-    return value
-      .toLowerCase()
-      .trim()
-      .split(' ')
-      .join('-');
+    return value.toLowerCase().trim().split(' ').join('-');
   }
 }

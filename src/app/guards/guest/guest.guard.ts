@@ -1,4 +1,4 @@
-import { CanActivateChildFn } from '@angular/router';
+import type { CanActivateChildFn } from '@angular/router';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 import { inject } from '@angular/core';
 
