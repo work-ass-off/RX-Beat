@@ -9,5 +9,5 @@ import type { Album } from '../../music-collection.mock';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumPreviewComponent {
-  readonly album = input.required<Album>();
+  public readonly album = input.required<Album>();
 }

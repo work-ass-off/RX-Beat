@@ -10,5 +10,5 @@ import type { GenreCollection } from '../music-collection.mock';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GenreSectionComponent {
-  readonly genre = input.required<GenreCollection>();
+  public readonly genre = input.required<GenreCollection>();
 }

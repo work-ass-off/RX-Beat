@@ -16,7 +16,7 @@ import { Router, RouterLink } from '@angular/router';
 export class HeaderComponent {
   private router = inject(Router);
 
-  onLogin(): void {
+  public onLogin(): void {
     this.router.navigate(['/login']);
   }
 }

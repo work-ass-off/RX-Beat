@@ -13,12 +13,12 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class SearchComponent {
   public jamendoTracksService = inject(JamendoTracksService);
 
-  onInput(track: string): void {
+  public onTypeSearch(track: string): void {
     this.jamendoTracksService.isAutocompleteOpen.set(true);
     this.jamendoTracksService.query.set(track);
   }
 
-  onSelect(track: string): void {
+  public onConfirmSearch(track: string): void {
     this.jamendoTracksService.query.set(track);
     this.jamendoTracksService.isAutocompleteOpen.set(false);
     this.jamendoTracksService.tracksResource.reload();
