@@ -1,9 +1,10 @@
 import type { AfterViewInit, ElementRef } from '@angular/core';
 import { ChangeDetectionStrategy, Component, input, output, signal, viewChild } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filters-carousel',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './filters-carousel.component.html',
   styleUrl: './filters-carousel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input, output, signal, viewChild } 
   },
 })
 export class FiltersCarouselComponent implements AfterViewInit {
-  public items = input<string[]>([]);
+  public filters = input<string[]>([]);
 
   public filterSelected = output<string>();
 
@@ -45,13 +46,13 @@ export class FiltersCarouselComponent implements AfterViewInit {
     this.showArrowRight.set(hasMoreToScroll);
   }
 
-  public selectFilter(item: string) {
-    if (this.activeFilter() === item) {
+  public selectFilter(filter: string) {
+    if (this.activeFilter() === filter) {
       this.activeFilter.set(null);
       this.filterSelected.emit('');
     } else {
-      this.activeFilter.set(item);
-      this.filterSelected.emit(item);
+      this.activeFilter.set(filter);
+      this.filterSelected.emit(filter);
     }
   }
 

@@ -1,11 +1,11 @@
 @let collapsed = isCollapsed();
 <div class="top" [class.centered]="collapsed">
   @if (!collapsed) {
-    <h3 class="top_title">Моя медиатека</h3>
+    <h3 class="top_title">{{ 'MAIN.SIDEBAR.MY_LIBRARY.TITLE' | translate }}</h3>
   }
   @if (!collapsed) {
     <button class="btn">
-      <p>Создать</p>
+      <p>{{ 'MAIN.SIDEBAR.MY_LIBRARY.CREATE' | translate }}</p>
     </button>
   } @else {
     <button class="btn-icon material-icons">add</button>
@@ -13,6 +13,6 @@
 </div>
 @if (!collapsed) {
   <div class="bottom">
-    <app-filters-carousel [items]="myFilters" (filterSelected)="onFilterChange($event)"> </app-filters-carousel>
+    <app-filters-carousel [filters]="myFilters" (filterSelected)="onFilterChange($event)"> </app-filters-carousel>
   </div>
 }

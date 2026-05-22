@@ -8,9 +8,9 @@
   }
 
   <div class="scroll-container" #scrollContainer (scroll)="onScroll()">
-    @for (item of items(); track item) {
-      <button class="btn" [class.active]="isActiveFilter() === item" (click)="selectFilter(item)">
-        {{ item }}
+    @for (filter of filters(); track filter) {
+      <button class="btn" [class.active]="isActiveFilter() === filter" (click)="selectFilter(filter)">
+        {{ filter | translate }}
       </button>
     }
   </div>
