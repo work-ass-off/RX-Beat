@@ -13,9 +13,6 @@
 </div>
 @if (!collapsed) {
   <div class="bottom">
-    <button class="btn">Плейлист</button>
-    <button class="btn">Исполнители</button>
-    <button class="btn">Альбомы</button>
-    <button class="btn">Подкасты</button>
+    <app-filters-carousel [items]="myFilters" (filterSelected)="onFilterChange($event)"> </app-filters-carousel>
   </div>
 }

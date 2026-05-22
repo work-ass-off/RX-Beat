@@ -26,7 +26,7 @@
       .collapse-btn {
         position: absolute;
         left: 0;
-        top: 17%;
+        top: 15%;
         opacity: 0;
         visibility: hidden;
         z-index: 10;
@@ -40,7 +40,7 @@
         }
 
         ::ng-deep .top_title {
-          transform: translateX(2rem);
+          transform: translateX(1rem);
         }
       }
     }

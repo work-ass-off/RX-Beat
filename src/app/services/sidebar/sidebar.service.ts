@@ -7,6 +7,5 @@ export class SidebarService {
 
   toggle() {
     this._collapse.update((val) => !val);
-    console.log('click');
   }
 }

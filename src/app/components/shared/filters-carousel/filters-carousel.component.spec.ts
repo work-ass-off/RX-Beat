@@ -1,18 +1,18 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { SidebarWrapperComponent } from './sidebar-wrapper.component';
+import { FiltersCarouselComponent } from './filters-carousel.component';
 
-describe('SidebarWrapperComponent', () => {
-  let component: SidebarWrapperComponent;
-  let fixture: ComponentFixture<SidebarWrapperComponent>;
+describe('FiltersCarouselComponent', () => {
+  let component: FiltersCarouselComponent;
+  let fixture: ComponentFixture<FiltersCarouselComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidebarWrapperComponent],
+      imports: [FiltersCarouselComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SidebarWrapperComponent);
+    fixture = TestBed.createComponent(FiltersCarouselComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
