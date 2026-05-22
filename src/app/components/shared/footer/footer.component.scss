@@ -1,11 +1,9 @@
 :host {
-  background: var(--bg-surface);
   position: fixed;
   bottom: 0;
-
+  left: 50%;
   width: 100%;
   padding: 1rem;
-
-  left: 50%;
+  background: var(--bg-surface);
   transform: translateX(-50%);
 }

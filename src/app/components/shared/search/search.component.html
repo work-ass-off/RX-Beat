@@ -1,4 +1,4 @@
-<form class="search" (ngSubmit)="onSelect(searchInput.value)">
+<form class="search" (ngSubmit)="onConfirmSearch(searchInput.value)">
   <button class="btn-icon material-icons submit" type="submit">search</button>
   <label for="search"></label>
   <input
@@ -10,7 +10,7 @@
     type="text"
     placeholder="{{ 'HEADER.SEARCH' | translate }}"
     [value]="jamendoTracksService.query()"
-    (input)="onInput(searchInput.value)"
+    (input)="onTypeSearch(searchInput.value)"
     (focus)="jamendoTracksService.isAutocompleteOpen.set(true)"
     (blur)="jamendoTracksService.isAutocompleteOpen.set(false)"
   />
@@ -19,7 +19,7 @@
 @if (jamendoTracksService.isAutocompleteOpen() && jamendoTracksService.autocompleteResource.value(); as suggestions) {
   <ul class="autocomplete">
     @for (item of suggestions.tracks; track item) {
-      <li (mousedown)="onSelect(item)">
+      <li (mousedown)="onConfirmSearch(item)">
         {{ item }}
       </li>
     }

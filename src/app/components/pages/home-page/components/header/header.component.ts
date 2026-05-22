@@ -16,5 +16,5 @@ const HeaderLinks: HeaderLink[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  readonly links = HeaderLinks;
+  public readonly links = HeaderLinks;
 }

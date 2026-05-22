@@ -24,7 +24,7 @@ export class JamendoService {
     return `${this.baseUrl}/${endpoint}?${searchParams}`;
   }
 
-  async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
+  public async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
     const response = await fetch(this.buildUrl(endpoint, params), {
       signal,
     });

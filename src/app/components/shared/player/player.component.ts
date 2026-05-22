@@ -9,6 +9,6 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerComponent {
-  private trackStoreService = inject(PlayerStoreService);
-  track = this.trackStoreService.currentTrack;
+  public trackStoreService = inject(PlayerStoreService);
+  public track = this.trackStoreService.currentTrack;
 }

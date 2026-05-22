@@ -13,5 +13,5 @@ import { TrackCardComponent } from '../track-card/track-card.component';
 export class JamendoComponent {
   public jamendoTracksService = inject(JamendoTracksService);
 
-  tracks = this.jamendoTracksService.tracksResource;
+  public tracks = this.jamendoTracksService.tracksResource;
 }
