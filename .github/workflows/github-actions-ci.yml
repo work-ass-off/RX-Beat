@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [develop, 'sprint-*']
 
+permissions:
+  deployments: write
+  pull-requests: write
+  statuses: write
+
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
@@ -43,10 +48,34 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Pull Vercel Environment Information
+        run: npx vercel pull --yes --environment=preview
+
+      - name: Vercel Build
+        run: npx vercel build
+
       - name: Deploy Preview to Vercel
         if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
-        run: npx vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prebuilt'
+          vercel-version: 'latest'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-deployment: true
+          github-environment: 'preview'
 
       - name: Deploy Production to Vercel
         if: (github.ref_name == 'develop') && github.event_name == 'push'
-        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod --prebuilt'
+          vercel-version: 'latest'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-deployment: true
+          github-environment: 'production'
