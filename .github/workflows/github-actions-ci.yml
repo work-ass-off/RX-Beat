@@ -45,8 +45,10 @@ jobs:
 
       - name: Deploy Preview to Vercel
         if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
-        run: npx vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
+        uses: amondnet/vercel-action@v25
 
       - name: Deploy Production to Vercel
         if: (github.ref_name == 'develop') && github.event_name == 'push'
-        run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-args: '--prod'
