@@ -7,13 +7,17 @@ on:
   pull_request:
     branches: [develop, 'sprint-*']
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
+  contents: read
   deployments: write
   pull-requests: write
   statuses: write
 
 jobs:
-  ci-cd:
+  ci:
     runs-on: ubuntu-latest
 
     env:
@@ -54,8 +58,40 @@ jobs:
       - name: Vercel Build
         run: npx vercel build
 
+      - name: Archive Vercel Build
+        run: tar -czf vercel-build.tar .vercel
+
+      - name: Upload Vercel Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vercel-build-${{ matrix.node-version }}
+          path: vercel-build.tar
+          retention-days: 1
+
+  deploy-preview:
+    needs: ci
+    if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: preview (${{ github.head_ref }})
+      url: ${{ steps.deploy-vercel.outputs.preview-url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Vercel Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: vercel-build-22.x
+          path: .
+
+      - name: Unpack Vercel Build
+        run: tar -xzf vercel-build.tar
+
       - name: Deploy Preview to Vercel
-        if: startsWith(github.base_ref, 'sprint-') && github.event_name == 'pull_request'
+        id: deploy-vercel
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -64,11 +100,32 @@ jobs:
           vercel-args: '--prebuilt'
           vercel-version: 'latest'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-deployment: true
-          github-environment: 'preview'
+          github-deployment: false
+
+  deploy-production:
+    needs: ci
+    if: (github.ref_name == 'develop') && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+      url: ${{ steps.deploy-vercel.outputs.preview-url }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Vercel Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: vercel-build-22.x
+          path: .
+
+      - name: Unpack Vercel Build
+        run: tar -xzf vercel-build.tar
 
       - name: Deploy Production to Vercel
-        if: (github.ref_name == 'develop') && github.event_name == 'push'
+        id: deploy-vercel
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -77,5 +134,4 @@ jobs:
           vercel-args: '--prod --prebuilt'
           vercel-version: 'latest'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-deployment: true
-          github-environment: 'production'
+          github-deployment: false
