@@ -9,12 +9,14 @@
 
   .btn {
     @include btn($color: var(--text-main), $bg: var(--action-surface), $bg-hover: var(--action-surface));
+
     white-space: nowrap;
     border: none;
   }
 
   .top {
     @include flex($justify: space-between, $align: center);
+
     width: 100%;
     padding: 0.5rem;
     overflow: hidden;
