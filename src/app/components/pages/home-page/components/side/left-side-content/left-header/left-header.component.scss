@@ -1,18 +1,22 @@
 @use '../../../../../../../styles/mixins' as *;
+
 :host {
   @include flex($direction: column, $align: flex-start);
+
   width: 100%;
   max-width: 100%;
   overflow: hidden;
 
   .btn {
     @include btn($color: var(--text-main), $bg: var(--action-surface), $bg-hover: var(--action-surface));
+
     white-space: nowrap;
     border: none;
   }
 
   .top {
     @include flex($justify: space-between, $align: center);
+
     width: 100%;
     padding: 0.5rem;
     overflow: hidden;
@@ -35,10 +39,10 @@
 
   .bottom {
     @include flex($justify: flex-start, $align: center);
+
     width: 100%;
     padding: 0.5rem;
-    overflow-y: hidden;
-    overflow-x: auto;
+    overflow: auto hidden;
     white-space: nowrap;
 
     &::-webkit-scrollbar {

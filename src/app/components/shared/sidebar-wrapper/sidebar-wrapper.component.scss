@@ -3,17 +3,18 @@
 :host {
   position: relative;
   background-color: var(--bg-surface-elevated);
-  transition: width 0.5s cubic-bezier(0.3, 0, 0, 1);
   border-radius: 20px;
+  transition: width 0.5s cubic-bezier(0.3, 0, 0, 1);
 
   .sidebar-header {
     padding: 1rem 1.5rem;
+
     .collapse-btn {
       border: none;
       transition: all 0.5s ease;
     }
 
-    ::ng-deep .top_title {
+    ::ng-deep .top-title {
       transition: transform 0.5s cubic-bezier(0.3, 0, 0, 1);
     }
   }
@@ -25,21 +26,21 @@
 
       .collapse-btn {
         position: absolute;
-        left: 0;
         top: 15%;
-        opacity: 0;
-        visibility: hidden;
+        left: 0;
         z-index: 10;
+        visibility: hidden;
+        opacity: 0;
       }
 
       &:hover {
         .collapse-btn {
+          visibility: visible;
           opacity: 1;
           transform: translateX(1rem);
-          visibility: visible;
         }
 
-        ::ng-deep .top_title {
+        ::ng-deep .top-title {
           transform: translateX(1rem);
         }
       }

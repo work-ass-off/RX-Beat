@@ -48,6 +48,12 @@ module.exports = {
     // Ошибка: .a { .b { & { ... } } }
     'block-no-redundant-nested-style-rules': true,
 
+    'selector-pseudo-element-no-unknown': [
+      true,
+      {
+        ignorePseudoElements: ['ng-deep'],
+      },
+    ],
     // === ПРАВИЛА ДЛЯ ЗНАЧЕНИЙ ===
 
     // Ключевые слова свойств только в нижнем регистре
