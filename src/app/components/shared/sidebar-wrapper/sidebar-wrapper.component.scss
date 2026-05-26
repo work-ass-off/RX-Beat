@@ -2,8 +2,9 @@
 
 :host {
   @include flex($direction: column, $justify: flex-start, $align: normal);
-  flex-shrink: 0;
+
   position: relative;
+  flex-shrink: 0;
   height: 100%;
   overflow-y: hidden;
   background-color: var(--bg-surface);
@@ -11,9 +12,9 @@
   transition: width 0.5s cubic-bezier(0.3, 0, 0, 1);
 
   .sidebar-header {
+    padding: 1rem 1.5rem;
     background-color: var(--bg-surface-elevated);
     border-radius: 1.5rem;
-    padding: 1rem 1.5rem;
 
     .collapse-btn {
       border: none;
@@ -28,9 +29,7 @@
   .sidebar-content {
     height: 100%;
     overflow-y: auto;
-
     scrollbar-width: none;
-
     -ms-overflow-style: none;
 
     &::-webkit-scrollbar {
@@ -70,6 +69,7 @@
 
   &.collapsed {
     @include flex($direction: column, $justify: flex-start);
+
     overflow-x: hidden;
 
     .sidebar-header {
