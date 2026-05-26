@@ -2,17 +2,30 @@
 
 :host {
   @include flex($align: flex-start);
+  height: 100%;
+  overflow-y: hidden;
 
   width: 100%;
 
   .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @include flex($direction: column, $justify: space-between);
     width: 100%;
-    min-height: calc(100dvh - 100px);
-    overflow-y: auto;
+    height: 100%;
+    overflow-y: hidden;
     background-color: var(--bg-surface);
     border-radius: 20px;
+
+    .main {
+      height: 100%;
+      overflow-y: auto;
+
+      scrollbar-width: none;
+
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 }
