@@ -1,1 +1,13 @@
-<p>login-page works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label for="username">Username:</label>
+  <input type="text" id="username" formControlName="username" required />
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" formControlName="password" required />
+
+  <button type="submit" class="btn">Login</button>
+</form>
+
+@if (isConfirmDialogOpen()) {
+  <app-confirm-dialog (confirmed)="onConfirmLeave()" (cancelled)="onStayOnPage()"></app-confirm-dialog>
+}

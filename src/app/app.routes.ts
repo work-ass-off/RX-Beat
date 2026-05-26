@@ -1,6 +1,7 @@
 import type { Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { guestGuard } from './guards/guest/guest.guard';
+import { loginGuard } from './guards/login/login.guard';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canDeactivate: [loginGuard],
     loadComponent: () => import('./components/pages/login-page/login-page.component').then((m) => m.LoginPageComponent),
   },
   {
