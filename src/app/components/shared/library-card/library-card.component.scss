@@ -1,0 +1,73 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  @include flex($justify: flex-start);
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+
+  .left-content {
+    position: relative;
+
+    .img {
+      border-radius: 0.5rem;
+      transition: opacity 0.5s ease;
+    }
+
+    .img-fallback {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--action-surface);
+      border-radius: 0.5rem;
+      transition: opacity 0.5s ease;
+    }
+
+    .rounded {
+      border-radius: 50%;
+    }
+
+    .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease;
+    }
+  }
+
+  .right-content {
+    @include flex($direction: column, $align: flex-start, $gap: 0.5rem);
+
+    .title {
+      font-size: 1rem;
+    }
+
+    .subtitle {
+      font-size: 0.75rem;
+    }
+  }
+
+  &:hover {
+    background-color: var(--action-surface);
+
+    .left-content {
+      .img,
+      .img-fallback {
+        opacity: 0.3;
+      }
+
+      .play {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}

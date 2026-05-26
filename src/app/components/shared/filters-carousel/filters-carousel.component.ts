@@ -28,15 +28,15 @@ export class FiltersCarouselComponent implements AfterViewInit {
 
   private scrollContainer = viewChild.required<ElementRef<HTMLDivElement>>('scrollContainer');
 
-  ngAfterViewInit() {
+  public ngAfterViewInit(): void {
     this.checkScroll();
   }
 
-  onResize() {
+  public onResize(): void {
     this.checkScroll();
   }
 
-  private checkScroll() {
+  private checkScroll(): void {
     const el = this.scrollContainer().nativeElement;
 
     const canScrollLeft = el.scrollLeft > 5;
@@ -46,7 +46,7 @@ export class FiltersCarouselComponent implements AfterViewInit {
     this.showArrowRight.set(hasMoreToScroll);
   }
 
-  public selectFilter(filter: string) {
+  public selectFilter(filter: string): void {
     if (this.activeFilter() === filter) {
       this.activeFilter.set(null);
       this.filterSelected.emit('');
@@ -56,21 +56,21 @@ export class FiltersCarouselComponent implements AfterViewInit {
     }
   }
 
-  public scrollLeft() {
+  public scrollLeft(): void {
     const el = this.scrollContainer().nativeElement;
     el.scrollBy({ left: -150, behavior: 'smooth' });
 
     setTimeout(() => this.checkScroll(), 300);
   }
 
-  public scrollRight() {
+  public scrollRight(): void {
     const el = this.scrollContainer().nativeElement;
     el.scrollBy({ left: 150, behavior: 'smooth' });
 
     setTimeout(() => this.checkScroll(), 300);
   }
 
-  public onScroll() {
+  public onScroll(): void {
     this.checkScroll();
   }
 }

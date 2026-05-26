@@ -1,0 +1,24 @@
+@let _card = card();
+<div class="left-content">
+  @if (_card.imageUrl) {
+    <img
+      class="img"
+      [class.rounded]="_card.type === 'artist'"
+      src="{{ _card.imageUrl }}"
+      alt="{{ _card.type }}"
+      width="48px"
+      height="48px"
+    />
+  } @else {
+    <div class="img-fallback" [class.rounded]="_card.type === 'artist'">
+      <span class="material-symbols-rounded"> music_note_2 </span>
+    </div>
+  }
+  <span class="play material-icons"> play_arrow </span>
+</div>
+@if (!isCollapsed()) {
+  <div class="right-content">
+    <span class="title">{{ _card.title }}</span>
+    <span class="subtitle">{{ _card.subtitle }}</span>
+  </div>
+}

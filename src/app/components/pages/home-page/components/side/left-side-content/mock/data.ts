@@ -1,0 +1,57 @@
+import type { LibraryItemProps } from '../../../../../../../models/library.models';
+
+export const mockLibraryItems: LibraryItemProps[] = [
+  {
+    id: 'lib-item-1',
+    title: 'Любимые треки',
+    subtitle: 'Плейлист • 324 трека',
+    imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=60',
+    type: 'playlist',
+    isPinned: true,
+    isActive: false,
+  },
+  {
+    id: 'lib-item-2',
+    title: 'Radiohead',
+    subtitle: 'Исполнитель',
+    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150&auto=format&fit=crop&q=60',
+    type: 'artist',
+    isPinned: true,
+    isActive: false,
+  },
+  {
+    id: 'lib-item-3',
+    title: 'After Hours',
+    subtitle: 'Альбом • The Weeknd',
+    imageUrl: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=150&auto=format&fit=crop&q=60',
+    type: 'album',
+    isPinned: false,
+    isActive: true,
+  },
+  {
+    id: 'lib-item-4',
+    title: 'Вечерний продакшн',
+    subtitle: 'Плейлист • Автор: Никита',
+    imageUrl: '',
+    type: 'playlist',
+    isPinned: false,
+    isActive: false,
+  },
+  {
+    id: 'lib-item-5',
+    title: 'The Joe Rogan Experience',
+    subtitle: 'Подкаст • Эпизод #2150',
+    imageUrl: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=150&auto=format&fit=crop&q=60',
+    type: 'show',
+    isPinned: false,
+    isActive: false,
+  },
+  {
+    id: 'lib-item-6',
+    title: 'Hans Zimmer',
+    subtitle: 'Исполнитель',
+    type: 'artist',
+    isPinned: false,
+    isActive: false,
+  },
+];

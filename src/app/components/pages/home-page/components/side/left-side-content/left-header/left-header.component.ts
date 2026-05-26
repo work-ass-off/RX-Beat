@@ -22,7 +22,7 @@ export class LeftHeaderComponent {
     'MAIN.SIDEBAR.MY_LIBRARY.FILTERS.PODCASTS',
   ];
 
-  protected onFilterChange(selected: string) {
+  public onFilterChange(selected: string): void {
     // TODO: For Debugging
     console.log(selected);
   }

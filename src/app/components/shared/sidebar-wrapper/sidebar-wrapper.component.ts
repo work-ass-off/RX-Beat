@@ -19,7 +19,7 @@ export class SidebarWrapperComponent {
   public expandedWidth = input('420px');
   public isCollapsed = this.sidebarService.isCollapsed;
 
-  public toggle() {
+  public toggle(): void {
     this.sidebarService.toggle();
   }
 }
