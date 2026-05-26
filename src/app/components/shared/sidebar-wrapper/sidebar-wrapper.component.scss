@@ -12,6 +12,8 @@
   transition: width 0.5s cubic-bezier(0.3, 0, 0, 1);
 
   .sidebar-header {
+    background-color: var(--bg-surface-elevated);
+    border-radius: 1.5rem;
     padding: 1rem 1.5rem;
     background-color: var(--bg-surface-elevated);
     border-radius: 1.5rem;
@@ -72,7 +74,6 @@
 
   &.collapsed {
     @include flex($direction: column, $justify: flex-start);
-
     overflow-x: hidden;
 
     .sidebar-header {
