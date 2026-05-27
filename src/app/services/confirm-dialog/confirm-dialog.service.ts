@@ -1,10 +1,12 @@
 import { Injectable, signal } from '@angular/core';
-import { type Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { canDeactivateResult, ManageButton } from './confirm-dialog.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfirmDialogService {
+  private manageButton = ManageButton;
   private pendingNavigation$: Subject<boolean> | undefined = undefined;
   public readonly isConfirmDialogOpen = signal(false);
   public readonly isFormDirty = signal(false);
@@ -14,7 +16,7 @@ export class ConfirmDialogService {
     return this.isFormDirty();
   }
 
-  public canDeactivate(): boolean | Observable<boolean> {
+  public canDeactivate(): canDeactivateResult {
     if (!this.hasUnsavedChanges()) {
       return true;
     }
@@ -31,18 +33,18 @@ export class ConfirmDialogService {
 
   public onManageButtonClick(value: string): void {
     this.buttonClicked.set(value);
-    if (this.buttonClicked() === 'leave') {
+    if (this.buttonClicked() === this.manageButton.CONFIRM) {
       this.onConfirmLeave();
-    } else if (this.buttonClicked() === 'stay') {
+    } else if (this.buttonClicked() === this.manageButton.CANCEL) {
       this.onStayOnPage();
     }
   }
 
-  public onConfirmLeave(): void {
+  private onConfirmLeave(): void {
     this.resolveNavigationDecision(true);
   }
 
-  public onStayOnPage(): void {
+  private onStayOnPage(): void {
     this.resolveNavigationDecision(false);
   }
 

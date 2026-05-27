@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ManageButton } from '../../../../../services/confirm-dialog/confirm-dialog.model';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -9,6 +10,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogComponent {
+  public readonly ManageButton = ManageButton;
   public buttonClicked = output<string>();
 
   public onButtonClick(buttonType: string): void {
