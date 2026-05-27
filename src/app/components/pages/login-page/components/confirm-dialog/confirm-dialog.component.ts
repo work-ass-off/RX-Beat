@@ -11,9 +11,9 @@ import { ManageButton } from '../../../../../services/confirm-dialog/confirm-dia
 })
 export class ConfirmDialogComponent {
   public readonly ManageButton = ManageButton;
-  public buttonClicked = output<string>();
+  public buttonClicked = output<ManageButton>();
 
-  public onButtonClick(buttonType: string): void {
+  public onButtonClick(buttonType: ManageButton): void {
     this.buttonClicked.emit(buttonType);
   }
 }
