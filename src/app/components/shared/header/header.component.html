@@ -3,6 +3,8 @@
     ><span class="logo">RX Beat</span><span class="subtitle">inspired by Spotify</span></a
   >
 </h1>
-<button app-theme-button><ng-content /></button>
-<button appLanguage class="btn-icon" #language="language">{{ language.currentLanguage() | uppercase }}</button>
+<button app-theme-button aria-label="Theme button"><ng-content /></button>
+<button appLanguage aria-label="Language button" class="btn-icon" #language="language">
+  {{ language.currentLanguage() | uppercase }}
+</button>
 <nav app-navigation></nav>

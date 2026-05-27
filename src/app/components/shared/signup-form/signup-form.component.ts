@@ -1,15 +1,21 @@
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RxBeatApiService, type User } from '../../../services/rx-beat-api/rx-beat-api.service';
+import { type Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signup-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AsyncPipe, JsonPipe],
   templateUrl: './signup-form.component.html',
-  styleUrl: './signup-form.component.scss',
+  styleUrls: ['./signup-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupFormComponent {
+  public readonly RxBeatApiService = inject(RxBeatApiService);
   private formBuilder = inject(FormBuilder);
+
+  public $user: Observable<User> | null = null;
 
   public signupForm = this.formBuilder.group({
     login: ['', Validators.required],
@@ -18,6 +24,13 @@ export class SignupFormComponent {
   });
 
   public onSignUp(): void {
-    console.log(this.signupForm.value);
+    if (this.signupForm.invalid) {
+      return;
+    }
+    const data = {
+      login: this.signupForm.value.login ?? '',
+      password: this.signupForm.value.password ?? '',
+    };
+    this.$user = this.RxBeatApiService.signup(data);
   }
 }
