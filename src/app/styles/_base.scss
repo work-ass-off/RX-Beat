@@ -130,3 +130,7 @@ body {
   color: var(--action-error);
   white-space: nowrap;
 }
+
+.form {
+  @include flex($direction: column, $gap: 0.5rem);
+}

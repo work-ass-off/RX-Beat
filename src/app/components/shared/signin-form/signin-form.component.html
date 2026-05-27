@@ -1,1 +1,23 @@
-<p>signin-form works!</p>
+<form [formGroup]="signinForm" (ngSubmit)="onSignIn()" class="form">
+  <h2>Log in</h2>
+  <label for="login"><input type="text" formControlName="login" placeholder="Login" id="login" class="input" /></label>
+  <p class="error">
+    @if (signinForm.controls.login.dirty && signinForm.controls.login.hasError('required')) {
+      <span>Login is required</span>
+    }
+  </p>
+  <label for="password"
+    ><input type="password" formControlName="password" placeholder="Password" id="password" class="input"
+  /></label>
+  <p class="error">
+    @if (signinForm.controls.password.dirty && signinForm.controls.password.hasError('required')) {
+      <span class="error">Password is required</span>
+    }
+  </p>
+
+  <button type="submit" [disabled]="signinForm.invalid" class="btn-primary">Log in</button>
+</form>
+<div>
+  Response:
+  <pre>{{ $user | async | json }}</pre>
+</div>
