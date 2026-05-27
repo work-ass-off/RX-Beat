@@ -21,6 +21,9 @@ export class RxBeatApiService {
   private HttpClient = inject(HttpClient);
   private readonly _baseUrl = 'http://localhost:3333/';
 
+  //will be work after deploy
+  //private readonly _baseUrl = 'https://rx-beat-api.onrender.com/';
+
   public signup(data: AuthDto): Observable<User> {
     return this.HttpClient.post<User>(`${this._baseUrl}auth/signup`, data);
   }
