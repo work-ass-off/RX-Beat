@@ -8,6 +8,6 @@
   <button type="submit" class="btn">Login</button>
 </form>
 
-@if (isConfirmDialogOpen()) {
-  <app-confirm-dialog (confirmed)="onConfirmLeave()" (cancelled)="onStayOnPage()"></app-confirm-dialog>
+@if (confirmDialogService.isConfirmDialogOpen()) {
+  <app-confirm-dialog (buttonClicked)="confirmDialogService.onManageButtonClick($event)"></app-confirm-dialog>
 }

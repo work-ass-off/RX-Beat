@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import type { CanDeactivateFn } from '@angular/router';
-
 import { loginGuard } from './login.guard';
 
 describe('loginGuard', () => {
-  const executeGuard: CanDeactivateFn<{ canDeactivate: () => boolean | Promise<boolean> }> = (...guardParameters) =>
+  const executeGuard: CanDeactivateFn<{ hasUnsavedChanges: () => boolean }> = (...guardParameters) =>
     TestBed.runInInjectionContext(() => loginGuard(...guardParameters));
 
   beforeEach(() => {

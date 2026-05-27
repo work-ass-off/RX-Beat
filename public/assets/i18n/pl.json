@@ -17,5 +17,11 @@
         }
       }
     }
+  },
+  "DIALOG": {
+    "CONFIRM_TITLE": "Potwierdzenie",
+    "CONFIRM_MESSAGE": "Czy na pewno chcesz opuścić tę stronę? Wprowadzone zmiany zostaną utracone.",
+    "CONFIRM_BUTTON": "Tak",
+    "CANCEL_BUTTON": "Nie"
   }
 }

@@ -1,8 +1,12 @@
 <dialog class="confirm-dialog" open role="confirm-dialog">
-  <h2 id="confirm-dialog-title" class="confirm-dialog-title">Unsaved Changes</h2>
-  <p class="confirm-dialog-text">You have unsaved changes. Do you really want to leave?</p>
+  <h2 id="confirm-dialog-title" class="confirm-dialog-title">{{ 'DIALOG.CONFIRM_TITLE' | translate }}</h2>
+  <p class="confirm-dialog-text">{{ 'DIALOG.CONFIRM_MESSAGE' | translate }}</p>
   <div class="confirm-dialog-actions">
-    <button type="button" class="btn-transparent confirm-dialog-button" (click)="onCancel()">Stay</button>
-    <button type="button" class="btn-primary confirm-dialog-button" (click)="onConfirm()">Leave</button>
+    <button type="button" class="btn-transparent confirm-dialog-button" (click)="onButtonClick('stay')">
+      {{ 'DIALOG.CANCEL_BUTTON' | translate }}
+    </button>
+    <button type="button" class="btn-primary confirm-dialog-button" (click)="onButtonClick('leave')">
+      {{ 'DIALOG.CONFIRM_BUTTON' | translate }}
+    </button>
   </div>
 </dialog>

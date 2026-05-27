@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 })
 export class AlbumPreviewComponent {
   private router = inject(Router);
-  readonly album = input.required<Album>();
+  public readonly album = input.required<Album>();
 
-  navigateToAlbum() {
+  public navigateToAlbum(): void {
     const link = this.router.parseUrl(this.router.url).root.children['primary']?.segments[1]?.path;
     const albumSlug = this.toSlug(this.album().title);
 

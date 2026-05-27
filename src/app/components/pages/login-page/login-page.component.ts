@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from '../../../services/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-login-page',
@@ -10,9 +11,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {
-  private pendingNavigationResolve: ((result: boolean) => void) | null = null;
-
-  public readonly isConfirmDialogOpen = signal(false);
+  protected confirmDialogService = inject(ConfirmDialogService);
 
   public readonly form = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -25,34 +24,8 @@ export class LoginPageComponent {
     }
   }
 
-  public hasUnsavedChanges(): boolean {
-    console.log('dirty');
+  protected hasUnsavedChanges(): boolean {
+    this.confirmDialogService.isFormDirty.set(this.form.dirty);
     return this.form.dirty;
-  }
-
-  public canDeactivate(): boolean | Promise<boolean> {
-    if (!this.hasUnsavedChanges()) {
-      return true;
-    }
-
-    this.isConfirmDialogOpen.set(true);
-
-    return new Promise((resolve) => {
-      this.pendingNavigationResolve = resolve;
-    });
-  }
-
-  public onConfirmLeave(): void {
-    this.resolveNavigationDecision(true);
-  }
-
-  public onStayOnPage(): void {
-    this.resolveNavigationDecision(false);
-  }
-
-  private resolveNavigationDecision(allowNavigation: boolean): void {
-    this.isConfirmDialogOpen.set(false);
-    this.pendingNavigationResolve?.(allowNavigation);
-    this.pendingNavigationResolve = null;
   }
 }

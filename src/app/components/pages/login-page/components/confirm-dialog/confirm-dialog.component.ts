@@ -1,28 +1,17 @@
-import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-dialog',
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './confirm-dialog.component.html',
   styleUrl: './confirm-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogComponent {
-  public readonly confirmed = output<void>();
-  public readonly cancelled = output<void>();
-  private readonly isOpen = signal<boolean>(false);
+  public buttonClicked = output<string>();
 
-  constructor() {
-    this.isOpen.set(true);
-  }
-
-  public onConfirm(): void {
-    this.confirmed.emit();
-    this.isOpen.set(false);
-  }
-
-  public onCancel(): void {
-    this.cancelled.emit();
-    this.isOpen.set(false);
+  public onButtonClick(buttonType: string): void {
+    this.buttonClicked.emit(buttonType);
   }
 }
