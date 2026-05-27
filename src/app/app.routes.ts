@@ -15,6 +15,22 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        outlet: 'sidebarHeader',
+        loadComponent: () =>
+          import('./components/pages/home-page/components/side/left-side-content/left-header/left-header.component').then(
+            (m) => m.LeftHeaderComponent,
+          ),
+      },
+      {
+        path: '',
+        outlet: 'sidebarBody',
+        loadComponent: () =>
+          import('./components/pages/home-page/components/side/left-side-content/left-content/left-content.component').then(
+            (m) => m.LeftContentComponent,
+          ),
+      },
+      {
+        path: '',
         redirectTo: 'all',
         pathMatch: 'full',
       },
