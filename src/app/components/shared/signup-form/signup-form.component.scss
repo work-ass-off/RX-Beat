@@ -1,0 +1,9 @@
+@use '../../../styles/mixins' as *;
+
+.form {
+  @include flex($direction: column, $gap: 0.5rem);
+}
+
+.btn-primary {
+  width: 100%;
+}

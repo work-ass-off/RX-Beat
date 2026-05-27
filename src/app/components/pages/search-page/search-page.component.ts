@@ -8,5 +8,8 @@ import { JamendoComponent } from '../../shared/jamendo/jamendo.component';
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'page',
+  },
 })
 export class SearchPageComponent {}
