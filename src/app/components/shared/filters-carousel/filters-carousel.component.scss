@@ -1,0 +1,95 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.carousel-wrapper {
+  @include flex;
+
+  position: relative;
+  width: 100%;
+
+  .scroll-container {
+    @include flex($gap: 0.5rem, $align: stretch, $justify: flex-start);
+
+    width: 100%;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .btn {
+      @include btn($color: var(--text-main), $bg: var(--action-surface), $bg-hover: var(--action-surface));
+
+      border: none;
+
+      &.active {
+        color: var(--bg-surface-elevated);
+        background-color: var(--action-primary);
+      }
+    }
+  }
+
+  .arrow-overlay {
+    @include flex($gap: 0, $justify: flex-end);
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    width: 60px;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+
+    .arrow-btn {
+      @include flex($justify: center, $align: center);
+
+      width: 32px;
+      height: 32px;
+      margin-right: 4px;
+      color: #b3b3b3;
+      pointer-events: auto;
+      cursor: pointer;
+      background-color: #121212;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.3);
+      transition:
+        color 0.2s,
+        transform 0.2s;
+
+      &:hover {
+        color: #ffffff;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // TODO: For Right Side
+  .right-overlay {
+    right: 0;
+    justify-content: flex-end;
+    background: linear-gradient(90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+
+    .arrow-btn {
+      margin-right: 4px;
+    }
+  }
+
+  // TODO: For Left Side
+  .left-overlay {
+    left: 0;
+    justify-content: flex-start;
+    background: linear-gradient(-90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+
+    .arrow-btn {
+      margin-left: 4px;
+    }
+  }
+}

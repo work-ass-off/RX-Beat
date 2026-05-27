@@ -3,5 +3,19 @@
     "LOGIN": "Log in",
     "SIGNUP": "Sign up",
     "SEARCH": "Search..."
+  },
+  "MAIN": {
+    "SIDEBAR": {
+      "MY_LIBRARY": {
+        "TITLE": "My Library",
+        "CREATE": "Create",
+        "FILTERS": {
+          "PLAYLISTS": "Playlists",
+          "ARTISTS": "Artists",
+          "ALBUMS": "Albums",
+          "PODCASTS": "Podcasts"
+        }
+      }
+    }
   }
 }

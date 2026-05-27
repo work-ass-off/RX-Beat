@@ -3,5 +3,19 @@
     "LOGIN": "Zaloguj się",
     "SIGNUP": "Zarejestruj się",
     "SEARCH": "Szukaj..."
+  },
+  "MAIN": {
+    "SIDEBAR": {
+      "MY_LIBRARY": {
+        "TITLE": "Moja biblioteka",
+        "CREATE": "Utwórz",
+        "FILTERS": {
+          "PLAYLISTS": "Playlisty",
+          "ARTISTS": "Artyści",
+          "ALBUMS": "Albumy",
+          "PODCASTS": "Podcasty"
+        }
+      }
+    }
   }
 }

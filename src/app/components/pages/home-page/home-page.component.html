@@ -1,6 +1,12 @@
-<header app-home-header></header>
-<main>
-  <app-content></app-content>
-  <router-outlet></router-outlet>
-</main>
-<footer app-home-footer></footer>
+<app-sidebar-wrapper>
+  <app-left-header sidebarHeader />
+  <app-left-content sidebarBody />
+</app-sidebar-wrapper>
+<div class="wrapper">
+  <header app-home-header></header>
+  <main class="main">
+    <app-content></app-content>
+    <router-outlet></router-outlet>
+  </main>
+  <footer app-home-footer></footer>
+</div>
