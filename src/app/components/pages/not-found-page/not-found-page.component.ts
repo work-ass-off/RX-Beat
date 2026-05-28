@@ -7,4 +7,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './not-found-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFoundPageComponent {}
+export class NotFoundPageComponent {
+  public onGoBack(): void {
+    window.history.back();
+  }
+}

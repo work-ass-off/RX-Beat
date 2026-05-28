@@ -96,6 +96,13 @@ body {
   animation: scroll-text 7s linear infinite;
 }
 
+.logo {
+  font-family: var(--font-cursive);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--action-primary);
+}
+
 .page {
   @include flex($align: flex-start);
 
