@@ -21,5 +21,6 @@ import { LeftContentComponent } from './components/side/left-side-content/left-c
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'page' },
 })
 export class HomePageComponent {}

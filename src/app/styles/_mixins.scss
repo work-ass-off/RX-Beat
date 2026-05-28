@@ -11,7 +11,7 @@
   $border: var(--bg-base),
   $bg: var(--text-main),
   $bg-hover: var(--text-sub),
-  $padding: 0.5rem 1rem
+  $padding: 0.25rem 0.75rem
 ) {
   display: inline-flex;
   flex-direction: row;
@@ -21,6 +21,7 @@
   padding: $padding;
   font-weight: 600;
   color: $color;
+  white-space: nowrap;
   outline: none;
   background-color: $bg;
   border: 1px solid $border;
@@ -36,13 +37,49 @@
     cursor: pointer;
     transition: all 0.5s ease;
 
-    &:hover {
+    &:hover :not {
       background-color: $bg-hover;
       transform: scale(1.05);
     }
   }
 
   @media (width <= 750px) {
-    padding: 1rem 2rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@mixin input($width: 100%, $padding: 0.5rem 1.5rem) {
+  width: $width;
+  padding: $padding;
+  font-family: inherit;
+  color: var(--text-main);
+  outline: none;
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-surface-elevated);
+  border-radius: 3rem;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: var(--text-sub);
+    opacity: 0.8;
+  }
+
+  &:hover {
+    border-color: var(--bg-surface);
+  }
+
+  &:focus {
+    border-color: var(--action-primary);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    transition: all 5000s ease-in-out 0s;
   }
 }

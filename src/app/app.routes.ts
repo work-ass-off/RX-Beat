@@ -41,6 +41,15 @@ export const routes: Routes = [
     loadComponent: () => import('./components/pages/about-page/about-page.component').then((m) => m.AboutPageComponent),
   },
   {
+    path: 'api',
+    loadComponent: () => import('./components/pages/api-page/api-page.component').then((m) => m.ApiPageComponent),
+  },
+  {
+    path: 'search',
+    loadComponent: () =>
+      import('./components/pages/search-page/search-page.component').then((m) => m.SearchPageComponent),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./components/pages/not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),

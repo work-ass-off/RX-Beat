@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { SearchComponent } from '../search/search.component';
 import { ThemeButtonComponent } from '../theme-button/theme-button.component';
 import { LanguageDirective } from '../../../directives/language/language.directive';
 import { UpperCasePipe } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
   selector: 'header[app-header]',
-  imports: [SearchComponent, ThemeButtonComponent, LanguageDirective, UpperCasePipe, TranslatePipe, RouterLink],
+  imports: [ThemeButtonComponent, LanguageDirective, UpperCasePipe, RouterLink, NavigationComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

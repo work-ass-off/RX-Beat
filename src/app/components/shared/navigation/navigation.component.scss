@@ -1,0 +1,11 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  @include flex;
+}
+
+.sign-up {
+  font-size: 0.75rem;
+  font-weight: 400;
+  border: none;
+}
