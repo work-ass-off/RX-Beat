@@ -1,0 +1,9 @@
+@let collapsed = isCollapsed();
+<div class="top" [class.centered]="collapsed">
+  @if (!collapsed) {
+    <h3 class="top-title">{{ 'Noize MC' }}</h3>
+  }
+  @if (!collapsed) {
+    <button class="btn-icon material-icons">more_horiz</button>
+  }
+</div>
