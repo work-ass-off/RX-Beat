@@ -14,7 +14,8 @@
           "PLAYLISTS": "Playlists",
           "ARTISTS": "Artists",
           "ALBUMS": "Albums",
-          "PODCASTS": "Podcasts"
+          "PODCASTS": "Podcasts",
+          "RADIO": "Radio"
         }
       }
     }

@@ -2,51 +2,62 @@
 
 :host {
   @include flex($direction: column, $align: flex-start);
-
   width: 100%;
-  max-width: 100%;
   overflow: hidden;
 
-  .btn {
-    @include btn($color: var(--text-main), $bg: var(--action-surface), $bg-hover: var(--action-surface));
+  .top,
+  .bottom {
+    width: 100%;
+  }
 
-    white-space: nowrap;
+  .btn {
+    margin-left: auto;
+    color: var(--text-main);
+    background-color: var(--action-surface);
     border: none;
   }
 
   .top {
-    @include flex($justify: space-between, $align: center);
-
-    width: 100%;
-    padding: 0.5rem;
+    @include flex($justify: flex-start, $gap: 0.2rem);
     overflow: hidden;
-    transition: justify-content 0.2s ease;
-
-    &.centered {
-      justify-content: center;
-      padding: 0.5rem 0;
-    }
-
-    &_title {
-      margin: 0;
-      white-space: nowrap;
-    }
-
-    .btn-icon {
-      border: none;
-    }
   }
 
   .bottom {
     @include flex($justify: flex-start, $align: center);
-
-    width: 100%;
-    padding: 0.5rem;
     overflow: auto hidden;
-    white-space: nowrap;
 
     &::-webkit-scrollbar {
       display: none;
     }
+  }
+
+  &:not(.collapsed) {
+    .collapse-btn {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-1rem);
+      transition: all 0.3s ease;
+    }
+
+    .top-title {
+      transform: translateX(-2rem);
+      transition: transform 0.5s cubic-bezier(0.3, 0, 0, 1);
+    }
+
+    &:hover {
+      .collapse-btn {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0.1rem);
+      }
+
+      .top-title {
+        transform: translateX(0.1rem);
+      }
+    }
+  }
+
+  &.collapsed .top {
+    @include flex($direction: column);
   }
 }

@@ -1,6 +1,7 @@
 @use '../../../styles/mixins' as *;
 
 :host {
+  width: 100%;
   overflow: hidden;
   border-radius: 20px;
 }
@@ -12,7 +13,7 @@
   width: 100%;
 
   .scroll-container {
-    @include flex($gap: 0.5rem, $align: stretch, $justify: flex-start);
+    @include flex($gap: 0.5rem, $align: stretch, $justify: space-between);
 
     width: 100%;
     padding: 0.5rem 0;

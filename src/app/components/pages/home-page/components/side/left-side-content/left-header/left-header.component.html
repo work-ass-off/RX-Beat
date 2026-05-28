@@ -1,5 +1,6 @@
 @let collapsed = isCollapsed();
-<div class="top" [class.centered]="collapsed">
+<div class="top">
+  <button (click)="toggle()" class="btn-icon material-symbols-rounded collapse-btn">left_panel_close</button>
   @if (!collapsed) {
     <h3 class="top-title">{{ 'MAIN.SIDEBAR.MY_LIBRARY.TITLE' | translate }}</h3>
   }

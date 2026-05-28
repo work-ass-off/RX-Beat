@@ -1,9 +1,8 @@
 @use '../../../styles/mixins' as *;
 
 :host {
-  @include flex($direction: column, $justify: flex-start, $align: normal);
+  @include flex($direction: column, $justify: flex-start, $gap: 0);
 
-  position: relative;
   flex-shrink: 0;
   height: 100%;
   overflow-y: hidden;
@@ -12,72 +11,17 @@
   transition: width 0.5s cubic-bezier(0.3, 0, 0, 1);
 
   .sidebar-header {
-    padding: 1rem 1.5rem;
+    width: 100%;
+    padding: 1rem;
     background-color: var(--bg-surface-elevated);
-    border-radius: 1.5rem;
-
-    .collapse-btn {
-      border: none;
-      transition: all 0.5s ease;
-    }
-
-    ::ng-deep .top-title {
-      transition: transform 0.5s cubic-bezier(0.3, 0, 0, 1);
-    }
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
   }
 
   .sidebar-content {
+    width: 100%;
     height: 100%;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  // TODO: Sidebar Open (Default state)
-  &:not(.collapsed) {
-    .sidebar-header {
-      position: relative;
-
-      .collapse-btn {
-        position: absolute;
-        top: 15%;
-        left: 0;
-        z-index: 10;
-        visibility: hidden;
-        opacity: 0;
-      }
-
-      &:hover {
-        .collapse-btn {
-          visibility: visible;
-          opacity: 1;
-          transform: translateX(1rem);
-        }
-
-        ::ng-deep .top-title {
-          transform: translateX(1rem);
-        }
-      }
-    }
-  }
-
-  // TODO: Sidebar Close
-
-  &.collapsed {
-    @include flex($direction: column, $justify: flex-start);
-
-    overflow-x: hidden;
-
-    .sidebar-header {
-      @include flex($direction: column, $gap: 0.5rem);
-
-      .collapse-btn {
-        position: relative;
-      }
-    }
+    padding: 1rem 0.2rem;
+    overflow: hidden;
   }
 }
