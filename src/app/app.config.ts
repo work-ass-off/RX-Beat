@@ -1,6 +1,6 @@
 import type { ApplicationConfig } from '@angular/core';
 import { provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withRouterConfig } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -23,6 +23,7 @@ export const appConfig: ApplicationConfig = {
       withRouterConfig({
         canceledNavigationResolution: 'computed',
       }),
+      withPreloading(PreloadAllModules),
     ),
   ],
 };

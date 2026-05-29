@@ -6,13 +6,13 @@ npm run format
 echo "🍀 Running linter..."
 
 npm run lint:fix
-
 npm run lint
 
 echo "🪻 Running stylelint..."
 
 npm run stylelint:fix
 
+npm run stylelint:fix
 npm run stylelint
 
 

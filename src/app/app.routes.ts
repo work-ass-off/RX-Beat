@@ -1,5 +1,6 @@
 import type { Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
+import { NotFoundPageComponent } from './components/pages/not-found-page/not-found-page.component';
 import { guestGuard } from './guards/guest/guest.guard';
 import { loginGuard } from './guards/login/login.guard';
 
@@ -89,8 +90,16 @@ export const routes: Routes = [
     loadComponent: () => import('./components/pages/about-page/about-page.component').then((m) => m.AboutPageComponent),
   },
   {
-    path: '**',
+    path: 'api',
+    loadComponent: () => import('./components/pages/api-page/api-page.component').then((m) => m.ApiPageComponent),
+  },
+  {
+    path: 'search',
     loadComponent: () =>
-      import('./components/pages/not-found-page/not-found-page.component').then((m) => m.NotFoundPageComponent),
+      import('./components/pages/search-page/search-page.component').then((m) => m.SearchPageComponent),
+  },
+  {
+    path: '**',
+    component: NotFoundPageComponent,
   },
 ];
