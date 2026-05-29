@@ -2,5 +2,6 @@
 
 :host {
   @include flex($direction: column);
+
   margin-bottom: auto;
 }

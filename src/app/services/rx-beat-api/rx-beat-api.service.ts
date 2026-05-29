@@ -1,7 +1,8 @@
 import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, EMPTY, of, type Observable } from 'rxjs';
+import { catchError, EMPTY, tap, of, type Observable } from 'rxjs';
 import { NotificationService } from '../notification/notification.service';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 export type AuthDto = {
   login: string;
@@ -16,7 +17,7 @@ export type User = {
 };
 
 export type Token = {
-  token: string;
+  access_token: string;
 };
 // export type ErrorResponse = {
 //   error: {
@@ -32,6 +33,7 @@ export type Token = {
 export class RxBeatApiService {
   private HttpClient = inject(HttpClient);
   private notificationService = inject(NotificationService);
+  private localStorage = inject(LocalStorageService);
 
   private readonly _baseUrl = 'http://localhost:3333/';
 
@@ -40,6 +42,7 @@ export class RxBeatApiService {
 
   public signup(data: AuthDto): Observable<Token> {
     return this.HttpClient.post<Token>(`${this._baseUrl}auth/signup`, data).pipe(
+      tap((res) => this.localStorage.setItem('token', res.access_token)),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 409) {
           this.notificationService.show(err.error?.message || 'User already exists');

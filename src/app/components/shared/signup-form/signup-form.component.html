@@ -42,5 +42,5 @@
   <pre>{{ $user | async | json }}</pre>
 </div>
 @if (notificationService.notification()) {
-  <p>oops {{ notificationService.notification() }}</p>
+  <p class="error">{{ notificationService.notification() }}</p>
 }
