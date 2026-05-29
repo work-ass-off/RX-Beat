@@ -7,9 +7,16 @@ import { SidebarService } from '../../../../../../../services/sidebar/sidebar.se
   templateUrl: './right-header.component.html',
   styleUrl: './right-header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.collapsed]': 'isCollapsed()',
+  },
 })
 export class RightHeaderComponent {
   private sidebarService = inject(SidebarService);
 
   public isCollapsed = this.sidebarService.isCollapsed;
+
+  public toggle(): void {
+    this.sidebarService.toggle();
+  }
 }
