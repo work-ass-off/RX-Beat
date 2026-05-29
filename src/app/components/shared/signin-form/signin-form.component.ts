@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { type Observable } from 'rxjs';
-import { RxBeatApiService, type User } from '../../../services/rx-beat-api/rx-beat-api.service';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { RxBeatApiService } from '../../../services/rx-beat-api/rx-beat-api.service';
+import { NotificationService } from '../../../services/notification/notification.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-signin-form',
-  imports: [ReactiveFormsModule, AsyncPipe, JsonPipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './signin-form.component.html',
   styleUrl: './signin-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,8 +14,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 export class SigninFormComponent {
   public readonly RxBeatApiService = inject(RxBeatApiService);
   private formBuilder = inject(FormBuilder);
-
-  public $user: Observable<User> | null = null;
+  public notificationService = inject(NotificationService);
 
   public signinForm = this.formBuilder.group({
     login: ['', Validators.required],
@@ -23,6 +22,8 @@ export class SigninFormComponent {
   });
 
   public onSignIn(): void {
+    console.log(this.signinForm.value);
+    this.notificationService.clear();
     if (this.signinForm.invalid) {
       return;
     }
@@ -30,6 +31,6 @@ export class SigninFormComponent {
       login: this.signinForm.value.login ?? '',
       password: this.signinForm.value.password ?? '',
     };
-    this.$user = this.RxBeatApiService.signin(data);
+    this.RxBeatApiService.login(data).pipe(take(1)).subscribe();
   }
 }

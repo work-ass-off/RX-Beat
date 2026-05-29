@@ -37,10 +37,6 @@
     Sign up
   </button>
 </form>
-<div class="response">
-  Response:
-  <pre>{{ $user | async | json }}</pre>
-</div>
 @if (notificationService.notification()) {
   <p class="error">{{ notificationService.notification() }}</p>
 }

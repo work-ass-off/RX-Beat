@@ -1,6 +1,6 @@
 import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, EMPTY, tap, of, type Observable } from 'rxjs';
+import { catchError, EMPTY, tap, type Observable } from 'rxjs';
 import { NotificationService } from '../notification/notification.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
@@ -19,13 +19,6 @@ export type User = {
 export type Token = {
   access_token: string;
 };
-// export type ErrorResponse = {
-//   error: {
-//     message: string;
-//     error: string;
-//     statusCode: number;
-//   };
-// };
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +35,10 @@ export class RxBeatApiService {
 
   public signup(data: AuthDto): Observable<Token> {
     return this.HttpClient.post<Token>(`${this._baseUrl}auth/signup`, data).pipe(
-      tap((res) => this.localStorage.setItem('token', res.access_token)),
+      tap((res) => {
+        this.localStorage.setItem('token', res.access_token);
+        console.log(res.access_token);
+      }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 409) {
           this.notificationService.show(err.error?.message || 'User already exists');
@@ -56,7 +52,21 @@ export class RxBeatApiService {
     );
   }
 
-  public signin(data: AuthDto): Observable<User> {
-    return this.HttpClient.post<Token>(`${this._baseUrl}auth/login`, data).pipe(catchError((e) => of(e.error.message)));
+  public login(data: AuthDto): Observable<Token> {
+    return this.HttpClient.post<Token>(`${this._baseUrl}auth/login`, data).pipe(
+      tap((res) => {
+        this.localStorage.setItem('token', res.access_token);
+        console.log(res.access_token);
+        console.log(this.localStorage.getItem('token'));
+      }),
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 400) {
+          this.notificationService.show(err.error?.message || 'Bad request');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
   }
 }
