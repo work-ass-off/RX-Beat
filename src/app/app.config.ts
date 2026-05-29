@@ -1,6 +1,6 @@
 import type { ApplicationConfig } from '@angular/core';
 import { provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -18,6 +18,12 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json',
       }),
     }),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(
+      routes,
+      withRouterConfig({
+        canceledNavigationResolution: 'computed',
+      }),
+      withPreloading(PreloadAllModules),
+    ),
   ],
 };

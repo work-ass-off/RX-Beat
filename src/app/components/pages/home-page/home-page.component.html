@@ -1,6 +1,6 @@
 <app-sidebar-wrapper>
-  <app-left-header sidebarHeader />
-  <app-left-content sidebarBody />
+  <router-outlet name="sidebarHeader" sidebarHeader></router-outlet>
+  <router-outlet name="sidebarBody" sidebarBody></router-outlet>
 </app-sidebar-wrapper>
 <div class="wrapper">
   <header app-home-header></header>

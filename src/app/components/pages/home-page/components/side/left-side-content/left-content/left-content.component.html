@@ -1,7 +1,11 @@
 @let cards = mockCards();
 
-@for (card of cards; track card.id) {
-  <app-library-card [card]="card" />
-} @empty {
-  <p>Library is empty</p>
+@if (isUserLogged()) {
+  @for (card of cards; track card.id) {
+    <app-library-card [card]="card" />
+  } @empty {
+    <p>Library is empty</p>
+  }
+} @else {
+  <button class="btn" (click)="onLogin()">Login to view your library</button>
 }

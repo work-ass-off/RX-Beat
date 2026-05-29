@@ -2,7 +2,6 @@
   "HEADER": {
     "LOGIN": "Log in",
     "SIGNUP": "Sign up",
-    "ABOUT": "About",
     "SEARCH": "Search..."
   },
   "MAIN": {
@@ -18,5 +17,11 @@
         }
       }
     }
+  },
+  "DIALOG": {
+    "CONFIRM_TITLE": "Confirmation",
+    "CONFIRM_MESSAGE": "Are you sure you want to leave this page? Any unsaved changes will be lost.",
+    "CONFIRM_BUTTON": "Yes",
+    "CANCEL_BUTTON": "No"
   }
 }
