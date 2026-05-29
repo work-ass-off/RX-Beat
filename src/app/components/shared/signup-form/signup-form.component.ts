@@ -1,8 +1,9 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RxBeatApiService, type User } from '../../../services/rx-beat-api/rx-beat-api.service';
+import { RxBeatApiService, type Token } from '../../../services/rx-beat-api/rx-beat-api.service';
 import { type Observable } from 'rxjs';
+import { NotificationService } from '../../../services/notification/notification.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -14,8 +15,9 @@ import { type Observable } from 'rxjs';
 export class SignupFormComponent {
   public readonly RxBeatApiService = inject(RxBeatApiService);
   private formBuilder = inject(FormBuilder);
+  public notificationService = inject(NotificationService);
 
-  public $user: Observable<User> | null = null;
+  public $user: Observable<Token> | null = null;
 
   public signupForm = this.formBuilder.group({
     login: ['', Validators.required],
@@ -24,6 +26,7 @@ export class SignupFormComponent {
   });
 
   public onSignUp(): void {
+    this.notificationService.clear();
     if (this.signupForm.invalid) {
       return;
     }

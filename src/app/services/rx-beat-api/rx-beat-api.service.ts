@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { type Observable } from 'rxjs';
+import { catchError, EMPTY, of, type Observable } from 'rxjs';
+import { NotificationService } from '../notification/notification.service';
 
 export type AuthDto = {
   login: string;
@@ -14,21 +15,45 @@ export type User = {
   updatedAt: number;
 };
 
+export type Token = {
+  token: string;
+};
+// export type ErrorResponse = {
+//   error: {
+//     message: string;
+//     error: string;
+//     statusCode: number;
+//   };
+// };
+
 @Injectable({
   providedIn: 'root',
 })
 export class RxBeatApiService {
   private HttpClient = inject(HttpClient);
+  private notificationService = inject(NotificationService);
+
   private readonly _baseUrl = 'http://localhost:3333/';
 
   //will be work after deploy
   //private readonly _baseUrl = 'https://rx-beat-api.onrender.com/';
 
-  public signup(data: AuthDto): Observable<User> {
-    return this.HttpClient.post<User>(`${this._baseUrl}auth/signup`, data);
+  public signup(data: AuthDto): Observable<Token> {
+    return this.HttpClient.post<Token>(`${this._baseUrl}auth/signup`, data).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 409) {
+          this.notificationService.show(err.error?.message || 'User already exists');
+        } else if (err.status === 400) {
+          this.notificationService.show(err.error?.message || 'Bad request');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
   }
 
   public signin(data: AuthDto): Observable<User> {
-    return this.HttpClient.post<User>(`${this._baseUrl}auth/signin`, data);
+    return this.HttpClient.post<Token>(`${this._baseUrl}auth/login`, data).pipe(catchError((e) => of(e.error.message)));
   }
 }

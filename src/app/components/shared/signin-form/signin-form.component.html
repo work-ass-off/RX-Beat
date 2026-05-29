@@ -17,7 +17,7 @@
 
   <button type="submit" [disabled]="signinForm.invalid" class="btn-primary">Log in</button>
 </form>
-<div>
+<div class="response">
   Response:
   <pre>{{ $user | async | json }}</pre>
 </div>
