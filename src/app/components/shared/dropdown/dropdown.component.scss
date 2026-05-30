@@ -1,0 +1,7 @@
+@use '../../../styles/mixins' as *;
+
+:host(.dropdown) {
+  @include flex($direction: column);
+
+  position: relative;
+}

@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SidebarService } from '../../../../../../../services/sidebar/sidebar.service';
+import { DropdownComponent } from '../../../../../../shared/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-right-header',
-  imports: [],
+  imports: [DropdownComponent],
   templateUrl: './right-header.component.html',
   styleUrl: './right-header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
