@@ -14,22 +14,9 @@ h1 {
 
   margin-right: auto;
 
-  .logo {
-    font-family: var(--font-cursive);
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--action-primary);
-  }
-
   .subtitle {
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--text-sub);
   }
-}
-
-.sign-up {
-  font-size: 0.75rem;
-  font-weight: 400;
-  border: none;
 }

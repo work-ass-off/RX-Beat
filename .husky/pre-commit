@@ -11,8 +11,6 @@ npm run lint
 echo "🪻 Running stylelint..."
 
 npm run stylelint:fix
-
-npm run stylelint:fix
 npm run stylelint
 
 

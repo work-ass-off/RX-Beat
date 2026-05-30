@@ -14,12 +14,12 @@ import { Router } from '@angular/router';
 })
 export class LeftContentComponent {
   private localStorageService = inject(LocalStorageService);
-  protected isUserLogged = signal<boolean>(!!this.localStorageService.getItem('user'));
+  protected isUserLogged = signal<boolean>(!!this.localStorageService.getItem('token'));
   public mockCards = signal<LibraryItemProps[]>(mockLibraryItems);
   private router = inject(Router);
 
   constructor() {
-    this.isUserLogged.set(!!this.localStorageService.getItem('user'));
+    this.isUserLogged.set(!!this.localStorageService.getItem('token'));
   }
 
   public onLogin(): void {

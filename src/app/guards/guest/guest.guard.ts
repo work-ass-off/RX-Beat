@@ -4,5 +4,5 @@ import { inject } from '@angular/core';
 
 export const guestGuard: CanActivateChildFn = () => {
   const localStorageService = inject(LocalStorageService);
-  return localStorageService.getItem('user') !== null;
+  return localStorageService.getItem('token') !== null;
 };
