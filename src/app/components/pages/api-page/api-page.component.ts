@@ -6,7 +6,7 @@ import { SigninFormComponent } from '../../shared/signin-form/signin-form.compon
   selector: 'app-api-page',
   imports: [SignupFormComponent, SigninFormComponent],
   templateUrl: './api-page.component.html',
-  styleUrl: './api-page.component.scss',
+  // styleUrl: './api-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'page',

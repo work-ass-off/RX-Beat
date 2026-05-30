@@ -1,0 +1,60 @@
+@use '../../../../../styles/mixins' as *;
+
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgb(0 0 0 / 0.55);
+
+  @include flex($align: center, $justify: center, $gap: 0);
+}
+
+.confirm-dialog {
+  justify-self: center;
+  width: min(420px, calc(100vw - 2rem));
+  padding: 1.5rem;
+  margin: 0;
+  color: var(--text-main);
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+
+  &::backdrop {
+    background: transparent;
+  }
+}
+
+.confirm-dialog-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.confirm-dialog-text {
+  margin: 0.75rem 0 0;
+  color: var(--text-sub);
+}
+
+.confirm-dialog-actions {
+  margin-top: 1.5rem;
+
+  @include flex($justify: flex-end, $gap: 0.75rem);
+}
+
+.confirm-dialog-button {
+  min-width: 96px;
+}
+
+@media (width <= 480px) {
+  .confirm-dialog {
+    padding: 1.25rem;
+  }
+
+  .confirm-dialog-actions {
+    @include flex($direction: column-reverse, $justify: center, $gap: 0.5rem);
+  }
+
+  .confirm-dialog-button {
+    width: 100%;
+  }
+}

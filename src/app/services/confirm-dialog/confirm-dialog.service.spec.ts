@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RxBeatApiService } from './rx-beat-api.service';
+import { ConfirmDialogService } from './confirm-dialog.service';
 
-describe('RxBeatApiService', () => {
-  let service: RxBeatApiService;
+describe('ConfirmDialogService', () => {
+  let service: ConfirmDialogService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RxBeatApiService);
+    service = TestBed.inject(ConfirmDialogService);
   });
 
   it('should be created', () => {
