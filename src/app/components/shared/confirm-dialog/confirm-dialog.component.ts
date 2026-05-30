@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ManageButton } from '../../../../../services/confirm-dialog/confirm-dialog.model';
+import { ManageButton } from '../../../services/confirm-dialog/confirm-dialog.model';
 
 @Component({
   selector: 'app-confirm-dialog',
