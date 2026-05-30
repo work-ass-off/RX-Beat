@@ -90,8 +90,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/pages/about-page/about-page.component').then((m) => m.AboutPageComponent),
   },
   {
-    path: 'api',
-    loadComponent: () => import('./components/pages/api-page/api-page.component').then((m) => m.ApiPageComponent),
+    path: 'signup',
+    canDeactivate: [loginGuard],
+    loadComponent: () =>
+      import('./components/pages/signup-page/signup-page.component').then((m) => m.SignupPageComponent),
   },
   {
     path: 'search',
