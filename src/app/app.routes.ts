@@ -97,10 +97,10 @@ export const routes: Routes = [
       import('./components/pages/signup-page/signup-page.component').then((m) => m.SignupPageComponent),
   },
   {
-    path: 'signup',
+    path: 'search',
     canDeactivate: [loginGuard],
     loadComponent: () =>
-      import('./components/pages/signup-page/signup-page.component').then((m) => m.SignupPageComponent),
+      import('./components/pages/search-page/search-page.component').then((m) => m.SearchPageComponent),
   },
   {
     path: 'profile',
