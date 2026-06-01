@@ -63,4 +63,4 @@ export class ConfirmDialogService {
 
 - **What I learned:** Refreshed my knowledge of Angular Guards, Routing, and RxJS Subjects.Learned how to handle asynchronous operations that require waiting for user interaction.Mastered using an RxJS Subject as an asynchronous bridge to hold Angular Router navigation until a user makes a choice in the UI.
 - **Plans:** I have plan to develop custom player.
-- **Time spent:** 65 hours.
+- **Time spent:** 64 hours.
