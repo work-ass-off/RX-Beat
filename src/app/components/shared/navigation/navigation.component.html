@@ -1,5 +1,10 @@
 <a class="btn-primary" routerLink="/about">{{ 'HEADER.ABOUT' | translate }}</a>
 <a class="btn-primary" routerLink="/search">Search</a>
 <a class="btn-primary" routerLink="/api">API</a>
-<a class="btn-transparent sign-up" routerLink="/signup">{{ 'HEADER.SIGNUP' | translate }}</a>
-<button class="btn" (click)="onLogin()">{{ 'HEADER.LOGIN' | translate }}</button>
+@if (isLoggedIn()) {
+  <a class="btn-primary" routerLink="/profile">{{ 'HEADER.PROFILE' | translate }}</a>
+  <button class="btn" (click)="onLogout()">{{ 'HEADER.LOGOUT' | translate }}</button>
+} @else {
+  <a class="btn-transparent sign-up" routerLink="/signup">{{ 'HEADER.SIGNUP' | translate }}</a>
+  <button class="btn" (click)="onLoginNavigation()">{{ 'HEADER.LOGIN' | translate }}</button>
+}

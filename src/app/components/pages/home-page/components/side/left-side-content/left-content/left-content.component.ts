@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import type { LibraryItemProps } from '../../../../../../../models/library.models';
 import { mockLibraryItems } from '../mock/data';
 import { LibraryCardComponent } from '../../../../../../shared/library-card/library-card.component';
-import { LocalStorageService } from '../../../../../../../services/local-storage/local-storage.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-left-content',
@@ -13,14 +13,12 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeftContentComponent {
-  private localStorageService = inject(LocalStorageService);
-  protected isUserLogged = signal<boolean>(!!this.localStorageService.getItem('token'));
-  public mockCards = signal<LibraryItemProps[]>(mockLibraryItems);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
-  constructor() {
-    this.isUserLogged.set(!!this.localStorageService.getItem('token'));
-  }
+  public mockCards = signal<LibraryItemProps[]>(mockLibraryItems);
+
+  public readonly isUserLogged = this.authService.isLoggedIn;
 
   public onLogin(): void {
     this.router.navigate(['/login']);

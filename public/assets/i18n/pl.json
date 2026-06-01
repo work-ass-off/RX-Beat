@@ -2,8 +2,10 @@
   "HEADER": {
     "LOGIN": "Zaloguj się",
     "SIGNUP": "Zarejestruj się",
+    "LOGOUT": "Wyloguj",
     "ABOUT": "O nas",
-    "SEARCH": "Szukaj..."
+    "SEARCH": "Szukaj...",
+    "PROFILE": "Profil"
   },
   "MAIN": {
     "SIDEBAR": {

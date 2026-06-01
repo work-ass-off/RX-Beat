@@ -3,6 +3,7 @@ import { HomePageComponent } from './components/pages/home-page/home-page.compon
 import { NotFoundPageComponent } from './components/pages/not-found-page/not-found-page.component';
 import { guestGuard } from './guards/guest/guest.guard';
 import { loginGuard } from './guards/login/login.guard';
+import { userGuard } from './guards/user/user.guard';
 
 export const routes: Routes = [
   {
@@ -96,9 +97,20 @@ export const routes: Routes = [
       import('./components/pages/signup-page/signup-page.component').then((m) => m.SignupPageComponent),
   },
   {
-    path: 'search',
+    path: 'signup',
+    canDeactivate: [loginGuard],
     loadComponent: () =>
-      import('./components/pages/search-page/search-page.component').then((m) => m.SearchPageComponent),
+      import('./components/pages/signup-page/signup-page.component').then((m) => m.SignupPageComponent),
+  },
+  {
+    path: 'profile',
+    canActivate: [userGuard],
+    loadComponent: () =>
+      import('./components/pages/profile-page/profile-page.component').then((m) => m.ProfilePageComponent),
+  },
+  {
+    path: 'api',
+    loadComponent: () => import('./components/pages/api-page/api-page.component').then((m) => m.ApiPageComponent),
   },
   {
     path: '**',
