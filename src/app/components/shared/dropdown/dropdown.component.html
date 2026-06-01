@@ -1,0 +1,8 @@
+<button (click)="open()" class="btn-icon material-icons btn">{{ dropdown().btnText }}</button>
+@if (isOpen()) {
+  <div class="dropdown-content">
+    @for (item of dropdown().items; track item.id) {
+      <app-dropdown-item (click)="handleItemClick($event)" [item]="item" />
+    }
+  </div>
+}
