@@ -1,16 +1,18 @@
 @use '../../../../styles/mixins' as *;
 
 :host(.dropdown-item) {
-  @include flex();
+  @include flex($justify: flex-start);
+
+  width: 100%;
   padding: 0.5rem;
   color: var(--text-main);
-  background-color: var(--bg-surface);
-  transition: all 0.5s ease;
   cursor: pointer;
+  background-color: var(--bg-surface);
   border-radius: 0.5rem;
+  transition: all 0.5s ease;
 
   &:hover {
-    background-color: var(--action-primary-hover);
     color: var(--bg-base);
+    background-color: var(--action-primary-hover);
   }
 }

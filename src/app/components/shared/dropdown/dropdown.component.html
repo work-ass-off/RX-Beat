@@ -1,7 +1,8 @@
-<button appDropDownTrigger class="btn-icon material-icons btn">more_horiz</button>
-<app-dropdown-content>
-  <app-dropdown-item>
-    <span class="material-icons">add</span>
-    Add to playlist
-  </app-dropdown-item>
-</app-dropdown-content>
+<button (click)="open()" class="btn-icon material-icons btn">{{ dropdown().btnText }}</button>
+@if (isOpen()) {
+  <div class="dropdown-content">
+    @for (item of dropdown().items; track item.id) {
+      <app-dropdown-item (click)="handleItemClick($event)" [item]="item" />
+    }
+  </div>
+}

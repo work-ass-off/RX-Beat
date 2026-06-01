@@ -8,5 +8,5 @@
   <h3 class="top-title">{{ 'Noize MC' }}</h3>
 }
 @if (!collapsed) {
-  <app-dropdown class="dropdown" />
+  <app-dropdown [dropdown]="dropdownConfig" (itemSelect)="handelDropdown($event)" />
 }

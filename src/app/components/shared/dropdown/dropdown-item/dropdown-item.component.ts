@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import type { DropdownItem } from '../model/dropdown.model';
 
 @Component({
   selector: 'app-dropdown-item',
@@ -10,4 +11,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     class: 'dropdown-item',
   },
 })
-export class DropdownItemComponent {}
+export class DropdownItemComponent {
+  public item = input.required<DropdownItem>();
+}

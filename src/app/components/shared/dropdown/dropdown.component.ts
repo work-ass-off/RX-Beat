@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 import { DropdownService } from '../../../services/dropdown/dropdown.service';
-import { DropdownContentComponent } from './dropdown-content/dropdown-content.component';
 import { DropdownItemComponent } from './dropdown-item/dropdown-item.component';
-import { DropDownTriggerDirective } from '../../../directives/drop-down-trigger/drop-down-trigger.directive';
+import type { Dropdown } from './model/dropdown.model';
 
 @Component({
   selector: 'app-dropdown',
-  imports: [DropdownContentComponent, DropdownItemComponent, DropDownTriggerDirective],
+  imports: [DropdownItemComponent],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,4 +14,18 @@ import { DropDownTriggerDirective } from '../../../directives/drop-down-trigger/
     class: 'dropdown',
   },
 })
-export class DropdownComponent {}
+export class DropdownComponent {
+  private _isOpen = signal<boolean>(false);
+  public isOpen = this._isOpen.asReadonly();
+  public dropdown = input.required<Dropdown>();
+  public itemSelect = output<Event>();
+
+  protected handleItemClick = (event: Event): void => {
+    this.itemSelect.emit(event);
+    this._isOpen.set(false);
+  };
+
+  public open(): void {
+    this._isOpen.update((prev) => !prev);
+  }
+}
