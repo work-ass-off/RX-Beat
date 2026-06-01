@@ -1,37 +1,10 @@
 @use '../../../../../../../styles/mixins' as *;
 
 :host {
-  @include flex($direction: column, $align: flex-start);
+  @include flex($gap: 0);
 
-  width: 100%;
-  overflow: hidden;
-
-  .top,
-  .bottom {
-    width: 100%;
-  }
-
-  .btn {
+  .dropdown {
     margin-left: auto;
-    color: var(--text-main);
-    background-color: var(--action-surface);
-    border: none;
-  }
-
-  .top {
-    @include flex($justify: flex-start, $gap: 0.2rem);
-
-    overflow: hidden;
-  }
-
-  .bottom {
-    @include flex($justify: flex-start, $align: center);
-
-    overflow: auto hidden;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 
   &:not(.collapsed) {
@@ -58,9 +31,5 @@
         transform: translateX(0.1rem);
       }
     }
-  }
-
-  &.collapsed .top {
-    @include flex($direction: column);
   }
 }
