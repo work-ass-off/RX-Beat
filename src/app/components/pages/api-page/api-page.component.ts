@@ -1,14 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SignupFormComponent } from '../signup-page/signup-form/signup-form.component';
-import { SigninFormComponent } from '../login-page/signin-form/signin-form.component';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { NotificationService } from '../../../services/notification/notification.service';
 
 @Component({
   selector: 'app-api-page',
-  imports: [SignupFormComponent, SigninFormComponent],
+  imports: [AsyncPipe, JsonPipe],
   templateUrl: './api-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'page',
   },
 })
-export class ApiPageComponent {}
+export class ApiPageComponent {
+  public httpClient = inject(HttpClient);
+  public notificationService = inject(NotificationService);
+
+  private readonly apiUrl = environment.rxBeatUrl;
+  public users$ = this.httpClient.get(`${this.apiUrl}/users`);
+}

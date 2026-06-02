@@ -1,8 +1,9 @@
 import type { CanActivateChildFn } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+
 import { inject } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 export const guestGuard: CanActivateChildFn = () => {
-  const localStorageService = inject(LocalStorageService);
-  return localStorageService.getItem('token') !== null;
+  const authService = inject(AuthService);
+  return !authService.isLoggedIn();
 };

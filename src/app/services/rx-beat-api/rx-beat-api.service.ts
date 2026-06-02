@@ -2,7 +2,8 @@ import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, EMPTY, tap, type Observable } from 'rxjs';
 import { NotificationService } from '../notification/notification.service';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 export type AuthDto = {
   login: string;
@@ -26,18 +27,14 @@ export type Token = {
 export class RxBeatApiService {
   private HttpClient = inject(HttpClient);
   private notificationService = inject(NotificationService);
-  private localStorage = inject(LocalStorageService);
+  private authService = inject(AuthService);
 
-  private readonly _baseUrl = 'http://localhost:3333/';
-
-  //will be work after deploy
-  //private readonly _baseUrl = 'https://rx-beat-api.onrender.com/';
+  private readonly _baseUrl = environment.rxBeatUrl;
 
   public signup(data: AuthDto): Observable<Token> {
-    return this.HttpClient.post<Token>(`${this._baseUrl}auth/signup`, data).pipe(
+    return this.HttpClient.post<Token>(`${this._baseUrl}/auth/signup`, data).pipe(
       tap((res) => {
-        this.localStorage.setItem('token', res.access_token);
-        console.log(res.access_token);
+        this.authService.login(res.access_token);
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 409) {
@@ -53,11 +50,9 @@ export class RxBeatApiService {
   }
 
   public login(data: AuthDto): Observable<Token> {
-    return this.HttpClient.post<Token>(`${this._baseUrl}auth/login`, data).pipe(
+    return this.HttpClient.post<Token>(`${this._baseUrl}/auth/login`, data).pipe(
       tap((res) => {
-        this.localStorage.setItem('token', res.access_token);
-        console.log(res.access_token);
-        console.log(this.localStorage.getItem('token'));
+        this.authService.login(res.access_token);
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 400) {
