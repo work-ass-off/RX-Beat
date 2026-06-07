@@ -32,8 +32,8 @@ export type JamendoAlbums = {
 
   image: string;
 
-  tracks: JamendoTrack[];
-  musicinfo: JamendoMusicInfo;
+  tracks?: JamendoTrack[];
+  musicinfo?: JamendoMusicInfo;
 };
 
 export type JamendoTrack = {
