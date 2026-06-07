@@ -1,23 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { AlbumsActions } from './albums.actions';
-import type { JamendoAlbums } from '../../models/jamendo.model';
+import { type AlbumsState, initialAlbumsState } from './albums.state';
 
-export const albumsFeatureKey = 'albums';
-
-export type AlbumsState = {
-  data: JamendoAlbums[] | null;
-  isLoading: boolean;
-  error: string | null;
-};
-
-export const initialState: AlbumsState = {
-  data: null,
-  isLoading: false,
-  error: null,
-};
-
-export const reducer = createReducer(
-  initialState,
+export const albumsReducer = createReducer<AlbumsState>(
+  initialAlbumsState,
 
   // * LOADING
 
