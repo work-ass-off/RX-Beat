@@ -9,7 +9,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { AlbumsEffects } from './store/albums/albums.effects';
+import { AlbumsEffects } from './store/albums/album.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
 import { ArtistsEffects } from './store/artists/artist.effects';
