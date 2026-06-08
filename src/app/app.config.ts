@@ -12,6 +12,7 @@ import { provideEffects } from '@ngrx/effects';
 import { AlbumsEffects } from './store/albums/albums.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
+import { ArtistsEffects } from './store/artists/artist.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,6 +36,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore(appReducer),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects([AlbumsEffects]),
+    provideEffects([AlbumsEffects, ArtistsEffects]),
   ],
 };
