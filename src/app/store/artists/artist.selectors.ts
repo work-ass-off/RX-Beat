@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector, type MemoizedSelector } from '@ngrx/store';
-import { artistAdapter, type ArtistState } from './artist.reducer';
-import type { Artist } from './artist.model';
+import type { Artist, ArtistState } from './artist.model';
 import type { Dictionary } from '@ngrx/entity';
+import { artistAdapter } from './artist.state';
 
 export const artistsFeatureKey = 'artists';
 

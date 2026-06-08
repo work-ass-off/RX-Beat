@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector, type MemoizedSelector } from '@ngrx/store';
-import { albumsFeatureKey } from './album.state';
-import { albumsAdapter, type AlbumsState } from './album.reducer';
-import type { Album } from './album.model';
+import type { Album, AlbumsState } from './album.model';
 import type { Dictionary } from '@ngrx/entity';
+import { albumsAdapter } from './album.state';
+
+export const albumsFeatureKey = 'albums';
 
 export const selectAlbumsState = createFeatureSelector<AlbumsState>(albumsFeatureKey);
 

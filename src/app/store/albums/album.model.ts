@@ -1,3 +1,4 @@
+import type { EntityState } from '@ngrx/entity';
 import type { JamendoResponse } from '../../models/jamendo.model';
 
 export type Album = {
@@ -14,3 +15,8 @@ export type Album = {
 };
 
 export type JamendoAlbumsResponse = JamendoResponse<Album[]>;
+
+export type AlbumsState = EntityState<Album> & {
+  loading: boolean;
+  error: string | null;
+};

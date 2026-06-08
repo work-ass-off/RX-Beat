@@ -1,22 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { createEntityAdapter, type EntityAdapter, type EntityState } from '@ngrx/entity';
-import type { Album } from './album.model';
+import type { Album, AlbumsState } from './album.model';
 import { AlbumActions } from './album.actions';
-
-export type AlbumsState = EntityState<Album> & {
-  loading: boolean;
-  error: string | null;
-};
-
-export const albumsAdapter: EntityAdapter<Album> = createEntityAdapter<Album>({
-  selectId: (album) => album.id,
-  sortComparer: (a, b) => b.releasedate.localeCompare(a.releasedate),
-});
-
-export const initialAlbumsState: AlbumsState = albumsAdapter.getInitialState({
-  loading: false,
-  error: null,
-});
+import { albumsAdapter, initialAlbumsState } from './album.state';
 
 export const albumsReducer = createReducer<AlbumsState>(
   initialAlbumsState,

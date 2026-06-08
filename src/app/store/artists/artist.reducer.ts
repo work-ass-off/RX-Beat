@@ -1,24 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { type EntityState, type EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import type { Artist } from './artist.model';
+import type { ArtistState } from './artist.model';
 import { ArtistActions } from './artist.actions';
+import { artistAdapter, initialArtistState } from './artist.state';
 
-export type ArtistState = EntityState<Artist> & {
-  loading: boolean;
-  error: string | null;
-};
-
-export const artistAdapter: EntityAdapter<Artist> = createEntityAdapter<Artist>({
-  selectId: (artist) => artist.id,
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
-
-export const initialArtistState: ArtistState = artistAdapter.getInitialState({
-  loading: false,
-  error: null,
-});
-
-export const artistsReducer = createReducer(
+export const artistsReducer = createReducer<ArtistState>(
   initialArtistState,
 
   on(ArtistActions.loadArtists, (state) => ({
