@@ -1,5 +1,6 @@
 import type { EntityState } from '@ngrx/entity';
 import type { JamendoResponse } from '../../models/jamendo.model';
+import type { Track } from '../track/track.model';
 
 export type Album = {
   id: string;
@@ -12,6 +13,7 @@ export type Album = {
     tags: string[];
     description: Record<string, string>;
   };
+  tracks?: Track[];
 };
 
 export type JamendoAlbumsResponse = JamendoResponse<Album[]>;
