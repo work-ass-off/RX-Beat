@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
+import { Controls } from './player.model';
 
 @Component({
   selector: 'app-player',
@@ -9,6 +10,13 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerComponent {
+  public readonly Controls = Controls;
+
   public trackStoreService = inject(PlayerStoreService);
   public track = this.trackStoreService.currentTrack;
+  public isPlaying = signal(false);
+
+  public togglePlay(): void {
+    this.isPlaying.set(!this.isPlaying());
+  }
 }
