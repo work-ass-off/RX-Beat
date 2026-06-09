@@ -18,10 +18,9 @@ export class AlbumsEffects {
           switchMap((response) => [
             AlbumActions.loadAlbumsSuccess({ albums: response.results }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((artist) => ({
-                id: artist.artist_id,
-                name: artist.artist_name,
-                image: artist.image,
+              artists: response.results.map((album) => ({
+                id: album.artist_id,
+                name: album.artist_name,
               })),
             }),
           ]),
@@ -34,15 +33,14 @@ export class AlbumsEffects {
   public loadAldumsTracks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AlbumActions.loadAlbumsWithTracks),
-      switchMap(() =>
-        this.jamendoAlbumsService.getAlbumsWithTracks().pipe(
+      switchMap(({ albumId }) =>
+        this.jamendoAlbumsService.getAlbumsWithTracks(albumId).pipe(
           switchMap((response) => [
             AlbumActions.loadAlbumsWithTracksSuccess({ albums: response.results }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((artist) => ({
-                id: artist.artist_id,
-                name: artist.name,
-                image: artist.image,
+              artists: response.results.map((album) => ({
+                id: album.artist_id,
+                name: album.artist_name,
               })),
             }),
           ]),

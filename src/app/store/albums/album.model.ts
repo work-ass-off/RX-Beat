@@ -7,7 +7,7 @@ export type Album = {
   name: string;
   releasedate: string;
   artist_id: string;
-  artist_name?: string;
+  artist_name: string;
   image: string;
   musicinfo?: {
     tags: string[];

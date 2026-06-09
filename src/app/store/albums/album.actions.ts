@@ -12,7 +12,7 @@ export const AlbumActions = createActionGroup({
 
     // * ALBUMS/TRACKS
 
-    'Load Albums With Tracks': emptyProps(),
+    'Load Albums With Tracks': props<{ albumId: string }>(),
     'Load Albums With Tracks Success': props<{ albums: Album[] }>(),
     'Load Albums With Tracks Failure': props<{ error: string }>(),
 

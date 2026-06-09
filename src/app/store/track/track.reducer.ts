@@ -36,14 +36,14 @@ export const tracksReducer = createReducer(
             id: rawTrack.id,
             name: rawTrack.name,
             duration: rawTrack.duration,
-            releasedate: rawTrack.releasedate,
+            releasedate: album.releasedate,
             audio: rawTrack.audio,
-            image: rawTrack.image,
+            image: album.image,
             position: rawTrack.position,
-            album_id: rawTrack.album_id,
-            artist_id: rawTrack.artist_id,
-            album_name: rawTrack.album_name,
-            artist_name: rawTrack.artist_name,
+            album_id: album.id,
+            artist_id: album.artist_id,
+            album_name: album.name,
+            artist_name: album.artist_name,
           });
         });
       }
