@@ -1,22 +1,32 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
-import { EMPTY, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { TrackActions } from './track.actions';
+import { JamendoTracksService } from '../../services/jamendo/jamendo-tracks/jamendo-tracks.service';
+import { ArtistActions } from '../artists/artist.actions';
 
 @Injectable()
-export class TrackEffects {
+export class TracksEffects {
   private actions$ = inject(Actions);
-  public loadTracks$ = createEffect(() => {
-    return this.actions$.pipe(
+  private jamendoTracksService = inject(JamendoTracksService);
+  public loadTracks$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(TrackActions.loadTracks),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map((tracks) => TrackActions.loadTracks({ tracks })),
-          catchError((error: Error) => of(TrackActions.failureTracks({ error: error.message }))),
+      switchMap(() =>
+        this.jamendoTracksService.getTracks().pipe(
+          switchMap((res) => [
+            TrackActions.loadTracksSuccess({ tracks: res.results }),
+            ArtistActions.loadExternalArtistsSuccess({
+              artists: res.results.map((track) => ({
+                id: track.artist_id,
+                name: track.artist_name,
+              })),
+            }),
+          ]),
+          catchError((error: Error) => of(TrackActions.loadTracksFailure({ error: error.message }))),
         ),
       ),
-    );
-  });
+    ),
+  );
 }
