@@ -113,6 +113,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/pages/api-page/api-page.component').then((m) => m.ApiPageComponent),
   },
   {
+    path: 'store',
+    loadComponent: () => import('./components/pages/store-page/store-page.component').then((m) => m.StorePageComponent),
+  },
+  {
     path: '**',
     component: NotFoundPageComponent,
   },

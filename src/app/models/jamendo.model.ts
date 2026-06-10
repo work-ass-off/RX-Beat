@@ -22,19 +22,50 @@ export type JamendoTrackQueryParams = JamendoBaseQueryParams & {
   artist_id?: string;
 };
 
-export type JamendoTrack = {
+export type JamendoAlbums = {
   id: string;
   name: string;
-  duration: number;
+  releasedate: string;
 
   artist_id: string;
   artist_name: string;
 
+  image: string;
+
+  tracks?: JamendoTrack[];
+  musicinfo?: JamendoMusicInfo;
+};
+
+export type JamendoTrack = {
+  id: string;
+  name: string;
+  duration: number;
+  audio: string;
+
+  image?: string;
+  albume_image?: string;
+
+  artist_id?: string;
+  artist_name?: string;
+
   album_id: string;
   album_name: string;
 
-  image: string;
-  audio: string;
+  updatedate?: string;
+  releasedate?: string;
+  relations?: {
+    review: string;
+    favorite: string;
+    like: string;
+  };
+
+  count?: string;
+  position?: string;
+};
+
+export type JamendoMusicInfo = {
+  tags: string[];
+  description: Record<string, string>;
 };
 
 export type JamendoAutocompleteResponse = {
