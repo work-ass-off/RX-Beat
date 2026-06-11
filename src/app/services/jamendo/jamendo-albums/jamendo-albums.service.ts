@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { JamendoService } from '../jamendo.service';
 import type { Observable } from 'rxjs';
-import type { JamendoAlbumsResponse } from '../../../store/albums/album.model';
+import type { JamendoAlbumsResponse } from '../../../models/';
 
 @Injectable({
   providedIn: 'root',

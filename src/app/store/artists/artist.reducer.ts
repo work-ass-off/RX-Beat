@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import type { ArtistState } from './artist.model';
+import type { ArtistState } from '../../models/artist.model';
 import { ArtistActions } from './artist.actions';
 import { artistAdapter, initialArtistState } from './artist.state';
 

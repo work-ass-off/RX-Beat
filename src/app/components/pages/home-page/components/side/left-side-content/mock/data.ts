@@ -1,4 +1,4 @@
-import type { LibraryItemProps } from '../../../../../../../models/library.models';
+import type { LibraryItemProps } from '../../../../../../../models/';
 
 export const mockLibraryItems: LibraryItemProps[] = [
   {

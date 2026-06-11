@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import type { Track } from './track.model';
+import type { Track } from '../../models/';
 import { TrackActions } from './track.actions';
 import { AlbumActions } from '../albums/album.actions';
 import { initialTracksState, tracksAdapter } from './track.state';
@@ -31,7 +31,7 @@ export const tracksReducer = createReducer(
 
     albums.forEach((album) => {
       if (album.tracks) {
-        album.tracks.forEach((rawTrack) => {
+        album.tracks.forEach((rawTrack: Track) => {
           allTracks.push({
             id: rawTrack.id,
             name: rawTrack.name,
