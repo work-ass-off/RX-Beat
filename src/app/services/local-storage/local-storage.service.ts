@@ -7,6 +7,7 @@ export type LocalStorageState = {
     id: string;
     name: string;
   };
+  token?: string;
 };
 
 @Injectable({

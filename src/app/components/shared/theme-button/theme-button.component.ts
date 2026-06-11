@@ -12,7 +12,7 @@ import { ThemeService } from '../../../services/theme/theme.service';
 export class ThemeButtonComponent {
   private ThemeService = inject(ThemeService);
 
-  toggle(): void {
+  public toggle(): void {
     this.ThemeService.toggle();
   }
 }

@@ -11,11 +11,11 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
   host: { '(mousedown)': 'onClick()' },
 })
 export class TrackCardComponent {
-  track = input.required<JamendoTrack>();
+  public track = input.required<JamendoTrack>();
 
   private trackStoreService = inject(PlayerStoreService);
 
-  onClick(): void {
+  public onClick(): void {
     this.trackStoreService.setTrack(this.track());
   }
 }

@@ -15,11 +15,13 @@
     // Interactive
     --action-primary: #1db954;
     --action-primary-hover: #1ed760;
-    --action-surface: rgba(255, 255, 255, 0.1);
+    --action-surface: rgb(255 255 255 / 0.1);
+    --action-error: #ff0048;
 
     // Misc
     --border: #282828;
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --border-none: none;
+    --shadow: 0 8px 24px rgb(0 0 0 / 0.5);
   }
 
   [data-theme='light'] {
@@ -36,10 +38,12 @@
     // Interactive
     --action-primary: #1db954;
     --action-primary-hover: #169c46;
-    --action-surface: rgba(0, 0, 0, 0.05);
+    --action-surface: rgb(0 0 0 / 0.05);
+    --action-error: #a10733;
 
     // Misc
     --border: #e0e0e0;
-    --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --border-none: none;
+    --shadow: 0 8px 24px rgb(0 0 0 / 0.1);
   }
 }

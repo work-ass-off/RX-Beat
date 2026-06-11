@@ -5,8 +5,8 @@
 }
 
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 html {
@@ -16,10 +16,10 @@ html {
 
 body {
   min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  text-rendering: optimizespeed;
 }
 
 body,
@@ -51,8 +51,8 @@ ol {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -62,8 +62,8 @@ textarea,
 select {
   font: inherit;
   outline: none;
-  border: none;
   background: transparent;
+  border: none;
 }
 
 button {

@@ -3,9 +3,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import type { HeaderLink } from './header.model';
 
 const HeaderLinks: HeaderLink[] = [
-  { name: 'All', link: '/' },
-  { name: 'Music', link: '/123' },
-  { name: 'Podcasts', link: '/345' },
+  { name: 'All', link: 'all' },
+  { name: 'Music', link: 'music' },
+  { name: 'Podcasts', link: 'podcasts' },
 ];
 
 @Component({
@@ -16,5 +16,5 @@ const HeaderLinks: HeaderLink[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  readonly links = HeaderLinks;
+  public readonly links = HeaderLinks;
 }

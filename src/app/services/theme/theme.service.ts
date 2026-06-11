@@ -13,7 +13,7 @@ export class ThemeService {
   private localStorage = inject(LocalStorageService);
   private document = inject(DOCUMENT);
 
-  readonly theme = signal<Theme>(this.localStorage.getItem(THEME_KEY, DEFAULT_THEME));
+  private readonly theme = signal<Theme>(this.localStorage.getItem(THEME_KEY, DEFAULT_THEME));
 
   constructor() {
     effect(() => {
@@ -25,7 +25,7 @@ export class ThemeService {
     });
   }
 
-  toggle(): void {
+  public toggle(): void {
     this.theme.update((t) => (t === 'dark' ? 'light' : 'dark'));
   }
 }

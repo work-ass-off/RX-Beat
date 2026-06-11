@@ -1,0 +1,4 @@
+<app-signin-form></app-signin-form>
+@if (confirmDialogService.isConfirmDialogOpen()) {
+  <app-confirm-dialog (buttonClicked)="confirmDialogService.onManageButtonClick($event)"></app-confirm-dialog>
+}

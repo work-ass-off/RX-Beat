@@ -1,0 +1,35 @@
+@use '../../../../../../../styles/mixins' as *;
+
+:host {
+  @include flex($gap: 0);
+
+  .dropdown {
+    margin-left: auto;
+  }
+
+  &:not(.collapsed) {
+    .collapse-btn {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-1rem);
+      transition: all 0.3s ease;
+    }
+
+    .top-title {
+      transform: translateX(-2rem);
+      transition: transform 0.5s cubic-bezier(0.3, 0, 0, 1);
+    }
+
+    &:hover {
+      .collapse-btn {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0.1rem);
+      }
+
+      .top-title {
+        transform: translateX(0.1rem);
+      }
+    }
+  }
+}

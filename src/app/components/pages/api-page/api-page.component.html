@@ -1,0 +1,7 @@
+@let users = users$ | async;
+@if (users) {
+  <div>{{ users | json }}</div>
+}
+@if (notificationService.notification()) {
+  <div class="error">{{ notificationService.notification() }}</div>
+}

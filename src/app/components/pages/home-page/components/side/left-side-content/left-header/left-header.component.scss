@@ -1,0 +1,66 @@
+@use '../../../../../../../styles/mixins' as *;
+
+:host {
+  @include flex($direction: column, $align: flex-start);
+
+  width: 100%;
+  overflow: hidden;
+
+  .top,
+  .bottom {
+    width: 100%;
+  }
+
+  .btn {
+    margin-left: auto;
+    color: var(--text-main);
+    background-color: var(--action-surface);
+    border: none;
+  }
+
+  .top {
+    @include flex($justify: flex-start, $gap: 0.2rem);
+
+    overflow: hidden;
+  }
+
+  .bottom {
+    @include flex($justify: flex-start, $align: center);
+
+    overflow: auto hidden;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &:not(.collapsed) {
+    .collapse-btn {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-1rem);
+      transition: all 0.3s ease;
+    }
+
+    .top-title {
+      transform: translateX(-2rem);
+      transition: transform 0.5s cubic-bezier(0.3, 0, 0, 1);
+    }
+
+    &:hover {
+      .collapse-btn {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0.1rem);
+      }
+
+      .top-title {
+        transform: translateX(0.1rem);
+      }
+    }
+  }
+
+  &.collapsed .top {
+    @include flex($direction: column);
+  }
+}

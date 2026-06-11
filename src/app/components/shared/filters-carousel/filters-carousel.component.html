@@ -1,0 +1,25 @@
+<div class="carousel-wrapper">
+  @if (isShowArrowLeft()) {
+    <div class="arrow-overlay left-overlay">
+      <button class="arrow-btn" (click)="scrollLeft()">
+        <span class="material-symbols-rounded">chevron_left</span>
+      </button>
+    </div>
+  }
+
+  <div class="scroll-container" #scrollContainer (scroll)="onScroll()">
+    @for (filter of filters(); track filter) {
+      <button class="btn" [class.active]="isActiveFilter() === filter" (click)="selectFilter(filter)">
+        {{ filter | translate }}
+      </button>
+    }
+  </div>
+
+  @if (isShowArrowRight()) {
+    <div class="arrow-overlay right-overlay">
+      <button class="arrow-btn" (click)="scrollRight()">
+        <span class="material-symbols-rounded">chevron_right</span>
+      </button>
+    </div>
+  }
+</div>

@@ -1,6 +1,8 @@
 import { effect, inject, Injectable, resource, signal } from '@angular/core';
 import { JamendoService } from '../jamendo.service';
 import type { JamendoAutocompleteResponse, JamendoResponse, JamendoTrack } from '../../../models/jamendo.model';
+import type { Observable } from 'rxjs';
+import type { Track } from '../../../store/track/track.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,11 +10,11 @@ import type { JamendoAutocompleteResponse, JamendoResponse, JamendoTrack } from 
 export class JamendoTracksService {
   private jamendoService = inject(JamendoService);
 
-  readonly query = signal('');
-  readonly debouncedQuery = signal('');
-  readonly selectedTrack = signal<JamendoTrack | null>(null);
+  public readonly query = signal('');
+  private readonly debouncedQuery = signal('');
+  private readonly selectedTrack = signal<JamendoTrack | null>(null);
 
-  readonly isAutocompleteOpen = signal(false);
+  public readonly isAutocompleteOpen = signal(false);
 
   constructor() {
     effect((onCleanup) => {
@@ -28,7 +30,7 @@ export class JamendoTracksService {
     });
   }
 
-  readonly tracksResource = resource({
+  public readonly tracksResource = resource({
     loader: async ({ abortSignal }) => {
       const query = this.query().trim();
       const response = await this.jamendoService.get<JamendoResponse<JamendoTrack[]>>(
@@ -49,7 +51,7 @@ export class JamendoTracksService {
     },
   });
 
-  readonly autocompleteResource = resource({
+  public readonly autocompleteResource = resource({
     loader: async ({ abortSignal }) => {
       const query = this.debouncedQuery().trim();
 
@@ -73,7 +75,7 @@ export class JamendoTracksService {
     },
   });
 
-  readonly similarTracksResource = resource({
+  public readonly similarTracksResource = resource({
     loader: async ({ abortSignal }) => {
       const track = this.selectedTrack();
 
@@ -91,4 +93,8 @@ export class JamendoTracksService {
       return response.results;
     },
   });
+
+  public getTracks(): Observable<JamendoResponse<Track[]>> {
+    return this.jamendoService.getWithHttpClient<JamendoResponse<Track[]>>('tracks', { limit: 10 });
+  }
 }

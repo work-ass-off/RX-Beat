@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { type Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JamendoService {
+  // * ADD HTTP CLIENT
+  private readonly http = inject(HttpClient);
+
   private readonly baseUrl = 'https://api.jamendo.com/v3.0';
 
   private readonly clientId = environment.jamendoClientId;
@@ -24,7 +29,7 @@ export class JamendoService {
     return `${this.baseUrl}/${endpoint}?${searchParams}`;
   }
 
-  async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
+  public async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
     const response = await fetch(this.buildUrl(endpoint, params), {
       signal,
     });
@@ -34,5 +39,33 @@ export class JamendoService {
     }
 
     return response.json() as Promise<T>;
+  }
+
+  // * NEW IMPLEMINTATION WITH HTTP CLIENT
+
+  private buildParams(params?: Record<string, unknown>): HttpParams {
+    let httpParams = new HttpParams().set('client_id', this.clientId).set('format', 'json');
+
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          console.log(key, value);
+          httpParams = httpParams.set(key, String(value));
+        }
+      });
+    }
+
+    console.log(httpParams);
+
+    return httpParams;
+  }
+
+  public getWithHttpClient<T>(endpoint: string, params?: Record<string, unknown>): Observable<T> {
+    const url = `${this.baseUrl}/${endpoint}`;
+
+    const httpParams = this.buildParams(params);
+    console.log(httpParams);
+
+    return this.http.get<T>(url, { params: httpParams });
   }
 }
