@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-import type { Artist } from './artist.model';
+import type { Artist } from '../../models/';
 
 export const ArtistActions = createActionGroup({
   source: 'Artist',

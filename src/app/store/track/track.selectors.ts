@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector, type MemoizedSelector } from '@ngrx/store';
 import type { Dictionary } from '@ngrx/entity';
 import { tracksAdapter } from './track.state';
-import type { Track, TracksState } from './track.model';
+import type { Track, TracksState } from '../../models/';
 
 export const tracksFeatureKey = 'tracks';
 

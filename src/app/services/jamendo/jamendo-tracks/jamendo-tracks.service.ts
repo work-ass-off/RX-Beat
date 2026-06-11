@@ -1,8 +1,7 @@
 import { effect, inject, Injectable, resource, signal } from '@angular/core';
 import { JamendoService } from '../jamendo.service';
-import type { JamendoAutocompleteResponse, JamendoResponse, JamendoTrack } from '../../../models/jamendo.model';
 import type { Observable } from 'rxjs';
-import type { Track } from '../../../store/track/track.model';
+import type { Track, JamendoAutocompleteResponse, JamendoResponse } from '../../../models/';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ export class JamendoTracksService {
 
   public readonly query = signal('');
   private readonly debouncedQuery = signal('');
-  private readonly selectedTrack = signal<JamendoTrack | null>(null);
+  private readonly selectedTrack = signal<Track | null>(null);
 
   public readonly isAutocompleteOpen = signal(false);
 
@@ -33,7 +32,7 @@ export class JamendoTracksService {
   public readonly tracksResource = resource({
     loader: async ({ abortSignal }) => {
       const query = this.query().trim();
-      const response = await this.jamendoService.get<JamendoResponse<JamendoTrack[]>>(
+      const response = await this.jamendoService.get<JamendoResponse<Track[]>>(
         'tracks',
         query
           ? {
@@ -81,7 +80,7 @@ export class JamendoTracksService {
 
       if (!track) return [];
 
-      const response = await this.jamendoService.get<JamendoResponse<JamendoTrack[]>>(
+      const response = await this.jamendoService.get<JamendoResponse<Track[]>>(
         'tracks/similar',
         {
           id: track.id,

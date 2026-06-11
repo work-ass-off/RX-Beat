@@ -1,5 +1,5 @@
 import { createEntityAdapter, type EntityAdapter } from '@ngrx/entity';
-import type { Artist, ArtistState } from './artist.model';
+import type { Artist, ArtistState } from '../../models/';
 
 export const artistAdapter: EntityAdapter<Artist> = createEntityAdapter<Artist>({
   selectId: (artist) => artist.id,
