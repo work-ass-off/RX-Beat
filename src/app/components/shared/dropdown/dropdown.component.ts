@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 import { DropdownService } from '../../../services/dropdown/dropdown.service';
 import { DropdownItemComponent } from './dropdown-item/dropdown-item.component';
-import type { Dropdown } from './model/dropdown.model';
+import type { Dropdown } from '../../../models/dropdown.model';
 
 @Component({
   selector: 'app-dropdown',
