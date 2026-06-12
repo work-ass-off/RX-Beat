@@ -53,10 +53,20 @@ jobs:
         run: npm run build
 
       - name: Pull Vercel Environment Information
-        run: npx vercel pull --yes --environment=preview
+        run: |
+          if [ '${{ github.event_name }}' == 'push' ]; then
+            npx vercel pull --yes --environment=production
+          else
+            npx vercel pull --yes --environment=preview
+          fi
 
       - name: Vercel Build
-        run: npx vercel build
+        run: |
+          if [ '${{ github.event_name }}' == 'push' ]; then
+            npx vercel build --prod
+          else
+            npx vercel build
+          fi
 
       - name: Archive Vercel Build
         run: tar -czf vercel-build.tar .vercel
