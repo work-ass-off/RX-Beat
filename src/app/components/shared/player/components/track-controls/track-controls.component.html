@@ -1,0 +1,17 @@
+<button class="btn btn-player change-track prev">
+  <span class="material-symbols-rounded">{{ Controls.PREVIOUS }}</span>
+</button>
+
+<button
+  class="btn btn-player"
+  (click)="togglePlay()"
+  [attr.aria-label]="trackStoreService.isPlaying() ? 'Pause' : 'Play'"
+>
+  <span class="material-symbols-outlined play-icon">{{
+    trackStoreService.isPlaying() ? Controls.PAUSE : Controls.PLAY
+  }}</span>
+</button>
+
+<button class="btn btn-player change-track next">
+  <span class="material-symbols-rounded">{{ Controls.NEXT }}</span>
+</button>

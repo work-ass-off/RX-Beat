@@ -1,0 +1,15 @@
+<div class="progress-bar-wrapper">
+  <div class="progress-bar">
+    <input
+      class="progress-slider"
+      type="range"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [value]="(trackStoreService.currentTrackCurrentTime$ | async) ?? defaultValue"
+      [style.--progress.%]="(trackStoreService.currentTrackCurrentTime$ | async) ?? defaultValue"
+      (input)="onSliderChange($event)"
+      aria-label="Track progress"
+    />
+  </div>
+</div>

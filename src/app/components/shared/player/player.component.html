@@ -1,17 +1,12 @@
-<div class="controls">
-  <div class="manage-track">
-    <button class="btn btn-player change-track prev">
-      <span class="material-symbols-rounded">{{ Controls.PREVIOUS }}</span>
-    </button>
+<app-track-controls></app-track-controls>
+<app-progress-bar></app-progress-bar>
 
-    <button class="btn btn-player" (click)="togglePlay()" [attr.aria-label]="isPlaying() ? 'Pause' : 'И'">
-      <span class="material-symbols-outlined play-icon">{{ isPlaying() ? Controls.PAUSE : Controls.PLAY }}</span>
-    </button>
-
-    <button class="btn btn-player change-track next">
-      <span class="material-symbols-rounded">{{ Controls.NEXT }}</span>
-    </button>
-  </div>
-</div>
-
-<audio #audioPlayer [src]="track()?.audio">Your browser does not support the audio element.</audio>
+<audio
+  #audioPlayer
+  [src]="track()?.audio"
+  (timeupdate)="updateProgress()"
+  (loadedmetadata)="updateProgress()"
+  (ended)="onTrackEnded()"
+>
+  Your browser does not support the audio element.
+</audio>
