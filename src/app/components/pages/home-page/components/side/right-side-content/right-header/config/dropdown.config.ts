@@ -1,4 +1,4 @@
-import type { Dropdown } from '../../../../../../../shared/dropdown/model/dropdown.model';
+import type { Dropdown } from '../../../../../../../../models/dropdown.model';
 
 export const DROPDOWN_CONFIG: Dropdown = {
   btnText: 'more_horiz',

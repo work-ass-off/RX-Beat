@@ -27,7 +27,7 @@ export class LeftHeaderComponent {
   ];
 
   public onFilterChange(selected: string): void {
-    // TODO: For Debugging
+    // For Debugging
     console.log(selected);
   }
 
