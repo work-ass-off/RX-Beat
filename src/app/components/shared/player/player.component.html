@@ -1,8 +1,18 @@
-<app-track-controls></app-track-controls>
-<app-progress-bar></app-progress-bar>
-<div class="time-wrapper">
-  <app-track-time [isTimeIsCurrentTime]="true"></app-track-time>
-  <app-track-time [isTimeIsCurrentTime]="false"></app-track-time>
+<div class="main-conrtols">
+  <app-track-controls></app-track-controls>
+  <app-progress-bar [id]="'progress-bar'" [value]="trackStoreService.trackProgressPresentage()"></app-progress-bar>
+  <div class="time-wrapper">
+    <app-track-time [isTimeIsCurrentTime]="true"></app-track-time>
+    <app-track-time [isTimeIsCurrentTime]="false"></app-track-time>
+  </div>
+</div>
+
+<div class="additional-controls">
+  <button class="queue-button btn btn-player">
+    <span class="material-symbols-outlined"> queue_music </span>
+  </button>
+
+  <app-progress-bar [id]="'volume-bar'" [value]="trackStoreService.volume()" [isVolumeBar]="true"> </app-progress-bar>
 </div>
 
 <audio

@@ -3,12 +3,13 @@
     <input
       class="progress-slider"
       type="range"
-      [min]="min"
-      [max]="max"
-      [step]="step"
-      [value]="trackStoreService.trackProgressPresentage()"
-      [style.--progress.%]="trackStoreService.trackProgressPresentage()"
-      (input)="onSliderChange($event)"
+      [id]="id()"
+      [min]="isVolumeBar() ? volumeMin : sliderMin"
+      [max]="isVolumeBar() ? volumeMax : sliderMax"
+      [step]="isVolumeBar() ? volumeStep : sliderStep"
+      [value]="value()"
+      [style.--progress]="isVolumeBar() ? value() * 100 + '%' : trackStoreService.trackProgressPresentage() + '%'"
+      (input)="isVolumeBar() ? setVolume($event) : onSliderChange($event)"
       aria-label="Track progress"
     />
   </div>
