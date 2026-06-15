@@ -2,6 +2,7 @@
 
 :host {
   @include flex($justify: center, $align: center, $gap: 20px);
+
   width: 100%;
 
   .btn-player {
