@@ -6,8 +6,8 @@
       [min]="min"
       [max]="max"
       [step]="step"
-      [value]="(trackStoreService.currentTrackCurrentTime$ | async) ?? defaultValue"
-      [style.--progress.%]="(trackStoreService.currentTrackCurrentTime$ | async) ?? defaultValue"
+      [value]="trackStoreService.trackProgressPresentage()"
+      [style.--progress.%]="trackStoreService.trackProgressPresentage()"
       (input)="onSliderChange($event)"
       aria-label="Track progress"
     />

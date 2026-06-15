@@ -1,5 +1,9 @@
 <app-track-controls></app-track-controls>
 <app-progress-bar></app-progress-bar>
+<div class="time-wrapper">
+  <app-track-time [isTimeIsCurrentTime]="true"></app-track-time>
+  <app-track-time [isTimeIsCurrentTime]="false"></app-track-time>
+</div>
 
 <audio
   #audioPlayer

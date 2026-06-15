@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@
 import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
 import { TrackControlsComponent } from './components/track-controls/track-controls.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { TrackTimeComponent } from './components/track-time/track-time.component';
 
 @Component({
   selector: 'app-player',
-  imports: [TrackControlsComponent, ProgressBarComponent],
+  imports: [TrackControlsComponent, ProgressBarComponent, TrackTimeComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,6 +42,6 @@ export class PlayerComponent {
 
   public onTrackEnded(): void {
     this.trackStoreService.isPlaying.set(false);
-    this.trackStoreService.currentTrackCurrentTime$.next(0);
+    this.trackStoreService.resetTrackTiming();
   }
 }

@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PlayerStoreService } from '../../../../../services/store/player-store/player-store.service';
-import { AsyncPipe } from '@angular/common';
 import { DEFAULT_VALUE, MAX_VALUE, MIN_VALUE, STEP_CHANGE_VALUE } from './progress-bar.const';
 
 @Component({
   selector: 'app-progress-bar',
-  imports: [AsyncPipe],
+  imports: [],
   templateUrl: './progress-bar.component.html',
   styleUrl: './progress-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

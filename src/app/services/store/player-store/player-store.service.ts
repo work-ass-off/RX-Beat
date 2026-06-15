@@ -1,6 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import type { JamendoTrack } from '../../../models/jamendo.model';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +8,26 @@ export class PlayerStoreService {
   public readonly currentTrack = signal<JamendoTrack | null>(null);
   public audio = signal<HTMLAudioElement | null>(null);
   public isPlaying = signal(false);
-  public currentTrackCurrentTime$ = new BehaviorSubject<number>(0);
+
+  public trackDuration = computed(() => this.currentTrack()?.duration || 0);
+
+  public trackCurrentTime = signal<number>(0);
+
+  public trackProgressPresentage = computed(() => {
+    const duration = this.trackDuration();
+    const currentTime = this.trackCurrentTime();
+
+    if (!duration) {
+      return 0;
+    }
+
+    return (currentTime / duration) * 100;
+  });
 
   public togglePlay(): void {
     this.isPlaying.set(!this.isPlaying());
 
     const audioElementRef = this.audio();
-    console.log(audioElementRef?.currentTime);
 
     if (!audioElementRef) {
       this.isPlaying.set(false);
@@ -32,25 +44,22 @@ export class PlayerStoreService {
   }
 
   public updateProgress(): void {
-    const audioElementRef = this.audio();
+    const audioElement = this.audio();
 
-    if (!audioElementRef) {
-      this.currentTrackCurrentTime$.next(0);
+    if (!audioElement) {
       return;
     }
-
-    const audioElement = audioElementRef;
 
     if (!audioElement.duration || Number.isNaN(audioElement.duration)) {
-      this.currentTrackCurrentTime$.next(0);
+      this.resetTrackTiming();
       return;
     }
 
-    this.currentTrackCurrentTime$.next((audioElement.currentTime / audioElement.duration) * 100);
+    this.trackCurrentTime.set(audioElement.currentTime);
 
-    if (audioElement.currentTime === audioElement.duration) {
+    if (audioElement.currentTime >= audioElement.duration) {
       this.isPlaying.set(false);
-      this.currentTrackCurrentTime$.next(0);
+      this.trackCurrentTime.set(0);
     }
   }
 
@@ -65,16 +74,20 @@ export class PlayerStoreService {
 
     const audioElement = audioElementRef;
     if (!audioElement.duration || Number.isNaN(audioElement.duration)) {
-      this.currentTrackCurrentTime$.next(0);
+      this.resetTrackTiming();
       return;
     }
 
     audioElement.currentTime = (newTime / 100) * audioElement.duration;
-    this.currentTrackCurrentTime$.next(newTime);
+    this.trackCurrentTime.set(audioElement.currentTime);
   }
 
   public setTrack(track: JamendoTrack): void {
     this.currentTrack.set(track);
+  }
+
+  public resetTrackTiming(): void {
+    this.trackCurrentTime.set(0);
   }
 
   public clearTrack(): void {
