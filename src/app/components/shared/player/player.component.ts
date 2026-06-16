@@ -23,6 +23,8 @@ export class PlayerComponent {
       id: 'local-1',
       name: 'Topolonyy Puh',
       duration: 231.327347,
+      releasedate: '1998-01-01',
+      position: 1,
       artist_id: 'local-artist',
       artist_name: 'Ivanushki International',
       album_id: 'local-album',

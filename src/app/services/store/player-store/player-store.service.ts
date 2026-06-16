@@ -1,11 +1,11 @@
 import { computed, Injectable, signal } from '@angular/core';
-import type { JamendoTrack } from '../../../models/jamendo.model';
+import type { Track } from '../../../models/jamendo.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerStoreService {
-  public readonly currentTrack = signal<JamendoTrack | null>(null);
+  public readonly currentTrack = signal<Track | null>(null);
   public audio = signal<HTMLAudioElement | null>(null);
   public isPlaying = signal(false);
 
