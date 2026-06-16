@@ -10,10 +10,10 @@ import { PlayerStoreService } from '../../../../../services/store/player-store/p
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrackTimeComponent {
-  public readonly trackStoreService = inject(PlayerStoreService);
+  protected readonly trackStoreService = inject(PlayerStoreService);
   public readonly isTimeIsCurrentTime = input<boolean>(false);
 
-  public readonly timeData = computed(() => {
+  protected readonly timeData = computed(() => {
     const duration = Math.floor(this.trackStoreService.trackDuration());
     const currentTime = Math.floor(this.trackStoreService.trackCurrentTime());
     const reminderTime = Math.max(duration - currentTime, 0);

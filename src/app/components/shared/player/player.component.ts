@@ -4,10 +4,11 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
 import { TrackControlsComponent } from './components/track-controls/track-controls.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { TrackTimeComponent } from './components/track-time/track-time.component';
+import { TrackPreviewComponent } from './components/track-preview/track-preview.component';
 
 @Component({
   selector: 'app-player',
-  imports: [TrackControlsComponent, ProgressBarComponent, TrackTimeComponent],
+  imports: [TrackControlsComponent, ProgressBarComponent, TrackTimeComponent, TrackPreviewComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,13 +21,13 @@ export class PlayerComponent {
   constructor() {
     this.trackStoreService.setTrack({
       id: 'local-1',
-      name: 'Local Track',
+      name: 'Topolonyy Puh',
       duration: 231.327347,
       artist_id: 'local-artist',
-      artist_name: 'Local Artist',
+      artist_name: 'Ivanushki International',
       album_id: 'local-album',
       album_name: 'Local Album',
-      image: '/assets/gif/black-cat.gif',
+      image: 'vinyl-mock.jpg',
       audio: '/ivanushki-international_-_topolinyy-puh.mp3',
     });
 

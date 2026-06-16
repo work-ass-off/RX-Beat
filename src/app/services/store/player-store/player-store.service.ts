@@ -8,6 +8,7 @@ export class PlayerStoreService {
   public readonly currentTrack = signal<JamendoTrack | null>(null);
   public audio = signal<HTMLAudioElement | null>(null);
   public isPlaying = signal(false);
+  public isLikedTrack = signal<boolean>(false);
   public volume = signal(1);
 
   public trackDuration = computed(() => this.currentTrack()?.duration || 0);

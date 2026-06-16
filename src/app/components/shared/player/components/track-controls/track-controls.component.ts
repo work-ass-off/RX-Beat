@@ -10,10 +10,10 @@ import { PlayerStoreService } from '../../../../../services/store/player-store/p
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrackControlsComponent {
-  public readonly trackStoreService = inject(PlayerStoreService);
-  public readonly Controls = Controls;
+  protected readonly trackStoreService = inject(PlayerStoreService);
+  protected readonly Controls = Controls;
 
-  public togglePlay(): void {
+  protected togglePlay(): void {
     this.trackStoreService.togglePlay();
   }
 }

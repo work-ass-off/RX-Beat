@@ -1,0 +1,59 @@
+:host {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: inherit;
+  padding: 10px;
+  border-radius: 20px;
+  width: 25%;
+
+  .track-cover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .track-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .track-artist {
+      font-size: 14px;
+      color: #666666;
+    }
+  }
+
+  .like-button {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-sub);
+
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-main);
+      }
+    }
+  }
+
+//   &:hover {
+//     cursor: pointer;
+//     background-color: var(--action-surface);
+//     transition: background-color 0.3s ease;
+//   }
+}
