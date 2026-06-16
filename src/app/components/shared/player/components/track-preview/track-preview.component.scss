@@ -1,15 +1,13 @@
+@use '../../../../../styles/mixins' as *;
+
 :host {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
+  @include flex($gap: 10px);
+
+  width: 25%;
   height: inherit;
   padding: 10px;
   border-radius: 20px;
-  width: 25%;
 
   .track-cover {
     width: 100px;
@@ -19,9 +17,8 @@
   }
 
   .track-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    @include flex($direction: column, $align: stretch, $justify: space-between, $gap: 0);
+
     height: 100%;
 
     .track-title {
@@ -38,11 +35,10 @@
   .like-button {
     width: 30px;
     height: 30px;
+    color: var(--text-sub);
+    cursor: pointer;
     background-color: transparent;
     border: none;
-    cursor: pointer;
-    color: var(--text-sub);
-
 
     @media (hover: hover) {
       &:hover {
@@ -50,10 +46,4 @@
       }
     }
   }
-
-//   &:hover {
-//     cursor: pointer;
-//     background-color: var(--action-surface);
-//     transition: background-color 0.3s ease;
-//   }
 }

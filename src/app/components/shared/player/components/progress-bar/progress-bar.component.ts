@@ -1,6 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { PlayerStoreService } from '../../../../../services/store/player-store/player-store.service';
-import { DEFAULT_VALUE, MAX_VALUE, MIN_VALUE, SLIDER_MAX, SLIDER_MIN, SLIDER_STEP, STEP_CHANGE_VALUE, VOLUME_MAX, VOLUME_MIN, VOLUME_STEP } from './progress-bar.const';
+import {
+  DEFAULT_VALUE,
+  MAX_VALUE,
+  MIN_VALUE,
+  SLIDER_MAX,
+  SLIDER_MIN,
+  SLIDER_STEP,
+  STEP_CHANGE_VALUE,
+  VOLUME_MAX,
+  VOLUME_MIN,
+  VOLUME_STEP,
+} from './progress-bar.const';
 
 @Component({
   selector: 'app-progress-bar',

@@ -1,9 +1,26 @@
+@use '../../../../../styles/mixins' as *;
+
 :host {
   width: 100%;
 
   .progress-bar-wrapper {
+    @include flex($direction: column, $align: stretch, $gap: 0);
+
     width: 100%;
     padding: 0.25rem 0;
+
+    .progress-bar {
+      @include flex($gap: 0);
+      width: 100%;
+    }
+
+    &.volume-wrapper {
+      align-items: flex-start;
+
+      .progress-bar {
+        width: 50%;
+      }
+    }
 
     .progress-slider {
       --progress: 0;
@@ -57,8 +74,9 @@
     }
 
     .progress-slider#volume-bar {
-      width: 50%;
+      width: 100%;
       height: 0.25rem;
+      justify-self: start;
 
       &::-webkit-slider-runnable-track {
         height: 0.25rem;
