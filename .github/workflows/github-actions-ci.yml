@@ -53,10 +53,20 @@ jobs:
         run: npm run build
 
       - name: Pull Vercel Environment Information
-        run: npx vercel pull --yes --environment=preview
+        run: |
+          if [ '${{ github.event_name }}' == 'push' ]; then
+            npx vercel pull --yes --environment=production
+          else
+            npx vercel pull --yes --environment=preview
+          fi
 
       - name: Vercel Build
-        run: npx vercel build
+        run: |
+          if [ '${{ github.event_name }}' == 'push' ]; then
+            npx vercel build --prod
+          else
+            npx vercel build
+          fi
 
       - name: Archive Vercel Build
         run: tar -czf vercel-build.tar .vercel
@@ -109,7 +119,7 @@ jobs:
 
     environment:
       name: production
-      url: ${{ steps.deploy-vercel.outputs.preview-url }}
+      url: ${{ steps.deploy-vercel.outputs.production-url }}
 
     steps:
       - name: Checkout code
@@ -135,3 +145,4 @@ jobs:
           vercel-version: 'latest'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-deployment: false
+          github-comment: false
