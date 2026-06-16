@@ -98,7 +98,6 @@ export const routes: Routes = [
   },
   {
     path: 'search',
-    canDeactivate: [loginGuard],
     loadComponent: () =>
       import('./components/pages/search-page/search-page.component').then((m) => m.SearchPageComponent),
   },

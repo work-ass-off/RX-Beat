@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import type { JamendoTrack } from '../../../models/jamendo.model';
+import type { Track } from '../../../models/';
 import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
   host: { '(mousedown)': 'onClick()' },
 })
 export class TrackCardComponent {
-  public track = input.required<JamendoTrack>();
+  public track = input.required<Track>();
 
   private trackStoreService = inject(PlayerStoreService);
 

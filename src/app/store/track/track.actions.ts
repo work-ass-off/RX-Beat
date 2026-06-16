@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import type { Track } from './track.model';
+import type { Track } from '../../models/';
 
 export const TrackActions = createActionGroup({
   source: 'Track',

@@ -4,6 +4,7 @@ import { AlbumActions } from './album.actions';
 import { catchError, of, switchMap } from 'rxjs';
 import { JamendoAlbumsService } from '../../services/jamendo/jamendo-albums/jamendo-albums.service';
 import { ArtistActions } from '../artists/artist.actions';
+import type { Album } from '../../models';
 
 @Injectable()
 export class AlbumsEffects {
@@ -18,7 +19,7 @@ export class AlbumsEffects {
           switchMap((response) => [
             AlbumActions.loadAlbumsSuccess({ albums: response.results }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((album) => ({
+              artists: response.results.map((album: Album) => ({
                 id: album.artist_id,
                 name: album.artist_name,
               })),
@@ -38,7 +39,7 @@ export class AlbumsEffects {
           switchMap((response) => [
             AlbumActions.loadAlbumsWithTracksSuccess({ albums: response.results }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((album) => ({
+              artists: response.results.map((album: Album) => ({
                 id: album.artist_id,
                 name: album.artist_name,
               })),

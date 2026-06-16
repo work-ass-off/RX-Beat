@@ -27,7 +27,7 @@ export class PlayerStoreService {
     return (currentTime / duration) * 100;
   });
 
-  public setTrack(track: JamendoTrack): void {
+  public setTrack(track: Track): void {
     this.currentTrack.set(track);
   }
 

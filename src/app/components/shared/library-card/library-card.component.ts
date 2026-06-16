@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import type { LibraryItemProps } from '../../../models/library.models';
+import type { LibraryItemProps } from '../../../models/';
 import { SidebarService } from '../../../services/sidebar/sidebar.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { createEntityAdapter, type EntityAdapter } from '@ngrx/entity';
-import type { Track, TracksState } from './track.model';
+import type { Track, TracksState } from '../../models/';
 
 export const tracksAdapter: EntityAdapter<Track> = createEntityAdapter<Track>({
   selectId: (track) => track.id,
