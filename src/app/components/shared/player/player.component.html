@@ -1,17 +1,28 @@
-<div class="controls">
-  <div class="manage-track">
-    <button class="btn btn-player change-track prev">
-      <span class="material-symbols-rounded">{{ Controls.PREVIOUS }}</span>
-    </button>
+<app-track-preview></app-track-preview>
 
-    <button class="btn btn-player" (click)="togglePlay()" [attr.aria-label]="isPlaying() ? 'Pause' : 'И'">
-      <span class="material-symbols-outlined play-icon">{{ isPlaying() ? Controls.PAUSE : Controls.PLAY }}</span>
-    </button>
-
-    <button class="btn btn-player change-track next">
-      <span class="material-symbols-rounded">{{ Controls.NEXT }}</span>
-    </button>
+<div class="main-conrtols">
+  <app-track-controls></app-track-controls>
+  <app-progress-bar [id]="'progress-bar'" [value]="trackStoreService.trackProgressPresentage()"></app-progress-bar>
+  <div class="time-wrapper">
+    <app-track-time [isTimeIsCurrentTime]="true"></app-track-time>
+    <app-track-time [isTimeIsCurrentTime]="false"></app-track-time>
   </div>
 </div>
 
-<audio #audioPlayer [src]="track()?.audio">Your browser does not support the audio element.</audio>
+<div class="additional-controls">
+  <button class="queue-button btn btn-player">
+    <span class="material-symbols-outlined"> queue_music </span>
+  </button>
+
+  <app-progress-bar [id]="'volume-bar'" [value]="trackStoreService.volume()" [isVolumeBar]="true"> </app-progress-bar>
+</div>
+
+<audio
+  #audioPlayer
+  [src]="track()?.audio"
+  (timeupdate)="updateProgress()"
+  (loadedmetadata)="updateProgress()"
+  (ended)="onTrackEnded()"
+>
+  Your browser does not support the audio element.
+</audio>

@@ -1,0 +1,50 @@
+@use '../../../../../styles/mixins' as *;
+
+:host {
+  box-sizing: border-box;
+
+  @include flex($gap: 10px);
+
+  width: 25%;
+  height: inherit;
+  padding: 10px;
+  border-radius: 20px;
+
+  .track-cover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .track-info {
+    @include flex($direction: column, $align: stretch, $justify: space-between, $gap: 0);
+
+    height: 100%;
+
+    .track-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .track-artist {
+      font-size: 14px;
+      color: #666666;
+    }
+  }
+
+  .like-button {
+    width: 30px;
+    height: 30px;
+    color: var(--text-sub);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-main);
+      }
+    }
+  }
+}
