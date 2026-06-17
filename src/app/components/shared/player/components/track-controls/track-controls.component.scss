@@ -4,6 +4,7 @@
   @include flex($justify: center, $align: center, $gap: 20px);
 
   width: 100%;
+  padding: 0.5rem 0 0 0;
 
   .btn-player {
     width: 3rem;
