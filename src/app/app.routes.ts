@@ -39,7 +39,9 @@ export const routes: Routes = [
       {
         path: 'tracks',
         loadComponent: () =>
-          import(`./components/pages/home-page/pages/all-page/all-page.component`).then((m) => m.AllPageComponent),
+          import(`./components/pages/home-page/pages/tracks-page/tracks-page.component`).then(
+            (m) => m.TracksPageComponent,
+          ),
         canActivateChild: [guestGuard],
         children: [
           {
@@ -52,8 +54,8 @@ export const routes: Routes = [
       {
         path: 'albums',
         loadComponent: () =>
-          import('./components/pages/home-page/pages/music-page/music-page.component').then(
-            (m) => m.MusicPageComponent,
+          import('./components/pages/home-page/pages/albums-page/albums-page.component').then(
+            (m) => m.AlbumsPageComponent,
           ),
         canActivateChild: [guestGuard],
         children: [
@@ -67,8 +69,8 @@ export const routes: Routes = [
       {
         path: 'artists',
         loadComponent: () =>
-          import('./components/pages/home-page/pages/podcasts-page/podcasts-page.component').then(
-            (m) => m.PodcastsPageComponent,
+          import('./components/pages/home-page/pages/artists-page/artists-page.component').then(
+            (m) => m.ArtistsPageComponent,
           ),
         canActivateChild: [guestGuard],
         children: [
@@ -82,8 +84,8 @@ export const routes: Routes = [
       {
         path: 'playlists',
         loadComponent: () =>
-          import('./components/pages/home-page/pages/podcasts-page/podcasts-page.component').then(
-            (m) => m.PodcastsPageComponent,
+          import('./components/pages/home-page/pages/playlists-page/playlists-page.component').then(
+            (m) => m.PlaylistsPageComponent,
           ),
         canActivateChild: [guestGuard],
         children: [
