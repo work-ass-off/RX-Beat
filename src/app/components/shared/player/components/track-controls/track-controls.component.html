@@ -1,17 +1,26 @@
-<button class="btn btn-player change-track prev">
+<button
+  class="btn btn-player change-track prev"
+  (click)="playerStoreService.setPreviousTrackFromQueue()"
+  [disabled]="currentTrackIndex() <= 0"
+>
   <span class="material-symbols-rounded">{{ Controls.PREVIOUS }}</span>
 </button>
 
 <button
   class="btn btn-player"
   (click)="togglePlay()"
-  [attr.aria-label]="trackStoreService.isPlaying() ? 'Pause' : 'Play'"
+  [attr.aria-label]="playerStoreService.isPlaying() ? 'Pause' : 'Play'"
+  [disabled]="!playerStoreService.currentTrack()"
 >
   <span class="material-symbols-outlined play-icon">{{
-    trackStoreService.isPlaying() ? Controls.PAUSE : Controls.PLAY
+    playerStoreService.isPlaying() ? Controls.PAUSE : Controls.PLAY
   }}</span>
 </button>
 
-<button class="btn btn-player change-track next">
+<button
+  class="btn btn-player change-track next"
+  (click)="playerStoreService.setNextTrackFromQueue()"
+  [disabled]="currentTrackIndex() + 1 >= playerStoreService.queue().length"
+>
   <span class="material-symbols-rounded">{{ Controls.NEXT }}</span>
 </button>

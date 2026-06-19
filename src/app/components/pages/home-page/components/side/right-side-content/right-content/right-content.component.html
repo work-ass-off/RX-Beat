@@ -1,1 +1,3 @@
-<p>right-content works!</p>
+@for (track of tracksQueue(); track track.id) {
+  <app-track-item [track]="track"></app-track-item>
+}

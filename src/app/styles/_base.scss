@@ -110,7 +110,7 @@ body {
 }
 
 .page {
-  @include flex($align: flex-start);
+  @include flex($align: flex-start, $direction: row-reverse, $gap: 1rem);
 
   width: 100%;
   height: 100%;

@@ -14,12 +14,12 @@ import { TrackPreviewComponent } from './components/track-preview/track-preview.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerComponent {
-  public readonly trackStoreService = inject(PlayerStoreService);
-  public readonly track = this.trackStoreService.currentTrack;
+  public readonly playerStoreService = inject(PlayerStoreService);
+  public readonly track = this.playerStoreService.currentTrack;
   public readonly audio = viewChild<ElementRef<HTMLAudioElement>>('audioPlayer');
 
   constructor() {
-    this.trackStoreService.setTrack({
+    this.playerStoreService.setTrack({
       id: 'local-1',
       name: 'Topolonyy Puh',
       duration: 231.327347,
@@ -33,18 +33,51 @@ export class PlayerComponent {
       audio: '/ivanushki-international_-_topolinyy-puh.mp3',
     });
 
+    effect((onCleanup) => {
+      const audioElement = this.audio()?.nativeElement;
+      const track = this.track();
+      const shouldPlay = this.playerStoreService.isPlaying();
+
+      if (!audioElement || !track) {
+        return;
+      }
+
+      if (!shouldPlay) {
+        audioElement.pause();
+        return;
+      }
+
+      const playAudio = (): void => {
+        void audioElement.play().catch((error) => {
+          console.error('Audio play() failed:', error);
+          this.playerStoreService.isPlaying.set(false);
+        });
+      };
+
+      if (audioElement.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        playAudio();
+      } else {
+        const onCanPlay = (): void => {
+          playAudio();
+        };
+
+        audioElement.addEventListener('canplay', onCanPlay, { once: true });
+        onCleanup(() => audioElement.removeEventListener('canplay', onCanPlay));
+      }
+    });
+
     effect(() => {
       const audioElementRef = this.audio();
-      this.trackStoreService.audio.set(audioElementRef?.nativeElement ?? null);
+      this.playerStoreService.audio.set(audioElementRef?.nativeElement ?? null);
     });
   }
 
   public updateProgress(): void {
-    this.trackStoreService.updateProgress();
+    this.playerStoreService.updateProgress();
   }
 
   public onTrackEnded(): void {
-    this.trackStoreService.isPlaying.set(false);
-    this.trackStoreService.resetTrackTiming();
+    this.playerStoreService.resetTrackTiming();
+    this.playerStoreService.setNextTrackFromQueue();
   }
 }
