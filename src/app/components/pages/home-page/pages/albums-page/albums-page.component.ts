@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
+import { JamendoAlbumsService } from '../../../../../services/jamendo/jamendo-albums/jamendo-albums.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-albums-page',
@@ -8,4 +10,8 @@ import { ContentComponent } from '../../components/content/content.component';
   styleUrl: './albums-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AlbumsPageComponent {}
+export class AlbumsPageComponent {
+  private jamendoAlbumsService = inject(JamendoAlbumsService);
+
+  private albumsSignal = toSignal(this.jamendoAlbumsService.getAlbums(), { initialValue: [] });
+}

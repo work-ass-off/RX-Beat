@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { JamendoTracksService } from '../../../../../services/jamendo/jamendo-tracks/jamendo-tracks.service';
 
 @Component({
   selector: 'app-tracks-page',
@@ -8,4 +10,8 @@ import { ContentComponent } from '../../components/content/content.component';
   styleUrl: './tracks-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TracksPageComponent {}
+export class TracksPageComponent {
+  private jamendoTracksService = inject(JamendoTracksService);
+
+  private tracksSignal = toSignal(this.jamendoTracksService.getTracks(), { initialValue: [] });
+}
