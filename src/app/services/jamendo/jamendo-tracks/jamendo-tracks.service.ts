@@ -1,13 +1,16 @@
 import { effect, inject, Injectable, resource, signal } from '@angular/core';
 import { JamendoService } from '../jamendo.service';
-import type { Observable } from 'rxjs';
-import type { Track, JamendoAutocompleteResponse, JamendoResponse } from '../../../models/';
+import { catchError, EMPTY, map, type Observable } from 'rxjs';
+import type { Track, JamendoAutocompleteResponse, JamendoResponse, JamendoTracksResponse } from '../../../models/';
+import { NotificationService } from '../../notification/notification.service';
+import type { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JamendoTracksService {
   private jamendoService = inject(JamendoService);
+  private notificationService = inject(NotificationService);
 
   public readonly query = signal('');
   private readonly debouncedQuery = signal('');
@@ -93,7 +96,15 @@ export class JamendoTracksService {
     },
   });
 
-  public getTracks(): Observable<JamendoResponse<Track[]>> {
-    return this.jamendoService.getWithHttpClient<JamendoResponse<Track[]>>('tracks', { limit: 10 });
+  // * HTTPClient
+
+  public getTracks(): Observable<Track[]> {
+    return this.jamendoService.getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30 }).pipe(
+      map((response) => response.results),
+      catchError((error: HttpErrorResponse) => {
+        this.notificationService.show(error.message || 'Something went wrong');
+        return EMPTY;
+      }),
+    );
   }
 }

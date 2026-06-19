@@ -57,6 +57,7 @@ export type Album = {
 };
 
 export type JamendoAlbumsResponse = JamendoResponse<Album[]>;
+
 export type JamendoAutocompleteResponse = {
   tracks: string[];
   artists: string[];
