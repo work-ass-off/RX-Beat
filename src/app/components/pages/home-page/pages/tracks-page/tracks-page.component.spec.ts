@@ -1,0 +1,23 @@
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+
+import { TracksPageComponent } from './tracks-page.component';
+
+describe('TracksPageComponent', () => {
+  let component: TracksPageComponent;
+  let fixture: ComponentFixture<TracksPageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TracksPageComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TracksPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
