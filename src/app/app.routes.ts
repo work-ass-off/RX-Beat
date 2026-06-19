@@ -33,11 +33,11 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'all',
+        redirectTo: 'tracks',
         pathMatch: 'full',
       },
       {
-        path: 'all',
+        path: 'tracks',
         loadComponent: () =>
           import(`./components/pages/home-page/pages/all-page/all-page.component`).then((m) => m.AllPageComponent),
         canActivateChild: [guestGuard],
@@ -50,7 +50,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'music',
+        path: 'albums',
         loadComponent: () =>
           import('./components/pages/home-page/pages/music-page/music-page.component').then(
             (m) => m.MusicPageComponent,
@@ -65,7 +65,22 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'podcasts',
+        path: 'artists',
+        loadComponent: () =>
+          import('./components/pages/home-page/pages/podcasts-page/podcasts-page.component').then(
+            (m) => m.PodcastsPageComponent,
+          ),
+        canActivateChild: [guestGuard],
+        children: [
+          {
+            path: ':albumName',
+            loadComponent: () =>
+              import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent),
+          },
+        ],
+      },
+      {
+        path: 'playlists',
         loadComponent: () =>
           import('./components/pages/home-page/pages/podcasts-page/podcasts-page.component').then(
             (m) => m.PodcastsPageComponent,
