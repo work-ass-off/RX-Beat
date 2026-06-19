@@ -16,10 +16,10 @@ export class AlbumsEffects {
       ofType(AlbumActions.loadAlbums),
       switchMap(() =>
         this.jamendoAlbumsService.getAlbums().pipe(
-          switchMap((response) => [
-            AlbumActions.loadAlbumsSuccess({ albums: response.results }),
+          switchMap((albums) => [
+            AlbumActions.loadAlbumsSuccess({ albums: albums }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((album: Album) => ({
+              artists: albums.map((album: Album) => ({
                 id: album.artist_id,
                 name: album.artist_name,
               })),
@@ -31,21 +31,23 @@ export class AlbumsEffects {
     ),
   );
 
-  public loadAldumsTracks$ = createEffect(() =>
+  public loadAldumTracks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AlbumActions.loadAlbumsWithTracks),
+      ofType(AlbumActions.loadAlbumWithTracks),
       switchMap(({ albumId }) =>
         this.jamendoAlbumsService.getAlbumWithTracks(albumId).pipe(
-          switchMap((response) => [
-            AlbumActions.loadAlbumsWithTracksSuccess({ albums: response.results }),
+          switchMap((album) => [
+            AlbumActions.loadAlbumWithTracksSuccess({ album: album }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((album: Album) => ({
-                id: album.artist_id,
-                name: album.artist_name,
-              })),
+              artists: [
+                {
+                  id: album.artist_id,
+                  name: album.artist_name,
+                },
+              ],
             }),
           ]),
-          catchError((err: Error) => of(AlbumActions.loadAlbumsWithTracksFailure({ error: err.message }))),
+          catchError((err: Error) => of(AlbumActions.loadAlbumWithTracksFailure({ error: err.message }))),
         ),
       ),
     ),

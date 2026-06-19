@@ -26,33 +26,31 @@ export const tracksReducer = createReducer(
     return tracksAdapter.upsertMany(clearedTracks, { ...state, loading: false });
   }),
 
-  on(AlbumActions.loadAlbumsWithTracksSuccess, (state, { albums }) => {
+  on(AlbumActions.loadAlbumWithTracksSuccess, (state, { album }) => {
     const allTracks: Track[] = [];
 
-    albums.forEach((album) => {
-      if (album.tracks) {
-        album.tracks.forEach((rawTrack: Track) => {
-          allTracks.push({
-            id: rawTrack.id,
-            name: rawTrack.name,
-            duration: rawTrack.duration,
-            releasedate: album.releasedate,
-            audio: rawTrack.audio,
-            image: album.image,
-            position: rawTrack.position,
-            album_id: album.id,
-            artist_id: album.artist_id,
-            album_name: album.name,
-            artist_name: album.artist_name,
-          });
+    if (album.tracks) {
+      album.tracks.forEach((rawTrack: Track) => {
+        allTracks.push({
+          id: rawTrack.id,
+          name: rawTrack.name,
+          duration: rawTrack.duration,
+          releasedate: album.releasedate,
+          audio: rawTrack.audio,
+          image: album.image,
+          position: rawTrack.position,
+          album_id: album.id,
+          artist_id: album.artist_id,
+          album_name: album.name,
+          artist_name: album.artist_name,
         });
-      }
-    });
+      });
+    }
 
     return tracksAdapter.upsertMany(allTracks, { ...state, loading: false });
   }),
 
-  on(TrackActions.loadTracksFailure, AlbumActions.loadAlbumsWithTracksFailure, (state, { error }) => ({
+  on(TrackActions.loadTracksFailure, AlbumActions.loadAlbumWithTracksFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
