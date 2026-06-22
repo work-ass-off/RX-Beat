@@ -14,6 +14,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
 import { ArtistsEffects } from './store/artists/artist.effects';
 import { TracksEffects } from './store/track/track.effects';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       }),
       withPreloading(PreloadAllModules),
     ),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, loadingInterceptor])),
     provideStore(appReducer),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([AlbumsEffects, ArtistsEffects, TracksEffects]),
