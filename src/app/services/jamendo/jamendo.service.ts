@@ -49,7 +49,6 @@ export class JamendoService {
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          console.log(key, value);
           httpParams = httpParams.set(key, String(value));
         }
       });
@@ -64,7 +63,6 @@ export class JamendoService {
     const url = `${this.baseUrl}/${endpoint}`;
 
     const httpParams = this.buildParams(params);
-    console.log(httpParams);
 
     return this.http.get<T>(url, { params: httpParams });
   }

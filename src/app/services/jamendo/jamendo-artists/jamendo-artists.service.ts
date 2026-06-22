@@ -9,26 +9,26 @@ import type { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class JamendoArtistsService {
-  private jamendoService = inject(JamendoService);
-  private notificationService = inject(NotificationService);
+  private _jamendoService = inject(JamendoService);
+  private _notificationService = inject(NotificationService);
 
   public getArtists(): Observable<Artist[]> {
-    return this.jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', { limit: 30 }).pipe(
+    return this._jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', { limit: 30 }).pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
-        this.notificationService.show(error.message || 'Something went wrong');
+        this._notificationService.show(error.message || 'Something went wrong');
         return EMPTY;
       }),
     );
   }
 
   public getArtistWithTracks(artistId: string): Observable<Artist> {
-    return this.jamendoService
+    return this._jamendoService
       .getWithHttpClient<JamnedoArtistsResponse>('artists/tracks', { limit: 1, id: artistId })
       .pipe(
         map((response) => response.results[0]),
         catchError((error: HttpErrorResponse) => {
-          this.notificationService.show(error.message || 'Something went wrong');
+          this._notificationService.show(error.message || 'Something went wrong');
           return EMPTY;
         }),
       );

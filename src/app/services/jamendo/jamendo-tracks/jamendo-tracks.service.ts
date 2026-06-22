@@ -9,8 +9,8 @@ import type { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root',
 })
 export class JamendoTracksService {
-  private jamendoService = inject(JamendoService);
-  private notificationService = inject(NotificationService);
+  private _jamendoService = inject(JamendoService);
+  private _notificationService = inject(NotificationService);
 
   public readonly query = signal('');
   private readonly debouncedQuery = signal('');
@@ -35,7 +35,7 @@ export class JamendoTracksService {
   public readonly tracksResource = resource({
     loader: async ({ abortSignal }) => {
       const query = this.query().trim();
-      const response = await this.jamendoService.get<JamendoResponse<Track[]>>(
+      const response = await this._jamendoService.get<JamendoResponse<Track[]>>(
         'tracks',
         query
           ? {
@@ -66,7 +66,7 @@ export class JamendoTracksService {
         };
       }
 
-      const response = await this.jamendoService.get<JamendoResponse<JamendoAutocompleteResponse>>(
+      const response = await this._jamendoService.get<JamendoResponse<JamendoAutocompleteResponse>>(
         'autocomplete',
         {
           prefix: query,
@@ -83,7 +83,7 @@ export class JamendoTracksService {
 
       if (!track) return [];
 
-      const response = await this.jamendoService.get<JamendoResponse<Track[]>>(
+      const response = await this._jamendoService.get<JamendoResponse<Track[]>>(
         'tracks/similar',
         {
           id: track.id,
@@ -99,10 +99,10 @@ export class JamendoTracksService {
   // * HTTPClient
 
   public getTracks(): Observable<Track[]> {
-    return this.jamendoService.getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30 }).pipe(
+    return this._jamendoService.getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30 }).pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
-        this.notificationService.show(error.message || 'Something went wrong');
+        this._notificationService.show(error.message || 'Something went wrong');
         return EMPTY;
       }),
     );
