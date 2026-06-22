@@ -21,7 +21,13 @@
     }
 
     &_name {
+      width: 100%;
+      max-width: 15rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: var(--text-main);
+      text-align: center;
+      white-space: nowrap;
     }
   }
 

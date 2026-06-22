@@ -11,4 +11,5 @@ import { TrackTimePipe } from '../../../pipes/track-time/track-time.pipe';
 })
 export class TrackComponent {
   public track = input.required<Track>();
+  public index = input.required<number>();
 }
