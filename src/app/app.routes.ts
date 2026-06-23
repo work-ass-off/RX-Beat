@@ -42,14 +42,6 @@ export const routes: Routes = [
           import(`./components/pages/home-page/pages/tracks-page/tracks-page.component`).then(
             (m) => m.TracksPageComponent,
           ),
-        canActivateChild: [guestGuard],
-        children: [
-          {
-            path: ':albumName',
-            loadComponent: () =>
-              import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent),
-          },
-        ],
       },
       {
         path: 'albums',
@@ -60,9 +52,11 @@ export const routes: Routes = [
         canActivateChild: [guestGuard],
         children: [
           {
-            path: ':albumName',
+            path: ':albumId',
             loadComponent: () =>
-              import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent),
+              import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+                (m) => m.TracksPageComponent,
+              ),
           },
         ],
       },
@@ -75,9 +69,11 @@ export const routes: Routes = [
         canActivateChild: [guestGuard],
         children: [
           {
-            path: ':albumName',
+            path: ':artistId',
             loadComponent: () =>
-              import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent),
+              import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+                (m) => m.TracksPageComponent,
+              ),
           },
         ],
       },
@@ -90,9 +86,11 @@ export const routes: Routes = [
         canActivateChild: [guestGuard],
         children: [
           {
-            path: ':albumName',
+            path: ':playlistId',
             loadComponent: () =>
-              import('./components/pages/album-page/album-page.component').then((m) => m.AlbumPageComponent),
+              import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+                (m) => m.TracksPageComponent,
+              ),
           },
         ],
       },
