@@ -1,0 +1,26 @@
+@use '../../../styles/mixins' as *;
+
+.spinner-container {
+  @include flex;
+
+  padding: 1rem;
+}
+
+.spinner {
+  border-color: rgb(29 185 84 / 0.2);
+  border-style: solid;
+  border-width: 0.5rem;
+  border-top-color: var(--action-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

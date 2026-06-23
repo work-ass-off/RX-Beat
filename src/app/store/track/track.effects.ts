@@ -15,10 +15,10 @@ export class TracksEffects {
       ofType(TrackActions.loadTracks),
       switchMap(() =>
         this.jamendoTracksService.getTracks().pipe(
-          switchMap((res) => [
-            TrackActions.loadTracksSuccess({ tracks: res.results }),
+          switchMap((tracks) => [
+            TrackActions.loadTracksSuccess({ tracks: tracks }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: res.results.map((track) => ({
+              artists: tracks.map((track) => ({
                 id: track.artist_id,
                 name: track.artist_name,
               })),

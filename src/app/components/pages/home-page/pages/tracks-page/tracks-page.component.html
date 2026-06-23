@@ -1,0 +1,22 @@
+@let tracks = tracks$ | async;
+
+@if (loading()) {
+  <app-loader-spinner />
+} @else {
+  @if (tracks && tracks.length > 0) {
+    <ul class="tracks-list">
+      @for (track of tracks; track track.id) {
+        <li class="track-item">
+          <app-track [track]="track" [index]="$index + 1" />
+        </li>
+      }
+    </ul>
+  } @else if (tracks && tracks.length === 0) {
+    <div class="empty-state">
+      <p>No tracks found for this selection.</p>
+    </div>
+  }
+}
+@if (notificationService.notification()) {
+  <div class="error">{{ notificationService.notification() }}</div>
+}

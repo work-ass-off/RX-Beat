@@ -12,9 +12,9 @@ export const AlbumActions = createActionGroup({
 
     // * ALBUMS/TRACKS
 
-    'Load Albums With Tracks': props<{ albumId: string }>(),
-    'Load Albums With Tracks Success': props<{ albums: Album[] }>(),
-    'Load Albums With Tracks Failure': props<{ error: string }>(),
+    'Load Album With Tracks': props<{ albumId: string }>(),
+    'Load Album With Tracks Success': props<{ album: Album }>(),
+    'Load Album With Tracks Failure': props<{ error: string }>(),
 
     // * ALBUMS/MUSICINFO
 

@@ -38,6 +38,7 @@ export type Artist = {
   website?: string;
   joindate?: string;
   image?: string;
+  tracks?: Track[];
 };
 
 export type JamnedoArtistsResponse = JamendoResponse<Artist[]>;
@@ -57,6 +58,7 @@ export type Album = {
 };
 
 export type JamendoAlbumsResponse = JamendoResponse<Album[]>;
+
 export type JamendoAutocompleteResponse = {
   tracks: string[];
   artists: string[];

@@ -5,11 +5,11 @@ import { Pipe } from '@angular/core';
   name: 'trackTime',
 })
 export class TrackTimePipe implements PipeTransform {
-  public transform(value: number | null): string {
+  public transform(value: number | null, maxLength = 2): string {
     const seconds = value ?? 0;
     const mm = Math.floor(seconds / 60)
       .toString()
-      .padStart(2, '0');
+      .padStart(maxLength, '0');
     const ss = Math.floor(seconds % 60)
       .toString()
       .padStart(2, '0');

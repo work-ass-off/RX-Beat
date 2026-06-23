@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { type Observable } from 'rxjs';
+import { LOADER_TYPE } from '../loading/loading.context';
 
 @Injectable({
   providedIn: 'root',
@@ -49,23 +50,22 @@ export class JamendoService {
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          console.log(key, value);
           httpParams = httpParams.set(key, String(value));
         }
       });
     }
 
-    console.log(httpParams);
-
     return httpParams;
   }
 
-  public getWithHttpClient<T>(endpoint: string, params?: Record<string, unknown>): Observable<T> {
+  public getWithHttpClient<T>(endpoint: string, params?: Record<string, unknown>, contextData?: string): Observable<T> {
     const url = `${this.baseUrl}/${endpoint}`;
 
     const httpParams = this.buildParams(params);
-    console.log(httpParams);
 
-    return this.http.get<T>(url, { params: httpParams });
+    return this.http.get<T>(url, {
+      params: httpParams,
+      context: contextData ? new HttpContext().set(LOADER_TYPE, contextData) : undefined,
+    });
   }
 }

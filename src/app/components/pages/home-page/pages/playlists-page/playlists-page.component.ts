@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
 
 @Component({
-  selector: 'app-podcasts-page',
+  selector: 'app-playlists-page',
   imports: [ContentComponent],
-  templateUrl: './podcasts-page.component.html',
-  styleUrl: './podcasts-page.component.scss',
+  templateUrl: './playlists-page.component.html',
+  styleUrl: './playlists-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PodcastsPageComponent {}
+export class PlaylistsPageComponent {}

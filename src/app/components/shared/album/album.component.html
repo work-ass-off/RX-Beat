@@ -1,0 +1,8 @@
+@if (album().image) {
+  <img class="image" [ngSrc]="album().image" [alt]="album().name" width="144" height="144" />
+} @else {
+  <div class="image-placeholder">{{ album().name }}</div>
+}
+<span class="name">{{ album().name }}</span>
+<span class="artist-name">{{ album().artist_name }}</span>
+<span class="release">{{ album().releasedate | releaseDate: 'year' }}</span>

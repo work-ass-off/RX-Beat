@@ -5,9 +5,18 @@
   gap: 10px;
   width: 100%;
   padding: 1rem;
+  overflow: auto hidden;
+  scrollbar-width: none;
   background-color: var(--bg-surface-elevated);
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   a {
+    display: inline-flex;
+    align-items: center;
     padding: 10px 20px;
     color: var(--text-main);
     background-color: var(--action-surface);
