@@ -1,0 +1,21 @@
+@use '../../../../../styles/mixins' as *;
+
+:host(.tracks) {
+  height: 100%;
+
+  .tracks-list {
+    height: 100%;
+    overflow: hidden scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .empty-state {
+    width: max-content;
+    padding: 1rem;
+  }
+}
