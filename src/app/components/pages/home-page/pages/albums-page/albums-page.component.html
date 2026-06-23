@@ -1,2 +1,15 @@
-<p>Albums</p>
-<app-content />
+@let albums = albums$ | async;
+
+@if (loading()) {
+  <app-loader-spinner />
+}
+<ul class="albums-list">
+  @for (album of albums; track album.id) {
+    <app-album [album]="album" [routerLink]="[album.id]" />
+  }
+</ul>
+<router-outlet />
+
+@if (notificationService.notification()) {
+  <div class="error">{{ notificationService.notification() }}</div>
+}
