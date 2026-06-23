@@ -7,6 +7,9 @@ import { TrackTimePipe } from '../../../pipes/track-time/track-time.pipe';
   imports: [TrackTimePipe],
   templateUrl: './track.component.html',
   styleUrl: './track.component.scss',
+  host: {
+    class: 'track',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrackComponent {

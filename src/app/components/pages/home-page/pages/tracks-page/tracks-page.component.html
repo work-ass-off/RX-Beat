@@ -6,7 +6,9 @@
   @if (tracks && tracks.length > 0) {
     <ul class="tracks-list">
       @for (track of tracks; track track.id) {
-        <app-track [track]="track" [index]="$index + 1" />
+        <li class="track-item">
+          <app-track [track]="track" [index]="$index + 1" />
+        </li>
       }
     </ul>
   } @else if (tracks && tracks.length === 0) {

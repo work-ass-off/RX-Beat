@@ -1,10 +1,8 @@
-<li class="album">
-  @if (album().image) {
-    <img class="album_image" [src]="album().image" [alt]="album().name" />
-  } @else {
-    <div class="album_image-placeholder">{{ album().name }}</div>
-  }
-  <span class="album_name">{{ album().name }}</span>
-  <span class="album_artist-name">{{ album().artist_name }}</span>
-  <span class="album_release">{{ album().releasedate | releaseDate: 'year' }}</span>
-</li>
+@if (album().image) {
+  <img class="image" [src]="album().image" [alt]="album().name" />
+} @else {
+  <div class="image-placeholder">{{ album().name }}</div>
+}
+<span class="name">{{ album().name }}</span>
+<span class="artist-name">{{ album().artist_name }}</span>
+<span class="release">{{ album().releasedate | releaseDate: 'year' }}</span>

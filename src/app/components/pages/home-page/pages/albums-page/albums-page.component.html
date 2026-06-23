@@ -5,7 +5,9 @@
 }
 <ul class="albums-list">
   @for (album of albums; track album.id) {
-    <app-album [album]="album" [routerLink]="[album.id]" />
+    <li class="album-item">
+      <app-album [album]="album" [routerLink]="[album.id]" />
+    </li>
   }
 </ul>
 <router-outlet />

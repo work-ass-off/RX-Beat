@@ -1,8 +1,11 @@
 @use '../../../styles/mixins' as *;
 
-.artist {
+:host(.artist) {
   @include flex($direction: column);
 
+  width: 100%;
+  min-width: 0;
+  max-width: 11rem;
   padding: 1rem;
   cursor: pointer;
   list-style: none;
@@ -13,25 +16,27 @@
     background-color: var(--action-surface);
   }
 
-  &_image {
+  .image {
     width: 9rem;
     height: 9rem;
+    object-fit: cover;
     border-radius: 50%;
   }
 
-  &_image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .image-placeholder {
+    @include flex;
+
     width: 9rem;
     height: 9rem;
     background-color: var(--bg-surface-elevated);
     border-radius: 50%;
   }
 
-  &_name {
+  .name {
+    display: inline-block;
     width: 100%;
-    max-width: 9rem;
+    min-width: 2rem;
+    max-width: 8rem;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-main);

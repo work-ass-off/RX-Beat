@@ -7,6 +7,9 @@ import { ReleaseDatePipe } from '../../../pipes/release-date/release-date.pipe';
   imports: [ReleaseDatePipe],
   templateUrl: './album.component.html',
   styleUrl: './album.component.scss',
+  host: {
+    class: 'album',
+  },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumComponent {

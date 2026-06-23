@@ -1,7 +1,7 @@
 @use '../../../styles/mixins' as *;
 
-.track {
-  @include flex($justify: space-between, $gap: 0);
+:host(.track) {
+  @include flex($justify: space-between);
 
   padding: 1rem;
   cursor: pointer;
@@ -14,7 +14,9 @@
   }
 
   .track-info {
-    @include flex($justify: space-between);
+    @include flex($justify: space-between, $gap: 0.5rem);
+
+    min-width: 2rem;
 
     &_position {
       color: var(--text-sub);
@@ -22,16 +24,16 @@
 
     &_name {
       width: 100%;
+      min-width: 1rem;
       max-width: 15rem;
       overflow: hidden;
       text-overflow: ellipsis;
       color: var(--text-main);
-      text-align: center;
       white-space: nowrap;
     }
   }
 
-  &_duration {
+  .duration {
     color: var(--text-sub);
   }
 }

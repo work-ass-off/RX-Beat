@@ -1,8 +1,6 @@
-<li class="artist">
-  @if (artist().image) {
-    <img class="artist_image" [src]="artist().image" [alt]="artist().name" />
-  } @else {
-    <div class="artist_image-placeholder">{{ artist().name }}</div>
-  }
-  <span class="artist_name">{{ artist().name }}</span>
-</li>
+@if (artist().image) {
+  <img class="image" [src]="artist().image" [alt]="artist().name" />
+} @else {
+  <div class="image-placeholder">{{ artist().name }}</div>
+}
+<span class="name">{{ artist().name }}</span>

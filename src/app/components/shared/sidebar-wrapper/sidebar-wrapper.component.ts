@@ -16,10 +16,6 @@ import { SidebarService } from '../../../services/sidebar/sidebar.service';
 })
 export class SidebarWrapperComponent {
   private sidebarService = inject(SidebarService);
-  public expandedWidth = input('420px');
+  public expandedWidth = input('320px');
   public isCollapsed = this.sidebarService.isCollapsed;
-
-  // public toggle(): void {
-  //   this.sidebarService.toggle();
-  // }
 }
