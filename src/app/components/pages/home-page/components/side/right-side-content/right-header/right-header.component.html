@@ -5,7 +5,7 @@
   <button (click)="toggle()" class="btn-icon material-symbols-rounded collapse-btn">left_panel_close</button>
 }
 @if (!collapsed) {
-  <h3 class="top-title">{{ 'Noize MC' }}</h3>
+  <h3 class="top-title">{{ 'Tracks Queue' }}</h3>
 }
 @if (!collapsed) {
   <app-dropdown [dropdown]="dropdownConfig" (itemSelect)="handelDropdown($event)" />

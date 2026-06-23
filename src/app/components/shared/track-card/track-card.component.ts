@@ -13,9 +13,9 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
 export class TrackCardComponent {
   public track = input.required<Track>();
 
-  private trackStoreService = inject(PlayerStoreService);
+  private playerStoreService = inject(PlayerStoreService);
 
   public onClick(): void {
-    this.trackStoreService.setTrack(this.track());
+    this.playerStoreService.setTrack(this.track());
   }
 }
