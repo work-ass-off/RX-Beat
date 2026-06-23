@@ -13,7 +13,7 @@ export class JamendoAlbumsService {
   private _notificationService = inject(NotificationService);
 
   public getAlbums(): Observable<Album[]> {
-    return this._jamendoService.getWithHttpClient<JamendoAlbumsResponse>('albums', { limit: 30 }).pipe(
+    return this._jamendoService.getWithHttpClient<JamendoAlbumsResponse>('albums', { limit: 30 }, 'albums').pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
         this._notificationService.show(error.message || 'Something went wrong');
@@ -24,7 +24,7 @@ export class JamendoAlbumsService {
 
   public getAlbumWithTracks(albumId: string): Observable<Album> {
     return this._jamendoService
-      .getWithHttpClient<JamendoAlbumsResponse>('albums/tracks', { limit: 1, id: albumId })
+      .getWithHttpClient<JamendoAlbumsResponse>('albums/tracks', { limit: 1, id: albumId }, 'tracks')
       .pipe(
         map((response) => response.results[0]),
         catchError((error: HttpErrorResponse) => {

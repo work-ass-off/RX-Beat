@@ -38,6 +38,7 @@ export type Artist = {
   website?: string;
   joindate?: string;
   image?: string;
+  tracks?: Track[];
 };
 
 export type JamnedoArtistsResponse = JamendoResponse<Artist[]>;

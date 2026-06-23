@@ -13,7 +13,7 @@ export class JamendoArtistsService {
   private _notificationService = inject(NotificationService);
 
   public getArtists(): Observable<Artist[]> {
-    return this._jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', { limit: 30 }).pipe(
+    return this._jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', { limit: 30 }, 'artists').pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
         this._notificationService.show(error.message || 'Something went wrong');
@@ -24,7 +24,7 @@ export class JamendoArtistsService {
 
   public getArtistWithTracks(artistId: string): Observable<Artist> {
     return this._jamendoService
-      .getWithHttpClient<JamnedoArtistsResponse>('artists/tracks', { limit: 1, id: artistId })
+      .getWithHttpClient<JamnedoArtistsResponse>('artists/tracks', { limit: 1, id: artistId }, 'tracks')
       .pipe(
         map((response) => response.results[0]),
         catchError((error: HttpErrorResponse) => {

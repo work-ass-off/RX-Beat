@@ -99,7 +99,7 @@ export class JamendoTracksService {
   // * HTTPClient
 
   public getTracks(): Observable<Track[]> {
-    return this._jamendoService.getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30 }).pipe(
+    return this._jamendoService.getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30 }, 'tracks').pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
         this._notificationService.show(error.message || 'Something went wrong');
