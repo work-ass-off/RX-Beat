@@ -1,18 +1,26 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, type Signal, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadingService {
-  private _isLoading = signal<boolean>(false);
+  private _loaders = signal<Record<string, number>>({});
 
-  public readonly isLoading = this._isLoading.asReadonly();
-
-  public show(): void {
-    this._isLoading.set(true);
+  public isLoaderActive(type: string): Signal<boolean> {
+    return computed(() => (this._loaders()[type] ?? 0) > 0);
   }
 
-  public hide(): void {
-    this._isLoading.set(false);
+  public show(type: string): void {
+    this._loaders.update((state) => ({
+      ...state,
+      [type]: (state[type] ?? 0) + 1,
+    }));
+  }
+
+  public hide(type: string): void {
+    this._loaders.update((state) => ({
+      ...state,
+      [type]: Math.max(0, (state[type] ?? 0) - 1),
+    }));
   }
 }
