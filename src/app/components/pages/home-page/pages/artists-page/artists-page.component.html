@@ -1,2 +1,15 @@
-<p>Artists!</p>
-<app-content />
+@let artists = artists$ | async;
+
+@if (loading()) {
+  <app-loader-spinner />
+}
+<ul class="artists-list">
+  @for (artist of artists; track artist.id) {
+    <app-artist [artist]="artist" [routerLink]="[artist.id]" />
+  }
+</ul>
+<router-outlet />
+
+@if (notificationService.notification()) {
+  <div class="error">{{ notificationService.notification() }}</div>
+}
