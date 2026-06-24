@@ -4,6 +4,7 @@ import { AlbumActions } from './album.actions';
 import { catchError, of, switchMap } from 'rxjs';
 import { JamendoAlbumsService } from '../../services/jamendo/jamendo-albums/jamendo-albums.service';
 import { ArtistActions } from '../artists/artist.actions';
+import type { Album } from '../../models';
 
 @Injectable()
 export class AlbumsEffects {
@@ -15,10 +16,10 @@ export class AlbumsEffects {
       ofType(AlbumActions.loadAlbums),
       switchMap(() =>
         this.jamendoAlbumsService.getAlbums().pipe(
-          switchMap((response) => [
-            AlbumActions.loadAlbumsSuccess({ albums: response.results }),
+          switchMap((albums) => [
+            AlbumActions.loadAlbumsSuccess({ albums: albums }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((album) => ({
+              artists: albums.map((album: Album) => ({
                 id: album.artist_id,
                 name: album.artist_name,
               })),
@@ -30,21 +31,23 @@ export class AlbumsEffects {
     ),
   );
 
-  public loadAldumsTracks$ = createEffect(() =>
+  public loadAldumTracks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AlbumActions.loadAlbumsWithTracks),
+      ofType(AlbumActions.loadAlbumWithTracks),
       switchMap(({ albumId }) =>
-        this.jamendoAlbumsService.getAlbumsWithTracks(albumId).pipe(
-          switchMap((response) => [
-            AlbumActions.loadAlbumsWithTracksSuccess({ albums: response.results }),
+        this.jamendoAlbumsService.getAlbumWithTracks(albumId).pipe(
+          switchMap((album) => [
+            AlbumActions.loadAlbumWithTracksSuccess({ album: album }),
             ArtistActions.loadExternalArtistsSuccess({
-              artists: response.results.map((album) => ({
-                id: album.artist_id,
-                name: album.artist_name,
-              })),
+              artists: [
+                {
+                  id: album.artist_id,
+                  name: album.artist_name,
+                },
+              ],
             }),
           ]),
-          catchError((err: Error) => of(AlbumActions.loadAlbumsWithTracksFailure({ error: err.message }))),
+          catchError((err: Error) => of(AlbumActions.loadAlbumWithTracksFailure({ error: err.message }))),
         ),
       ),
     ),

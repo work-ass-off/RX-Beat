@@ -4,22 +4,7 @@ import { catchError, EMPTY, tap, type Observable } from 'rxjs';
 import { NotificationService } from '../notification/notification.service';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../environments/environment';
-
-export type AuthDto = {
-  login: string;
-  password: string;
-};
-
-export type User = {
-  id: string;
-  login: string;
-  createdAt: number;
-  updatedAt: number;
-};
-
-export type Token = {
-  access_token: string;
-};
+import type { AuthDto, Playlist, PlaylistDto, Token, User } from '../../models/';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +42,108 @@ export class RxBeatApiService {
       catchError((err: HttpErrorResponse) => {
         if (err.status === 400) {
           this.notificationService.show(err.error?.message || 'Bad request');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+
+  public me(): Observable<User> {
+    return this.HttpClient.get<User>(`${this._baseUrl}/users/me`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'Unauthorized');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+
+  public getPlaylists(): Observable<Playlist[]> {
+    return this.HttpClient.get<Playlist[]>(`${this._baseUrl}/playlists`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'Sign in to see your playlists');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+  public createPlaylist(data: PlaylistDto): Observable<Playlist> {
+    return this.HttpClient.post<Playlist>(`${this._baseUrl}/playlists`, data).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'You can not create playlist without login');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+
+  public getPlaylist(id: string): Observable<Playlist> {
+    return this.HttpClient.get<Playlist>(`${this._baseUrl}/playlists/${id}`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'You can not get playlist without login');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+
+  public deletePlaylist(id: string): Observable<void> {
+    return this.HttpClient.delete<void>(`${this._baseUrl}/playlists/${id}`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'You can not delete playlist without login');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+  public updatePlaylist(id: string, data: PlaylistDto): Observable<Playlist> {
+    return this.HttpClient.put<Playlist>(`${this._baseUrl}/playlists/${id}`, data).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'You can not update playlist without login');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+
+  public addTrackToPlaylist(playlistId: string, trackId: string): Observable<void> {
+    return this.HttpClient.post<void>(`${this._baseUrl}/playlists/${playlistId}/tracks`, { trackId }).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'You can not add track to playlist without login');
+        } else {
+          this.notificationService.show(err.error?.message || 'Something went wrong');
+        }
+        return EMPTY;
+      }),
+    );
+  }
+
+  public removeTrackFromPlaylist(playlistId: string, trackId: string): Observable<void> {
+    return this.HttpClient.delete<void>(`${this._baseUrl}/playlists/${playlistId}/tracks/${trackId}`).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 401) {
+          this.notificationService.show(err.error?.message || 'You can not remove track from playlist without login');
         } else {
           this.notificationService.show(err.error?.message || 'Something went wrong');
         }

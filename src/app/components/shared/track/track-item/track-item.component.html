@@ -1,0 +1,18 @@
+<div class="left-content">
+  @if (track().image) {
+    <img class="img" src="{{ track().image }}" alt="{{ track().name }}" width="48px" height="48px" />
+  } @else {
+    <div class="img-fallback">
+      <span class="material-symbols-rounded"> music_note_2 </span>
+    </div>
+  }
+  <button type="button" class="play material-icons" (click)="togglePlay()" aria-label="Toggle track playback">
+    {{ isCurrentTrackPlaying() ? 'pause' : 'play_arrow' }}
+  </button>
+</div>
+@if (!isCollapsed()) {
+  <div class="right-content">
+    <span class="title">{{ track().artist_name }}</span>
+    <span class="subtitle">{{ track().name }}</span>
+  </div>
+}

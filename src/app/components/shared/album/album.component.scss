@@ -1,0 +1,59 @@
+@use '../../../styles/mixins' as *;
+
+:host(.album) {
+  @include flex($direction: column);
+
+  width: 100%;
+  min-width: 0;
+  max-width: 11rem;
+  padding: 1rem;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: var(--action-surface);
+  }
+
+  .image {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+    border-radius: 1.5rem;
+  }
+
+  .image-placeholder {
+    @include flex;
+
+    width: 9rem;
+    height: 9rem;
+    background-color: var(--bg-surface-elevated);
+    border-radius: 1.5rem;
+  }
+
+  .name,
+  .artist-name,
+  .release {
+    display: inline-block;
+    width: 100%;
+    min-width: 2rem;
+    max-width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .name {
+    color: var(--text-main);
+  }
+
+  .artist-name {
+    color: var(--text-sub);
+  }
+
+  .release {
+    color: var(--text-sub);
+  }
+}

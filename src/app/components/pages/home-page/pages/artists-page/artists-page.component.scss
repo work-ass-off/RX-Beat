@@ -1,0 +1,23 @@
+@use '../../../../../styles/mixins' as *;
+
+:host(.artists) {
+  @include flex($align: flex-start);
+
+  height: 100%;
+  overflow: hidden;
+
+  .artists-list {
+    @include flex($wrap: wrap);
+
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

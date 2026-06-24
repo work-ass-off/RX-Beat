@@ -15,7 +15,7 @@ export class ArtistsEffects {
       ofType(ArtistActions.loadArtists),
       switchMap(() =>
         this.jamendoArtistsService.getArtists().pipe(
-          map((res) => ArtistActions.loadArtistsSuccess({ artists: res.results })),
+          map((artists) => ArtistActions.loadArtistsSuccess({ artists: artists })),
           catchError((error: Error) => of(ArtistActions.loadArtistsFailure({ error: error.message }))),
         ),
       ),

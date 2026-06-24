@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import type { LibraryItemProps } from '../../../../../../../models/library.models';
+import type { LibraryItemProps } from '../../../../../../../models/';
 import { mockLibraryItems } from '../mock/data';
 import { LibraryCardComponent } from '../../../../../../shared/library-card/library-card.component';
 import { Router } from '@angular/router';

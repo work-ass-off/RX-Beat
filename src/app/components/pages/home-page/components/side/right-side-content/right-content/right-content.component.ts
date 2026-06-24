@@ -1,10 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { PlayerStoreService } from '../../../../../../../services/store/player-store/player-store.service';
+import { TrackItemComponent } from '../../../../../../shared/track/track-item/track-item.component';
 
 @Component({
   selector: 'app-right-content',
-  imports: [],
+  imports: [TrackItemComponent],
   templateUrl: './right-content.component.html',
   styleUrl: './right-content.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RightContentComponent {}
+export class RightContentComponent {
+  private playerStoreService = inject(PlayerStoreService);
+  protected tracksQueue = this.playerStoreService.queue;
+}

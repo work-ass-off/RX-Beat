@@ -1,0 +1,16 @@
+<div class="progress-bar-wrapper" [class.volume-wrapper]="isVolumeBar()">
+  <div class="progress-bar">
+    <input
+      class="progress-slider"
+      type="range"
+      [id]="id()"
+      [min]="isVolumeBar() ? volumeMin : sliderMin"
+      [max]="isVolumeBar() ? volumeMax : sliderMax"
+      [step]="isVolumeBar() ? volumeStep : sliderStep"
+      [value]="value()"
+      [style.--progress]="isVolumeBar() ? value() * 100 + '%' : trackStoreService.trackProgressPresentage() + '%'"
+      (input)="isVolumeBar() ? setVolume($event) : onSliderChange($event)"
+      aria-label="Track progress"
+    />
+  </div>
+</div>

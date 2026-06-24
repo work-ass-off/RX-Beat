@@ -1,0 +1,6 @@
+@if (artist().image) {
+  <img class="image" [src]="artist().image" [alt]="artist().name" />
+} @else {
+  <div class="image-placeholder">{{ artist().name }}</div>
+}
+<span class="name">{{ artist().name }}</span>

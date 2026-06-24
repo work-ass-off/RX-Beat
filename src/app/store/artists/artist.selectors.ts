@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector, type MemoizedSelector } from '@ngrx/store';
-import type { Artist, ArtistState } from './artist.model';
+import type { Artist, ArtistState } from '../../models/';
 import type { Dictionary } from '@ngrx/entity';
 import { artistAdapter } from './artist.state';
 

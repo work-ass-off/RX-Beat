@@ -1,0 +1,11 @@
+<div class="track-cover">
+  <img [src]="trackImage()" alt="track cover" class="track-cover" />
+</div>
+<div class="track-info">
+  <h3>{{ trackName() }}</h3>
+  <p>{{ artistName() }}</p>
+</div>
+
+<button class="btn btn-player like-button" (click)="toggleLike()">
+  <span class="material-symbols-outlined"> {{ isLikedTrack() ? 'check_circle' : 'add_circle' }} </span>
+</button>

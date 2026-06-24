@@ -1,5 +1,5 @@
 import { createEntityAdapter, type EntityAdapter } from '@ngrx/entity';
-import type { Album, AlbumsState } from './album.model';
+import type { Album, AlbumsState } from '../../models/';
 
 export const albumsAdapter: EntityAdapter<Album> = createEntityAdapter<Album>({
   selectId: (album) => album.id,

@@ -1,22 +1,83 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import type { ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@angular/core';
 import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
-import { Controls } from './player.model';
+import { TrackControlsComponent } from './components/track-controls/track-controls.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { TrackTimeComponent } from './components/track-time/track-time.component';
+import { TrackPreviewComponent } from './components/track-preview/track-preview.component';
 
 @Component({
   selector: 'app-player',
-  imports: [],
+  imports: [TrackControlsComponent, ProgressBarComponent, TrackTimeComponent, TrackPreviewComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerComponent {
-  public readonly Controls = Controls;
+  public readonly playerStoreService = inject(PlayerStoreService);
+  public readonly track = this.playerStoreService.currentTrack;
+  public readonly audio = viewChild<ElementRef<HTMLAudioElement>>('audioPlayer');
 
-  public trackStoreService = inject(PlayerStoreService);
-  public track = this.trackStoreService.currentTrack;
-  public isPlaying = signal(false);
+  constructor() {
+    this.playerStoreService.setTrack({
+      id: 'local-1',
+      name: 'Topolonyy Puh',
+      duration: 231.327347,
+      releasedate: '1998-01-01',
+      position: 1,
+      artist_id: 'local-artist',
+      artist_name: 'Ivanushki International',
+      album_id: 'local-album',
+      album_name: 'Local Album',
+      image: 'vinyl-mock.jpg',
+      audio: '/ivanushki-international_-_topolinyy-puh.mp3',
+    });
 
-  public togglePlay(): void {
-    this.isPlaying.set(!this.isPlaying());
+    effect((onCleanup) => {
+      const audioElement = this.audio()?.nativeElement;
+      const track = this.track();
+      const shouldPlay = this.playerStoreService.isPlaying();
+
+      if (!audioElement || !track) {
+        return;
+      }
+
+      if (!shouldPlay) {
+        audioElement.pause();
+        return;
+      }
+
+      const playAudio = (): void => {
+        void audioElement.play().catch((error) => {
+          console.error('Audio play() failed:', error);
+          this.playerStoreService.isPlaying.set(false);
+        });
+      };
+
+      if (audioElement.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        playAudio();
+      } else {
+        const onCanPlay = (): void => {
+          playAudio();
+        };
+
+        audioElement.addEventListener('canplay', onCanPlay, { once: true });
+        onCleanup(() => audioElement.removeEventListener('canplay', onCanPlay));
+      }
+    });
+
+    effect(() => {
+      const audioElementRef = this.audio();
+      this.playerStoreService.audio.set(audioElementRef?.nativeElement ?? null);
+    });
+  }
+
+  public updateProgress(): void {
+    this.playerStoreService.updateProgress();
+  }
+
+  public onTrackEnded(): void {
+    this.playerStoreService.resetTrackTiming();
+    this.playerStoreService.setNextTrackFromQueue();
   }
 }

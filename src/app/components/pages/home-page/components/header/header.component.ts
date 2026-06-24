@@ -3,9 +3,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import type { HeaderLink } from './header.model';
 
 const HeaderLinks: HeaderLink[] = [
-  { name: 'All', link: 'all' },
-  { name: 'Music', link: 'music' },
-  { name: 'Podcasts', link: 'podcasts' },
+  { name: 'Tracks', link: 'tracks' },
+  { name: 'Albums', link: 'albums' },
+  { name: 'Artists', link: 'artists' },
+  { name: 'Playlists', link: 'playlists' },
 ];
 
 @Component({

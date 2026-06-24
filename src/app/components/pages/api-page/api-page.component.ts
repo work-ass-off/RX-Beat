@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { AsyncPipe, JsonPipe } from '@angular/common';
+import { RxBeatApiService } from '../../../services/rx-beat-api/rx-beat-api.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '../../../services/notification/notification.service';
+import { type Observable } from 'rxjs';
+import type { Playlist } from '../../../models/';
 
 @Component({
   selector: 'app-api-page',
-  imports: [AsyncPipe, JsonPipe],
+  imports: [AsyncPipe, JsonPipe, ReactiveFormsModule],
   templateUrl: './api-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -14,9 +16,21 @@ import { NotificationService } from '../../../services/notification/notification
   },
 })
 export class ApiPageComponent {
-  public httpClient = inject(HttpClient);
+  public readonly RxBeatApiService = inject(RxBeatApiService);
+  public readonly fb = inject(FormBuilder);
   public notificationService = inject(NotificationService);
 
-  private readonly apiUrl = environment.rxBeatUrl;
-  public users$ = this.httpClient.get(`${this.apiUrl}/users`);
+  public playlists$: Observable<Playlist[]> = this.RxBeatApiService.getPlaylists();
+
+  public playlistForm = this.fb.group({
+    name: ['', Validators.required],
+  });
+
+  public onPlaylistCreate(): void {
+    this.notificationService.clear();
+    const data = this.playlistForm.value.name ?? '';
+    this.RxBeatApiService.createPlaylist({ name: data }).subscribe();
+    this.playlistForm.reset();
+    this.playlists$ = this.RxBeatApiService.getPlaylists();
+  }
 }

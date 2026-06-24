@@ -1,0 +1,39 @@
+@use '../../../styles/mixins' as *;
+
+:host(.track) {
+  @include flex($justify: space-between);
+
+  padding: 1rem;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: var(--action-surface);
+  }
+
+  .track-info {
+    @include flex($justify: space-between, $gap: 0.5rem);
+
+    min-width: 2rem;
+
+    &_position {
+      color: var(--text-sub);
+    }
+
+    &_name {
+      width: 100%;
+      min-width: 1rem;
+      max-width: 15rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+  }
+
+  .duration {
+    color: var(--text-sub);
+  }
+}

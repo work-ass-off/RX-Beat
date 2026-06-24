@@ -41,7 +41,7 @@ export class StorePageComponent implements OnInit {
     this.selectedAlbumId.set(albumId);
     // * Step 2: Imitate request "Loading tracks for current album"
     // * Our TracksReducer will intercept this action and extract the nested tracks from it!
-    this.store.dispatch(AlbumActions.loadAlbumsWithTracks({ albumId }));
+    this.store.dispatch(AlbumActions.loadAlbumWithTracks({ albumId }));
   }
 
   public formatDuration(seconds: number): string {
