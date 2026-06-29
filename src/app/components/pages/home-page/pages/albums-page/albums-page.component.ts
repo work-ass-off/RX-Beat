@@ -25,6 +25,6 @@ export class AlbumsPageComponent {
 
   public notificationService = inject(NotificationService);
 
-  public albums$: Observable<Album[]> = this.jamendoAlbumsService.getAlbums();
+  public albums$: Observable<Album[]> = this.jamendoAlbumsService.albums$;
   public loading = this.loadingService.isLoaderActive('albums');
 }

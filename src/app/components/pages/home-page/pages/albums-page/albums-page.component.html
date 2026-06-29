@@ -2,15 +2,16 @@
 
 @if (loading()) {
   <app-loader-spinner />
+} @else {
+  <ul class="albums-list">
+    @for (album of albums; track album.id) {
+      <li class="album-item">
+        <app-album [album]="album" [routerLink]="[album.id]" />
+      </li>
+    }
+  </ul>
+  <router-outlet />
 }
-<ul class="albums-list">
-  @for (album of albums; track album.id) {
-    <li class="album-item">
-      <app-album [album]="album" [routerLink]="[album.id]" />
-    </li>
-  }
-</ul>
-<router-outlet />
 
 @if (notificationService.notification()) {
   <div class="error">{{ notificationService.notification() }}</div>

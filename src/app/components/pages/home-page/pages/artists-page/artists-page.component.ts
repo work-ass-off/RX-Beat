@@ -25,6 +25,6 @@ export class ArtistsPageComponent {
 
   public notificationService = inject(NotificationService);
 
-  public artists$: Observable<Artist[]> = this.jamendoArtistsService.getArtists();
+  public artists$: Observable<Artist[]> = this.jamendoArtistsService.artists$;
   public loading = this.loadingService.isLoaderActive('artists');
 }
