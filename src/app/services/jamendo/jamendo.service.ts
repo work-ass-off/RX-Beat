@@ -15,7 +15,7 @@ export class JamendoService {
 
   private readonly clientId = environment.jamendoClientId;
 
-  private buildUrl(endpoint: string, params?: Record<string, unknown>): string {
+  /* private buildUrl(endpoint: string, params?: Record<string, unknown>): string {
     const searchParams = new URLSearchParams({
       client_id: this.clientId,
       format: 'json',
@@ -28,9 +28,9 @@ export class JamendoService {
     });
 
     return `${this.baseUrl}/${endpoint}?${searchParams}`;
-  }
+  } */
 
-  public async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
+  /* public async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
     const response = await fetch(this.buildUrl(endpoint, params), {
       signal,
     });
@@ -40,7 +40,7 @@ export class JamendoService {
     }
 
     return response.json() as Promise<T>;
-  }
+  } */
 
   // * NEW IMPLEMINTATION WITH HTTP CLIENT
 
