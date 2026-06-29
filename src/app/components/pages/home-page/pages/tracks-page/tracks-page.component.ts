@@ -47,7 +47,7 @@ export class TracksPageComponent {
           .getArtistWithTracks(params.artist)
           .pipe(map((artist) => artist?.tracks ?? []));
       }
-      return this.jamendoTracksService.getTracks();
+      return this.jamendoTracksService.tracks$;
     }),
   );
 }
