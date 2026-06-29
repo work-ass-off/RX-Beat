@@ -16,7 +16,7 @@ export class JamendoAlbumsService {
 
   public albums$ = toObservable(this.activeAlbumsSearch).pipe(
     switchMap((searchQuery) => {
-      const params: Record<string, unknown> = { limit: 30 };
+      const params: Record<string, unknown> = { limit: 30, imagesize: 150 };
       const namesearch = searchQuery.trim();
       if (namesearch) {
         params['namesearch'] = namesearch;

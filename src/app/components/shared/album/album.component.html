@@ -1,5 +1,7 @@
 @if (album().image) {
-  <img class="image" [ngSrc]="album().image" [alt]="album().name" width="144" height="144" />
+  <div class="img-container">
+    <img class="image" [ngSrc]="album().image | imgWidth" [alt]="album().name" [priority]="index() < 7" fill />
+  </div>
 } @else {
   <div class="image-placeholder">{{ album().name }}</div>
 }
