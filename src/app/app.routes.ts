@@ -1,7 +1,7 @@
 import type { Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './components/pages/not-found-page/not-found-page.component';
-import { guestGuard } from './guards/guest/guest.guard';
+// import { guestGuard } from './guards/guest/guest.guard';
 import { loginGuard } from './guards/login/login.guard';
 import { userGuard } from './guards/user/user.guard';
 
@@ -49,7 +49,7 @@ export const routes: Routes = [
           import('./components/pages/home-page/pages/albums-page/albums-page.component').then(
             (m) => m.AlbumsPageComponent,
           ),
-        canActivateChild: [guestGuard],
+        canActivateChild: [userGuard],
         children: [
           {
             path: ':albumId',
@@ -66,7 +66,7 @@ export const routes: Routes = [
           import('./components/pages/home-page/pages/artists-page/artists-page.component').then(
             (m) => m.ArtistsPageComponent,
           ),
-        canActivateChild: [guestGuard],
+        canActivateChild: [userGuard],
         children: [
           {
             path: ':artistId',
@@ -83,7 +83,7 @@ export const routes: Routes = [
           import('./components/pages/home-page/pages/playlists-page/playlists-page.component').then(
             (m) => m.PlaylistsPageComponent,
           ),
-        canActivateChild: [guestGuard],
+        canActivateChild: [userGuard],
         children: [
           {
             path: ':playlistId',

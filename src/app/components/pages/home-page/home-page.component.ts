@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarWrapperComponent } from '../../shared/sidebar-wrapper/sidebar-wrapper.component';
 import { RightHeaderComponent } from './components/side/right-side-content/right-header/right-header.component';
 import { RightContentComponent } from './components/side/right-side-content/right-content/right-content.component';
+import { SearchComponent } from '../../shared/search/search.component';
 
 @Component({
   selector: 'app-home-page',
@@ -15,6 +16,7 @@ import { RightContentComponent } from './components/side/right-side-content/righ
     SidebarWrapperComponent,
     RightHeaderComponent,
     RightContentComponent,
+    SearchComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',

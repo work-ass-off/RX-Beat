@@ -1,4 +1,4 @@
-@if (tracks.isLoading()) {
+<!-- @if (tracks.isLoading()) {
   <app-loader></app-loader>
 }
 
@@ -12,5 +12,20 @@
 @if (!tracks.isLoading() && !tracks.error() && tracks.value(); as tracks) {
   @for (track of tracks; track track.id) {
     <app-track-card [track]="track"></app-track-card>
+  }
+} -->
+@let tracks = tracks$ | async;
+
+@if (loading()) {
+  <app-loader></app-loader>
+} @else {
+  @if (tracks && tracks.length > 0) {
+    @for (track of tracks; track track.id) {
+      <app-track-card [track]="track"></app-track-card>
+    }
+  } @else if (tracks && tracks.length === 0) {
+    <div class="empty-state">
+      <p>No tracks found</p>
+    </div>
   }
 }
