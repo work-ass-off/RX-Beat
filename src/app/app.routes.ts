@@ -1,7 +1,6 @@
 import type { Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './components/pages/not-found-page/not-found-page.component';
-// import { guestGuard } from './guards/guest/guest.guard';
 import { loginGuard } from './guards/login/login.guard';
 import { userGuard } from './guards/user/user.guard';
 
@@ -33,64 +32,73 @@ export const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'tracks',
-        pathMatch: 'full',
-      },
-      {
-        path: 'tracks',
         loadComponent: () =>
-          import(`./components/pages/home-page/pages/tracks-page/tracks-page.component`).then(
-            (m) => m.TracksPageComponent,
+          import('./components/pages/home-page/pages/home-layout/home-layout.component').then(
+            (m) => m.HomeLayoutComponent,
           ),
-      },
-      {
-        path: 'albums',
-        loadComponent: () =>
-          import('./components/pages/home-page/pages/albums-page/albums-page.component').then(
-            (m) => m.AlbumsPageComponent,
-          ),
-        canActivateChild: [userGuard],
         children: [
           {
-            path: ':albumId',
+            path: '',
+            redirectTo: 'tracks',
+            pathMatch: 'full',
+          },
+          {
+            path: 'tracks',
             loadComponent: () =>
-              import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+              import(`./components/pages/home-page/pages/tracks-page/tracks-page.component`).then(
                 (m) => m.TracksPageComponent,
               ),
           },
-        ],
-      },
-      {
-        path: 'artists',
-        loadComponent: () =>
-          import('./components/pages/home-page/pages/artists-page/artists-page.component').then(
-            (m) => m.ArtistsPageComponent,
-          ),
-        canActivateChild: [userGuard],
-        children: [
           {
-            path: ':artistId',
+            path: 'albums',
             loadComponent: () =>
-              import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
-                (m) => m.TracksPageComponent,
+              import('./components/pages/home-page/pages/albums-page/albums-page.component').then(
+                (m) => m.AlbumsPageComponent,
               ),
+            canActivateChild: [userGuard],
+            children: [
+              {
+                path: ':albumId',
+                loadComponent: () =>
+                  import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+                    (m) => m.TracksPageComponent,
+                  ),
+              },
+            ],
           },
-        ],
-      },
-      {
-        path: 'playlists',
-        loadComponent: () =>
-          import('./components/pages/home-page/pages/playlists-page/playlists-page.component').then(
-            (m) => m.PlaylistsPageComponent,
-          ),
-        canActivateChild: [userGuard],
-        children: [
           {
-            path: ':playlistId',
+            path: 'artists',
             loadComponent: () =>
-              import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
-                (m) => m.TracksPageComponent,
+              import('./components/pages/home-page/pages/artists-page/artists-page.component').then(
+                (m) => m.ArtistsPageComponent,
               ),
+            canActivateChild: [userGuard],
+            children: [
+              {
+                path: ':artistId',
+                loadComponent: () =>
+                  import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+                    (m) => m.TracksPageComponent,
+                  ),
+              },
+            ],
+          },
+          {
+            path: 'playlists',
+            loadComponent: () =>
+              import('./components/pages/home-page/pages/playlists-page/playlists-page.component').then(
+                (m) => m.PlaylistsPageComponent,
+              ),
+            canActivateChild: [userGuard],
+            children: [
+              {
+                path: ':playlistId',
+                loadComponent: () =>
+                  import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
+                    (m) => m.TracksPageComponent,
+                  ),
+              },
+            ],
           },
         ],
       },
