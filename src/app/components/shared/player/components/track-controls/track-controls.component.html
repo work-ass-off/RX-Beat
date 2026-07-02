@@ -12,9 +12,7 @@
   [attr.aria-label]="isPlaying() ? 'Pause' : 'Play'"
   [disabled]="!currentTrack()"
 >
-  <span class="material-symbols-outlined play-icon">{{
-    isPlaying() ? Controls.PAUSE : Controls.PLAY
-  }}</span>
+  <span class="material-symbols-outlined play-icon">{{ isPlaying() ? Controls.PAUSE : Controls.PLAY }}</span>
 </button>
 
 <button

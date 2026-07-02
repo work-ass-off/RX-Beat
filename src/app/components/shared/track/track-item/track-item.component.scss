@@ -70,11 +70,12 @@
         opacity: 1;
       }
     }
-   
   }
+
   &.is-active {
-      background-color: var(--action-surface);
-      .left-content {
+    background-color: var(--action-surface);
+
+    .left-content {
       .img,
       .img-fallback {
         opacity: 0.3;

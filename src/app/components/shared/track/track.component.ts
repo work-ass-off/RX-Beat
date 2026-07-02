@@ -22,9 +22,8 @@ export class TrackComponent {
   public index = input.required<number>();
 
   public onClick(): void {
-  //  private playerStoreService = inject(PlayerStoreService);
-
-  // public onAddToTrackQueue(): void {
-  //   this.playerStoreService.setTrack(this.track());
+    //  private playerStoreService = inject(PlayerStoreService);
+    // public onAddToTrackQueue(): void {
+    //   this.playerStoreService.setTrack(this.track());
   }
 }

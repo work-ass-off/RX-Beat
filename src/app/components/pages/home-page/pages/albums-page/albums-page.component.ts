@@ -52,6 +52,5 @@ export class AlbumsPageComponent {
   public onAlbumSelect(albumId: string): void {
     this.store.dispatch(AlbumActions.loadAlbumWithTracks({ albumId }));
     this.selectedAlbumId$.next(albumId);
-    
   }
 }

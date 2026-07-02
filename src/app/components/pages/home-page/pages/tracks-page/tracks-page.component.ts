@@ -34,11 +34,7 @@ export class TracksPageComponent {
 
   public notificationService = inject(NotificationService);
 
-  constructor() {}
-
   public loading = this.loadingService.isLoaderActive('tracks');
-
-
 
   public tracks$: Observable<Track[]> = this.route.paramMap.pipe(
     map((params) => ({
@@ -53,12 +49,10 @@ export class TracksPageComponent {
         );
       }
       if (params.artist) {
-        return this.jamendoArtistsService
-          .getArtistWithTracks(params.artist)
-          .pipe(
-            map((artist) => artist?.tracks ?? []),
-            tap((tracks) => this.playerStoreService.setPopularTracksQueue(tracks, true)),
-          );
+        return this.jamendoArtistsService.getArtistWithTracks(params.artist).pipe(
+          map((artist) => artist?.tracks ?? []),
+          tap((tracks) => this.playerStoreService.setPopularTracksQueue(tracks, true)),
+        );
       }
       return this.jamendoTracksService.tracks$;
       return this.jamendoTracksService

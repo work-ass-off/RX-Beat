@@ -7,7 +7,6 @@ type QueueName = 'popularTracksQueue' | 'albumQueue' | 'queueOfPlayedTracks';
   providedIn: 'root',
 })
 export class PlayerStoreService {
-
   public isInitialLoading = signal<boolean>(true);
   //Track
   public readonly currentTrack = signal<Track | null>(null);
@@ -16,7 +15,7 @@ export class PlayerStoreService {
   //Track state
   public isPlaying = signal(false);
   public isLikedTrack = signal<boolean>(false);
-  
+
   //Player state
   public volume = signal(1);
 
@@ -36,7 +35,8 @@ export class PlayerStoreService {
 
   //Player queue
   // Transit to the store
-  public queueOfPlayedTracks = signal<Track[]>([{
+  public queueOfPlayedTracks = signal<Track[]>([
+    {
       id: 'local-1',
       name: 'Topolonyy Puh',
       duration: 231.327347,
@@ -48,7 +48,8 @@ export class PlayerStoreService {
       album_name: 'Local Album',
       image: 'vinyl-mock.jpg',
       audio: '/ivanushki-international_-_topolinyy-puh.mp3',
-    }]);
+    },
+  ]);
   public albumQueue = signal<Track[] | null>(null);
   public popularTracksQueue = signal<Track[] | null>(null);
   public activeQueue = signal<QueueName>('queueOfPlayedTracks');
@@ -121,7 +122,6 @@ export class PlayerStoreService {
 
     this.ensureCurrentTrackFromActiveQueue();
   }
-  
 
   protected addTrackToQueue(track: Track): void {
     this.queueOfPlayedTracks.update((queue) => (queue.find((t) => t.id === track.id) ? queue : [track, ...queue]));
@@ -192,7 +192,6 @@ export class PlayerStoreService {
       this.audio()?.pause();
     }
   }
-
 
   public updateProgress(): void {
     const audioElement = this.audio();
