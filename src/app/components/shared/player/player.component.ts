@@ -66,4 +66,8 @@ export class PlayerComponent {
     this.playerStoreService.resetTrackTiming();
     this.playerStoreService.setNextTrackFromQueue();
   }
+
+  public toggleQueue(): void {
+    this.playerStoreService.activeQueue.set('queueOfPlayedTracks');
+  }
 }
