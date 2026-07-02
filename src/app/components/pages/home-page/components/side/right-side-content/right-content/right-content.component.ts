@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { PlayerStoreService } from '../../../../../../../services/store/player-store/player-store.service';
 import { TrackItemComponent } from '../../../../../../shared/track/track-item/track-item.component';
 
@@ -11,5 +11,11 @@ import { TrackItemComponent } from '../../../../../../shared/track/track-item/tr
 })
 export class RightContentComponent {
   private playerStoreService = inject(PlayerStoreService);
-  protected tracksQueue = this.playerStoreService.queue;
+  protected tracksQueue = computed(() => this.playerStoreService.currentQueue());
+
+  constructor() {
+    effect(() => {
+      console.log('Current queue in RightContentComponent:', this.tracksQueue());
+    });
+  }
 }

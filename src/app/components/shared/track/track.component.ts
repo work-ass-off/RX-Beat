@@ -11,6 +11,7 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
   host: {
     class: 'track',
     '(mousedown)': 'onClick()',
+    '(click)': 'onAddToTrackQueue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,6 +22,9 @@ export class TrackComponent {
   public index = input.required<number>();
 
   public onClick(): void {
-    this.playerStoreService.setTrack(this.track());
+  //  private playerStoreService = inject(PlayerStoreService);
+
+  // public onAddToTrackQueue(): void {
+  //   this.playerStoreService.setTrack(this.track());
   }
 }

@@ -9,6 +9,9 @@ import { SidebarService } from '../../../../services/sidebar/sidebar.service';
   templateUrl: './track-item.component.html',
   styleUrl: './track-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.is-active]': 'isCurrentTrackPlaying()',
+  },
 })
 export class TrackItemComponent {
   protected playerStoreService = inject(PlayerStoreService);
@@ -27,9 +30,7 @@ export class TrackItemComponent {
       return;
     }
 
-    this.playerStoreService.setTrack(this.track());
-    this.playerStoreService.audio()?.load();
-    this.playerStoreService.togglePlay();
+    this.playerStoreService.setTrack(this.track(), { autoplay: true, addToHistory: true });
     return;
   }
 }
