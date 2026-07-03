@@ -9,6 +9,18 @@
   height: inherit;
   padding: 10px;
   border-radius: 20px;
+  
+     .img-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background-color: var(--action-surface);
+      border-radius: 0.5rem;
+      transition: opacity 0.5s ease;
+    }
+  
 
   .track-cover {
     width: 100px;
