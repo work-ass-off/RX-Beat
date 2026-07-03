@@ -36,4 +36,12 @@
       white-space: nowrap;
     }
   }
+
+  .auth-required {
+    @include flex($direction: column);
+
+    p {
+      text-align: center;
+    }
+  }
 }
