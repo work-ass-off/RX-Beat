@@ -5,10 +5,10 @@
 
   box-sizing: border-box;
   width: 100%;
-  height: inherit;
   min-width: 0;
-  overflow: hidden;
+  height: inherit;
   padding: clamp(0.25rem, 0.8vw, 0.75rem);
+  overflow: hidden;
   border-radius: 20px;
 
   .img-fallback {

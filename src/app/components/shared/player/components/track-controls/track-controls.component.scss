@@ -3,8 +3,8 @@
 :host {
   @include flex($justify: center, $align: center, $gap: 20px);
 
-  min-width: 0;
   width: clamp(4.75rem, 10vw, 6.25rem);
+  min-width: 0;
   padding: 0.5rem 0 0;
 
   .btn-player {
