@@ -1,8 +1,12 @@
-import type { Routes } from '@angular/router';
+import { type Routes } from '@angular/router';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './components/pages/not-found-page/not-found-page.component';
 import { loginGuard } from './guards/login/login.guard';
 import { userGuard } from './guards/user/user.guard';
+import { JamendoAbstractService } from './services/jamendo/jamendo-abstract/jamendo-abstract.service';
+import { JamendoTracksService } from './services/jamendo/jamendo-tracks/jamendo-tracks.service';
+import { JamendoAlbumsService } from './services/jamendo/jamendo-albums/jamendo-albums.service';
+import { JamendoArtistsService } from './services/jamendo/jamendo-artists/jamendo-artists.service';
 
 export const routes: Routes = [
   {
@@ -48,6 +52,12 @@ export const routes: Routes = [
               import(`./components/pages/home-page/pages/tracks-page/tracks-page.component`).then(
                 (m) => m.TracksPageComponent,
               ),
+            providers: [
+              {
+                provide: JamendoAbstractService,
+                useClass: JamendoTracksService,
+              },
+            ],
           },
           {
             path: 'albums',
@@ -55,14 +65,26 @@ export const routes: Routes = [
               import('./components/pages/home-page/pages/albums-page/albums-page.component').then(
                 (m) => m.AlbumsPageComponent,
               ),
+            providers: [
+              {
+                provide: JamendoAbstractService,
+                useClass: JamendoAlbumsService,
+              },
+            ],
             canActivateChild: [userGuard],
             children: [
               {
-                path: ':albumId',
+                path: ':id',
                 loadComponent: () =>
                   import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
                     (m) => m.TracksPageComponent,
                   ),
+                providers: [
+                  {
+                    provide: JamendoAbstractService,
+                    useClass: JamendoAlbumsService,
+                  },
+                ],
               },
             ],
           },
@@ -73,13 +95,25 @@ export const routes: Routes = [
                 (m) => m.ArtistsPageComponent,
               ),
             canActivateChild: [userGuard],
+            providers: [
+              {
+                provide: JamendoAbstractService,
+                useClass: JamendoArtistsService,
+              },
+            ],
             children: [
               {
-                path: ':artistId',
+                path: ':id',
                 loadComponent: () =>
                   import('./components/pages/home-page/pages/tracks-page/tracks-page.component').then(
                     (m) => m.TracksPageComponent,
                   ),
+                providers: [
+                  {
+                    provide: JamendoAbstractService,
+                    useClass: JamendoArtistsService,
+                  },
+                ],
               },
             ],
           },
@@ -123,6 +157,12 @@ export const routes: Routes = [
     path: 'search',
     loadComponent: () =>
       import('./components/pages/search-page/search-page.component').then((m) => m.SearchPageComponent),
+    providers: [
+      {
+        provide: JamendoAbstractService,
+        useClass: JamendoTracksService,
+      },
+    ],
   },
   {
     path: 'profile',
