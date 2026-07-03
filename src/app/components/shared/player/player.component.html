@@ -14,7 +14,13 @@
     <span class="material-symbols-outlined"> queue_music </span>
   </button>
 
-  <app-progress-bar [id]="'volume-bar'" [value]="playerStoreService.volume()" [isVolumeBar]="true"> </app-progress-bar>
+  <app-progress-bar
+    class="volume-control"
+    [id]="'volume-bar'"
+    [value]="playerStoreService.volume()"
+    [isVolumeBar]="true"
+  >
+  </app-progress-bar>
 </div>
 
 <audio
