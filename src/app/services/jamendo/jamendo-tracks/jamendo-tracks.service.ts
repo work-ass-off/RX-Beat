@@ -1,21 +1,18 @@
 // import { effect, inject, Injectable, resource, signal } from '@angular/core';
 // import type { Track, JamendoAutocompleteResponse, JamendoResponse, JamendoTracksResponse } from '../../../models/';
 
-import { inject, Injectable, signal } from '@angular/core';
-import { JamendoService } from '../jamendo.service';
-import { catchError, EMPTY, map, type Observable, switchMap } from 'rxjs';
-import type { JamendoTracksResponse, Track } from '../../../models/';
-import { NotificationService } from '../../notification/notification.service';
+import { Injectable } from '@angular/core';
+import { catchError, EMPTY, map, type Observable } from 'rxjs';
+import type { JamendoTracksResponse, Key, Track } from '../../../models/';
 import type { HttpErrorResponse } from '@angular/common/http';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { JamendoAbstractService } from '../jamendo-abstract/jamendo-abstract.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class JamendoTracksService {
-  private _jamendoService = inject(JamendoService);
-  private _notificationService = inject(NotificationService);
-  public activeTracksSearch = signal<string>('');
+export class JamendoTracksService extends JamendoAbstractService<Track> {
+  protected override endpoint: Key = 'tracks';
+  protected override defaultParams: Record<string, unknown> = { order: 'popularity_total' };
 
   // public readonly query = signal('');
   // private readonly debouncedQuery = signal('');
@@ -102,23 +99,6 @@ export class JamendoTracksService {
   }); */
 
   // * HTTPClient
-
-  public tracks$ = toObservable(this.activeTracksSearch).pipe(
-    switchMap((searchQuery) => {
-      const params: Record<string, unknown> = { limit: 30, order: 'popularity_total' };
-      const namesearch = searchQuery.trim();
-      if (namesearch) {
-        params['namesearch'] = namesearch;
-      }
-      return this._jamendoService.getWithHttpClient<JamendoTracksResponse>('tracks', params, 'tracks').pipe(
-        map((response) => response.results),
-        catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
-          return EMPTY;
-        }),
-      );
-    }),
-  );
 
   public getTracks(): Observable<Track[]> {
     return this._jamendoService
