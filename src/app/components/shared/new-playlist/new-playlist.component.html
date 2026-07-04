@@ -2,4 +2,5 @@
   <label for="name"></label>
   <input class="input" type="text" formControlName="name" placeholder="Playlist name" id="name" class="input" />
   <button type="submit" [disabled]="playlistForm.invalid" class="btn-primary">Create playlist</button>
+  <button type="button" class="btn" (click)="onCancel()">Cancel</button>
 </form>

@@ -1,6 +1,6 @@
 import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, EMPTY, tap, type Observable } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, shareReplay, switchMap, tap, type Observable } from 'rxjs';
 import { NotificationService } from '../notification/notification.service';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../environments/environment';
@@ -63,18 +63,28 @@ export class RxBeatApiService {
     );
   }
 
-  public getPlaylists(): Observable<Playlist[]> {
-    return this.HttpClient.get<Playlist[]>(`${this._baseUrl}/playlists`).pipe(
-      catchError((err: HttpErrorResponse) => {
-        if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'Sign in to see your playlists');
-        } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
-        }
-        return EMPTY;
-      }),
-    );
+  private refreshSubject$ = new BehaviorSubject<void>(undefined);
+
+  public playlists$ = this.refreshSubject$.pipe(
+    switchMap(() =>
+      this.HttpClient.get<Playlist[]>(`${this._baseUrl}/playlists`).pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.notificationService.show(err.error?.message || 'Sign in to see your playlists');
+          } else {
+            this.notificationService.show(err.error?.message || 'Something went wrong');
+          }
+          return EMPTY;
+        }),
+      ),
+    ),
+    shareReplay(1),
+  );
+
+  public refreshPlaylists(): void {
+    this.refreshSubject$.next();
   }
+
   public createPlaylist(data: PlaylistDto): Observable<Playlist> {
     return this.HttpClient.post<Playlist>(`${this._baseUrl}/playlists`, data).pipe(
       catchError((err: HttpErrorResponse) => {

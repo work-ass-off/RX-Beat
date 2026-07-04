@@ -1,21 +1,21 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RxBeatApiService } from '../../../services/rx-beat-api/rx-beat-api.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '../../../services/notification/notification.service';
+import { RxBeatApiService } from '../../../services/rx-beat-api/rx-beat-api.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
-  selector: 'app-api-page',
+  selector: 'app-new-playlist',
   imports: [ReactiveFormsModule],
-  templateUrl: './api-page.component.html',
+  templateUrl: './new-playlist.component.html',
+  styleUrl: './new-playlist.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    class: 'page',
-  },
 })
-export class ApiPageComponent {
-  public readonly RxBeatApiService = inject(RxBeatApiService);
-  public readonly fb = inject(FormBuilder);
-  public notificationService = inject(NotificationService);
+export class NewPlaylistComponent {
+  private readonly RxBeatApiService = inject(RxBeatApiService);
+  private readonly fb = inject(FormBuilder);
+  protected notificationService = inject(NotificationService);
+  protected dialogRef = inject<DialogRef<string>>(DialogRef<string>);
 
   public playlistForm = this.fb.group({
     name: ['', Validators.required],
@@ -27,5 +27,10 @@ export class ApiPageComponent {
     this.RxBeatApiService.createPlaylist({ name: data }).subscribe();
     this.playlistForm.reset();
     this.RxBeatApiService.refreshPlaylists();
+    this.dialogRef.close();
+  }
+
+  public onCancel(): void {
+    this.dialogRef.close();
   }
 }

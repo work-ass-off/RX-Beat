@@ -1,0 +1,4 @@
+@let playlists = playlists$ | async;
+@if (playlists) {
+  <pre>{{ playlists | json }}</pre>
+}
