@@ -59,15 +59,15 @@ export type Album = {
 
 export type JamendoAlbumsResponse = JamendoResponse<Album[]>;
 
-export type AutocompleteKey = 'tracks' | 'artists' | 'albums';
+export type Key = 'tracks' | 'artists' | 'albums';
 
-export type Autocomplete = { [K in AutocompleteKey]: Record<K, string[]> }[AutocompleteKey];
+export type Autocomplete = { [K in Key]: Record<K, string[]> }[Key];
 
-export type JamendoAutocompleteResponseNew = JamendoResponse<Autocomplete>;
+export type JamendoAutocompleteResponse = JamendoResponse<Autocomplete>;
 
-export type JamendoAutocompleteResponse = {
+/* export type JamendoAutocompleteResponse = {
   tracks: string[];
   artists: string[];
   albums: string[];
   tags: string[];
-};
+}; */

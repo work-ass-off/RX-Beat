@@ -1,35 +1,15 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { JamendoService } from '../jamendo.service';
-import type { Artist, JamnedoArtistsResponse } from '../../../models/';
-import { catchError, EMPTY, map, switchMap, type Observable } from 'rxjs';
-import { NotificationService } from '../../notification/notification.service';
+import { Injectable } from '@angular/core';
+import type { Artist, JamnedoArtistsResponse, Key } from '../../../models/';
+import { catchError, EMPTY, map, type Observable } from 'rxjs';
 import type { HttpErrorResponse } from '@angular/common/http';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { JamendoAbstractService } from '../jamendo-abstract/jamendo-abstract.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class JamendoArtistsService {
-  private _jamendoService = inject(JamendoService);
-  private _notificationService = inject(NotificationService);
-  public activeArtistsSearch = signal<string>('');
-
-  public artists$ = toObservable(this.activeArtistsSearch).pipe(
-    switchMap((searchQuery) => {
-      const params: Record<string, unknown> = { limit: 30 };
-      const namesearch = searchQuery.trim();
-      if (namesearch) {
-        params['namesearch'] = namesearch;
-      }
-      return this._jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', params, 'artists').pipe(
-        map((response) => response.results),
-        catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
-          return EMPTY;
-        }),
-      );
-    }),
-  );
+export class JamendoArtistsService extends JamendoAbstractService<Artist> {
+  protected override endpoint: Key = 'artists';
+  protected override defaultParams: Record<string, unknown> = {};
 
   public getArtists(): Observable<Artist[]> {
     return this._jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', { limit: 30 }, 'artists').pipe(
@@ -39,17 +19,5 @@ export class JamendoArtistsService {
         return EMPTY;
       }),
     );
-  }
-
-  public getArtistWithTracks(artistId: string): Observable<Artist> {
-    return this._jamendoService
-      .getWithHttpClient<JamnedoArtistsResponse>('artists/tracks', { limit: 1, id: artistId }, 'tracks')
-      .pipe(
-        map((response) => response.results[0]),
-        catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
-          return EMPTY;
-        }),
-      );
   }
 }

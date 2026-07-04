@@ -35,7 +35,7 @@ export class AlbumsEffects {
     this.actions$.pipe(
       ofType(AlbumActions.loadAlbumWithTracks),
       switchMap(({ albumId }) =>
-        this.jamendoAlbumsService.getAlbumWithTracks(albumId).pipe(
+        this.jamendoAlbumsService.getDataById(albumId).pipe(
           switchMap((album) => [
             AlbumActions.loadAlbumWithTracksSuccess({ album: album }),
             ArtistActions.loadExternalArtistsSuccess({
