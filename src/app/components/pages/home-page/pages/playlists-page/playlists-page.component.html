@@ -1,2 +1,15 @@
-<p>Playlists!</p>
-<app-content />
+@let playlists = playlists$ | async;
+
+@if (loading()) {
+  <app-loader-spinner />
+} @else {
+  <ul class="artists-list">
+    @for (playlist of playlists; track playlist.id) {
+      <li class="artist-item">
+        {{ playlist.name }}
+        <!-- <app- [artist]="playlist" [routerLink]="[playlist.id]" /> -->
+      </li>
+    }
+  </ul>
+  <router-outlet />
+}
