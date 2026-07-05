@@ -16,7 +16,7 @@ export class ToastService {
     const toast: Toast = { id, title, message, type };
     this.toasts.push(toast);
     this.toastSubject.next(this.toasts);
-    setTimeout(() => this.remove(id), 300);
+    setTimeout(() => this.remove(id), 3000);
     return id;
   }
 
