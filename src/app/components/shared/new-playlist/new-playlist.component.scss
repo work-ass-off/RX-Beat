@@ -1,0 +1,16 @@
+@use '../../../styles/mixins' as *;
+
+:host {
+  display: block;
+  padding: 1rem 2rem;
+  background: var(--bg-base);
+  border-radius: 8px;
+}
+
+.form {
+  gap: 2rem;
+}
+
+.btns {
+  @include flex($gap: 3rem);
+}

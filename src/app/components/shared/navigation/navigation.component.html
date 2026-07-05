@@ -3,7 +3,6 @@
 <a class="btn-primary" routerLink="/api">API</a>
 <a class="btn-primary" routerLink="/store">Store</a>
 @if (isLoggedIn()) {
-  <a class="btn-primary" routerLink="/profile">{{ 'HEADER.PROFILE' | translate }}</a>
   <button class="btn" (click)="onLogout()">{{ 'HEADER.LOGOUT' | translate }}</button>
 } @else {
   <a class="btn-transparent sign-up" routerLink="/signup">{{ 'HEADER.SIGNUP' | translate }}</a>

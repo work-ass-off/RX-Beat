@@ -165,12 +165,6 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'profile',
-    canActivate: [userGuard],
-    loadComponent: () =>
-      import('./components/pages/profile-page/profile-page.component').then((m) => m.ProfilePageComponent),
-  },
-  {
     path: 'api',
     loadComponent: () => import('./components/pages/api-page/api-page.component').then((m) => m.ApiPageComponent),
   },

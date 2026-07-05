@@ -1,0 +1,35 @@
+@use '../../../styles/mixins' as *;
+
+// .menu {
+
+//   background-color: var(--bg-surface-elevated);
+//   border: 1px solid var(--border);
+//   padding: 0.5rem;
+// }
+.menu {
+  @include flex($direction: column);
+  background-color: var(--bg-surface-elevated);
+  padding: 1rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.menu-item {
+  @include flex($align: center, $justify: space-between);
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 0.5rem;
+  border-radius: 1rem;
+
+  width: 100%;
+  &.active {
+    background-color: var(--action-surface);
+  }
+  &:hover {
+    background-color: var(--bg-base);
+  }
+}

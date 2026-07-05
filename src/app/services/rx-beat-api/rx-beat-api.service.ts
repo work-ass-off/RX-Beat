@@ -137,7 +137,7 @@ export class RxBeatApiService {
   }
 
   public addTrackToPlaylist(playlistId: string, trackId: string): Observable<void> {
-    return this.HttpClient.post<void>(`${this._baseUrl}/playlists/${playlistId}/tracks`, { trackId }).pipe(
+    return this.HttpClient.post<void>(`${this._baseUrl}/playlists/${playlistId}/tracks`, { trackId: trackId }).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.notificationService.show(err.error?.message || 'You can not add track to playlist without login');

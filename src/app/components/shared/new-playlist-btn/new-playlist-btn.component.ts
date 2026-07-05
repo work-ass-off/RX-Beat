@@ -14,7 +14,7 @@ export class NewPlaylistBtnComponent {
 
   public openDialog(): void {
     const dialogRef = this.dialog.open<string>(NewPlaylistComponent, {
-      width: '250px',
+      // width: '250px',
       // data: { name: this.name, animal: this.animal },
     });
 
