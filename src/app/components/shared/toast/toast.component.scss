@@ -19,6 +19,13 @@
     overflow: hidden;
     border-radius: 0.25rem;
 
+    &-icon {
+      @include flex;
+      width: 1.5rem;
+      height: auto;
+      padding: 1rem;
+    }
+
     &-content {
       flex-grow: 1;
       padding: 1rem 0.5rem;
@@ -56,7 +63,7 @@
 
     /* ------- Define Toast and Toast Loader Style -------- */
 
-    &.done {
+    &.success {
       color: #51a351;
       background-color: #c7ffd5;
 
