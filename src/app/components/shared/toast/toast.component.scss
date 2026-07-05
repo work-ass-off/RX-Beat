@@ -1,0 +1,113 @@
+@use '../../../styles/mixins' as *;
+
+:host(.toast-container) {
+  @include flex($direction: column, $align: flex-end);
+
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  cursor: pointer;
+
+  .toast {
+    @include flex;
+
+    position: relative;
+    width: 20rem;
+    min-height: 4rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border-radius: 0.25rem;
+
+    &-icon {
+      @include flex;
+
+      width: 1.5rem;
+      height: auto;
+      padding: 1rem;
+    }
+
+    &-content {
+      flex-grow: 1;
+      padding: 1rem 0.5rem;
+
+      .title {
+        margin-bottom: 0.2rem;
+        font-weight: bold;
+      }
+    }
+
+    &-close {
+      position: absolute;
+      top: 0.2rem;
+      right: 0.5rem;
+      padding: 0;
+      color: inherit;
+      cursor: pointer;
+      background: none;
+      border: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &-loader {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 0.2rem;
+      animation: loader 3s linear forwards;
+    }
+
+    /* ------- Define Toast and Toast Loader Style -------- */
+
+    &.success {
+      color: #51a351;
+      background-color: #c7ffd5;
+
+      .toast-loader {
+        background-color: #51a351;
+      }
+    }
+
+    &.error {
+      color: #bd362f;
+      background-color: #ffcdd1;
+
+      .toast-loader {
+        background-color: #bd362f;
+      }
+    }
+
+    &.warning {
+      color: #f89406;
+      background-color: #ffecb6;
+
+      .toast-loader {
+        background-color: #f89406;
+      }
+    }
+
+    &.info {
+      color: #2f96b4;
+      background-color: #caf8ff;
+
+      .toast-loader {
+        background-color: #2f96b4;
+      }
+    }
+  }
+}
+
+@keyframes loader {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
