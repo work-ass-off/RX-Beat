@@ -1,9 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ToastService } from '../../../services/toast/toast.service';
-import type { Toast } from '../../../models';
-import type { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toast',
@@ -24,23 +22,10 @@ import type { Subscription } from 'rxjs';
     ]),
   ],
 })
-export class ToastComponent implements OnInit {
+export class ToastComponent {
   private toastService = inject(ToastService);
-  private destroyRef = inject(DestroyRef);
-  private cdr = inject(ChangeDetectorRef);
 
-  public toasts: Toast[] = [];
-
-  public ngOnInit(): void {
-    const subscription: Subscription = this.toastService.toasts$.subscribe((toasts) => {
-      this.toasts = toasts;
-      this.cdr.markForCheck();
-    });
-
-    this.destroyRef.onDestroy(() => {
-      subscription.unsubscribe();
-    });
-  }
+  public toasts = this.toastService.toasts;
 
   public removeToast(id: number): void {
     this.toastService.remove(id);
