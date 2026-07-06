@@ -1,2 +1,13 @@
-<p>Playlists!</p>
-<app-content />
+@let playlists = playlists$ | async;
+
+@if (loading()) {
+  <app-loader-spinner />
+} @else {
+  <div class="list">
+    @for (playlist of playlists; track playlist.id) {
+      <button class="btn-icon" (click)="navigateToPlaylist(playlist)">{{ playlist.name }}</button>
+    }
+    <app-new-playlist-btn></app-new-playlist-btn>
+  </div>
+  <router-outlet [routerOutletData]="activeTracks()" />
+}

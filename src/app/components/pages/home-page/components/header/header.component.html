@@ -7,8 +7,10 @@
     </div>
   }
   <div class="scroll-container" #scrollContainer (scroll)="onScroll()">
-    @for (link of links; track link.name) {
-      <a [routerLink]="['/home', link.link]" routerLinkActive="active">{{ link.name }}</a>
+    @for (link of links; track link.label) {
+      <a class="btn-primary" [routerLink]="['/home', link.link]" routerLinkActive="active">{{
+        link.label | translate
+      }}</a>
     }
   </div>
 

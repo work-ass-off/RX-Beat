@@ -1,18 +1,18 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { SearchPageComponent } from './search-page.component';
+import { PlaylistsTracksComponent } from './playlists-tracks.component';
 
-describe('SearchPageComponent', () => {
-  let component: SearchPageComponent;
-  let fixture: ComponentFixture<SearchPageComponent>;
+describe('PlaylistsTracksComponent', () => {
+  let component: PlaylistsTracksComponent;
+  let fixture: ComponentFixture<PlaylistsTracksComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchPageComponent],
+      imports: [PlaylistsTracksComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchPageComponent);
+    fixture = TestBed.createComponent(PlaylistsTracksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,23 +8,24 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import type { HeaderLink } from './header.model';
+import { TranslatePipe } from '@ngx-translate/core';
 
-const HeaderLinks: HeaderLink[] = [
-  { name: 'Tracks', link: 'tracks' },
-  { name: 'Albums', link: 'albums' },
-  { name: 'Artists', link: 'artists' },
-  { name: 'Playlists', link: 'playlists' },
+const HEADER_LINKS: HeaderLink[] = [
+  { label: 'MAIN.SIDEBAR.MY_LIBRARY.FILTERS.TRACKS', link: 'tracks' },
+  { label: 'MAIN.SIDEBAR.MY_LIBRARY.FILTERS.ALBUMS', link: 'albums' },
+  { label: 'MAIN.SIDEBAR.MY_LIBRARY.FILTERS.ARTISTS', link: 'artists' },
+  { label: 'MAIN.SIDEBAR.MY_LIBRARY.FILTERS.PLAYLISTS', link: 'playlists' },
 ];
 
 @Component({
   selector: 'header[app-home-header]',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements AfterViewInit {
-  public readonly links = HeaderLinks;
+  public readonly links = HEADER_LINKS;
 
   private showArrowRight = signal<boolean>(false);
   public isShowArrowRight = this.showArrowRight.asReadonly();

@@ -1,18 +1,18 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { StorePageComponent } from './store-page.component';
+import { NewPlaylistBtnComponent } from './new-playlist-btn.component';
 
-describe('StorePageComponent', () => {
-  let component: StorePageComponent;
-  let fixture: ComponentFixture<StorePageComponent>;
+describe('NewPlaylistBtnComponent', () => {
+  let component: NewPlaylistBtnComponent;
+  let fixture: ComponentFixture<NewPlaylistBtnComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StorePageComponent],
+      imports: [NewPlaylistBtnComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StorePageComponent);
+    fixture = TestBed.createComponent(NewPlaylistBtnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

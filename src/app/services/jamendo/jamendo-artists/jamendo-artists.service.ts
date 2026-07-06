@@ -15,7 +15,7 @@ export class JamendoArtistsService extends JamendoAbstractService<Artist> {
     return this._jamendoService.getWithHttpClient<JamnedoArtistsResponse>('artists', { limit: 30 }, 'artists').pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
-        this._notificationService.show(error.message || 'Something went wrong');
+        this.toastService.error(error.message || 'Something went wrong');
         return EMPTY;
       }),
     );

@@ -14,7 +14,7 @@ export class JamendoAlbumsService extends JamendoAbstractService<Album> {
     return this._jamendoService.getWithHttpClient<JamendoAlbumsResponse>('albums', { limit: 30 }, 'albums').pipe(
       map((response) => response.results),
       catchError((error: HttpErrorResponse) => {
-        this._notificationService.show(error.message || 'Something went wrong');
+        this.toastService.error(error.message || 'Something went wrong');
         return EMPTY;
       }),
     );

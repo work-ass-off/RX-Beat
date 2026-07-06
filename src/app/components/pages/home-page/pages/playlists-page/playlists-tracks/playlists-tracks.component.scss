@@ -1,0 +1,47 @@
+@use '../../../../../../styles/mixins' as *;
+
+:host(.tracks) {
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+
+  .tracks-list {
+    height: 100%;
+    overflow: hidden scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .empty-state {
+    width: 100%;
+    min-width: 5rem;
+    max-width: max-content;
+    padding: 1rem;
+
+    p {
+      display: inline-block;
+      width: 100%;
+      min-width: 5rem;
+      max-width: max-content;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-main);
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  .auth-required {
+    @include flex($direction: column);
+
+    p {
+      text-align: center;
+    }
+  }
+}
