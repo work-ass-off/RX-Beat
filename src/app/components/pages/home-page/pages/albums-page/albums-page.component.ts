@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NotificationService } from '../../../../../services/notification/notification.service';
-import type { Observable } from 'rxjs';
+import { type Observable } from 'rxjs';
 import type { Album } from '../../../../../models';
 import { AsyncPipe } from '@angular/common';
 import { LoadingService } from '../../../../../services/loading/loading.service';

@@ -1,5 +1,9 @@
 .section {
   height: 100%;
-  margin-bottom: 0.5rem;
   overflow-y: hidden;
+
+  &.has-player {
+    padding-bottom: 7rem;
+    margin-bottom: 0.5rem;
+  }
 }

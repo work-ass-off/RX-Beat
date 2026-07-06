@@ -10,7 +10,7 @@ import { PlayerStoreService } from '../../../services/store/player-store/player-
   styleUrl: './track.component.scss',
   host: {
     class: 'track',
-    '(mousedown)': 'onClick()',
+    '(click)': 'onAddToTrackQueue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -20,7 +20,7 @@ export class TrackComponent {
   public track = input.required<Track>();
   public index = input.required<number>();
 
-  public onClick(): void {
+  public onAddToTrackQueue(): void {
     this.playerStoreService.setTrack(this.track());
   }
 }

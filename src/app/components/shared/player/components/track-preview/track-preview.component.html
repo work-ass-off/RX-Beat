@@ -1,6 +1,12 @@
-<div class="track-cover">
-  <img [src]="trackImage()" alt="track cover" class="track-cover" />
-</div>
+@if (trackImage()) {
+  <div class="track-cover">
+    <img [src]="trackImage()" alt="track cover" class="track-cover" />
+  </div>
+} @else {
+  <div class="img-fallback">
+    <span class="material-symbols-rounded"> music_note_2 </span>
+  </div>
+}
 <div class="track-info">
   <h3>{{ trackName() }}</h3>
   <p>{{ artistName() }}</p>
