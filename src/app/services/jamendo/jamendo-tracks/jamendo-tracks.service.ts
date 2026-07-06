@@ -17,7 +17,7 @@ export class JamendoTracksService extends JamendoAbstractService<Track> {
       .pipe(
         map((response) => response.results),
         catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
+          this.toastService.error(error.message || 'Something went wrong');
           return EMPTY;
         }),
       );

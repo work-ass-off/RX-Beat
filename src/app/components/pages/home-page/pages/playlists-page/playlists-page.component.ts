@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { type Observable } from 'rxjs';
 import type { Playlist } from '../../../../../models';
 import { LoadingService } from '../../../../../services/loading/loading.service';
-import { NotificationService } from '../../../../../services/notification/notification.service';
 import { RxBeatApiService } from '../../../../../services/rx-beat-api/rx-beat-api.service';
 import { LoaderSpinnerComponent } from '../../../../shared/loader-spinner/loader-spinner.component';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -26,8 +25,6 @@ export class PlaylistsPageComponent {
   private activatedRoute = inject(ActivatedRoute);
 
   public activeTracks = signal<string[]>([]);
-
-  public notificationService = inject(NotificationService);
   public loading = this._loadingService.isLoaderActive('playlists');
 
   public playlists$: Observable<Playlist[]> = this._rxBeatApiService.playlists$;

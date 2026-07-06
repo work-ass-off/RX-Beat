@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { RxBeatApiService } from '../../../services/rx-beat-api/rx-beat-api.service';
 import { type Observable } from 'rxjs';
 import type { Playlist } from '../../../models';
-import { NotificationService } from '../../../services/notification/notification.service';
 import { AsyncPipe } from '@angular/common';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { NewPlaylistBtnComponent } from '../new-playlist-btn/new-playlist-btn.component';
+import { ToastService } from '../../../services/toast/toast.service';
 
 @Component({
   selector: 'app-playlist-menu',
@@ -16,7 +16,7 @@ import { NewPlaylistBtnComponent } from '../new-playlist-btn/new-playlist-btn.co
 })
 export class PlaylistMenuComponent {
   private readonly RxBeatApiService = inject(RxBeatApiService);
-  protected notificationService = inject(NotificationService);
+  private toastService = inject(ToastService);
 
   public trackId = input<string>('1157362');
 
@@ -28,7 +28,7 @@ export class PlaylistMenuComponent {
         this.RxBeatApiService.refreshPlaylists();
       },
       error: () => {
-        this.notificationService.show('Failed to delete playlist. Please try again later');
+        this.toastService.error('Failed to delete playlist. Please try again later');
       },
     });
   }

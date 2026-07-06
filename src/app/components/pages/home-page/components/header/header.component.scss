@@ -24,20 +24,6 @@
       &::-webkit-scrollbar {
         display: none;
       }
-
-      a {
-        display: inline-flex;
-        align-items: center;
-        padding: 10px 20px;
-        color: var(--text-main);
-        background-color: var(--action-surface);
-        border-radius: 20px;
-
-        &.active {
-          color: var(--bg-surface-elevated);
-          background-color: var(--action-primary);
-        }
-      }
     }
 
     .arrow-overlay {

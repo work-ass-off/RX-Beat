@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LoadingService } from '../../../../../services/loading/loading.service';
-import { NotificationService } from '../../../../../services/notification/notification.service';
 import type { Observable } from 'rxjs';
 import type { Artist } from '../../../../../models';
 import { AsyncPipe } from '@angular/common';
@@ -22,9 +21,6 @@ import { JamendoAbstractService } from '../../../../../services/jamendo/jamendo-
 export class ArtistsPageComponent {
   private _jamendoService = inject(JamendoAbstractService);
   private _loadingService = inject(LoadingService);
-
-  public notificationService = inject(NotificationService);
   public loading = this._loadingService.isLoaderActive('artists');
-
   public artists$: Observable<Artist[]> = this._jamendoService.data$;
 }

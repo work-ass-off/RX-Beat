@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NotificationService } from '../../../services/notification/notification.service';
 import { RxBeatApiService } from '../../../services/rx-beat-api/rx-beat-api.service';
 import { DialogRef } from '@angular/cdk/dialog';
 
@@ -14,7 +13,6 @@ import { DialogRef } from '@angular/cdk/dialog';
 export class NewPlaylistComponent {
   private readonly RxBeatApiService = inject(RxBeatApiService);
   private readonly fb = inject(FormBuilder);
-  protected notificationService = inject(NotificationService);
   protected dialogRef = inject<DialogRef<string>>(DialogRef<string>);
 
   public playlistForm = this.fb.group({
@@ -22,7 +20,6 @@ export class NewPlaylistComponent {
   });
 
   public onPlaylistCreate(): void {
-    this.notificationService.clear();
     const data = this.playlistForm.value.name ?? '';
     this.RxBeatApiService.createPlaylist({ name: data }).subscribe();
     this.playlistForm.reset();

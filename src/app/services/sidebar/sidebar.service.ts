@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 
 @Injectable()
 export class SidebarService {
-  private readonly _collapse = signal(false);
+  private readonly _collapse = signal(true);
   public readonly isCollapsed = this._collapse.asReadonly();
 
   public toggle(): void {

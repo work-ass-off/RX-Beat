@@ -1,16 +1,16 @@
 import { inject, Injectable } from '@angular/core';
-import { NotificationService } from '../../notification/notification.service';
 import { JamendoService } from '../jamendo.service';
 import { catchError, EMPTY, map, type Observable } from 'rxjs';
 import type { JamendoTracksResponse, Track } from '../../../models';
 import { type HttpErrorResponse } from '@angular/common/http';
+import { ToastService } from '../../toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JamendoPlaylistService {
   private _jamendoService = inject(JamendoService);
-  private _notificationService = inject(NotificationService);
+  private toastService = inject(ToastService);
 
   public getPlaylistTracks(id: string[]): Observable<Track[]> {
     return this._jamendoService
@@ -18,7 +18,7 @@ export class JamendoPlaylistService {
       .pipe(
         map((response) => response.results),
         catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
+          this.toastService.error(error.message || 'Something went wrong');
           return EMPTY;
         }),
       );

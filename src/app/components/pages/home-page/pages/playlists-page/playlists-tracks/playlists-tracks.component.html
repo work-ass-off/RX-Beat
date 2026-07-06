@@ -3,23 +3,17 @@
 @if (loading()) {
   <app-loader-spinner />
 } @else {
-  @if (notificationService.notification()) {
-    <div class="error-state">
-      <p>{{ notificationService.notification() }}</p>
+  @if (tracks && tracks.length) {
+    <ul class="tracks-list">
+      @for (track of tracks; track track.id) {
+        <li class="track-item">
+          <app-track [track]="track" [index]="$index + 1" />
+        </li>
+      }
+    </ul>
+  } @else if (tracks && !tracks.length) {
+    <div class="empty-state">
+      <p>Tracks not found.</p>
     </div>
-  } @else {
-    @if (tracks && tracks.length) {
-      <ul class="tracks-list">
-        @for (track of tracks; track track.id) {
-          <li class="track-item">
-            <app-track [track]="track" [index]="$index + 1" />
-          </li>
-        }
-      </ul>
-    } @else if (tracks && !tracks.length) {
-      <div class="empty-state">
-        <p>Tracks not found.</p>
-      </div>
-    }
   }
 }

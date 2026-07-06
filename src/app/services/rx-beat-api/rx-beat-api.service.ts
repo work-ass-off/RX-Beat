@@ -1,17 +1,17 @@
 import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, EMPTY, shareReplay, switchMap, tap, type Observable } from 'rxjs';
-import { NotificationService } from '../notification/notification.service';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../environments/environment';
 import type { AuthDto, Playlist, PlaylistDto, Token, User } from '../../models/';
+import { ToastService } from '../toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RxBeatApiService {
   private HttpClient = inject(HttpClient);
-  private notificationService = inject(NotificationService);
+  private toastService = inject(ToastService);
   private authService = inject(AuthService);
 
   private readonly _baseUrl = environment.rxBeatUrl;
@@ -23,11 +23,11 @@ export class RxBeatApiService {
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 409) {
-          this.notificationService.show(err.error?.message || 'User already exists');
+          this.toastService.error(err.error?.message || 'User already exists');
         } else if (err.status === 400) {
-          this.notificationService.show(err.error?.message || 'Bad request');
+          this.toastService.error(err.error?.message || 'Bad request');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -41,9 +41,9 @@ export class RxBeatApiService {
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 400) {
-          this.notificationService.show(err.error?.message || 'Bad request');
+          this.toastService.error(err.error?.message || 'Bad request');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -54,9 +54,9 @@ export class RxBeatApiService {
     return this.HttpClient.get<User>(`${this._baseUrl}/users/me`).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'Unauthorized');
+          this.toastService.error(err.error?.message || 'Unauthorized');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -70,9 +70,9 @@ export class RxBeatApiService {
       this.HttpClient.get<Playlist[]>(`${this._baseUrl}/playlists`).pipe(
         catchError((err: HttpErrorResponse) => {
           if (err.status === 401) {
-            this.notificationService.show(err.error?.message || 'Sign in to see your playlists');
+            this.toastService.error(err.error?.message || 'Sign in to see your playlists');
           } else {
-            this.notificationService.show(err.error?.message || 'Something went wrong');
+            this.toastService.error(err.error?.message || 'Something went wrong');
           }
           return EMPTY;
         }),
@@ -89,9 +89,9 @@ export class RxBeatApiService {
     return this.HttpClient.post<Playlist>(`${this._baseUrl}/playlists`, data).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'You can not create playlist without login');
+          this.toastService.error(err.error?.message || 'You can not create playlist without login');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -102,9 +102,9 @@ export class RxBeatApiService {
     return this.HttpClient.get<Playlist>(`${this._baseUrl}/playlists/${id}`).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'You can not get playlist without login');
+          this.toastService.error(err.error?.message || 'You can not get playlist without login');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -115,9 +115,9 @@ export class RxBeatApiService {
     return this.HttpClient.delete<void>(`${this._baseUrl}/playlists/${id}`).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'You can not delete playlist without login');
+          this.toastService.error(err.error?.message || 'You can not delete playlist without login');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -127,9 +127,9 @@ export class RxBeatApiService {
     return this.HttpClient.put<Playlist>(`${this._baseUrl}/playlists/${id}`, data).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'You can not update playlist without login');
+          this.toastService.error(err.error?.message || 'You can not update playlist without login');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -140,9 +140,9 @@ export class RxBeatApiService {
     return this.HttpClient.post<void>(`${this._baseUrl}/playlists/${playlistId}/tracks`, { trackId: trackId }).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'You can not add track to playlist without login');
+          this.toastService.error(err.error?.message || 'You can not add track to playlist without login');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),
@@ -153,9 +153,9 @@ export class RxBeatApiService {
     return this.HttpClient.delete<void>(`${this._baseUrl}/playlists/${playlistId}/tracks/${trackId}`).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.notificationService.show(err.error?.message || 'You can not remove track from playlist without login');
+          this.toastService.error(err.error?.message || 'You can not remove track from playlist without login');
         } else {
-          this.notificationService.show(err.error?.message || 'Something went wrong');
+          this.toastService.error(err.error?.message || 'Something went wrong');
         }
         return EMPTY;
       }),

@@ -1,17 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { JamendoService } from '../jamendo.service';
-import { NotificationService } from '../../notification/notification.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { catchError, EMPTY, map, type Observable, switchMap } from 'rxjs';
 import type { Key, JamendoResponse } from '../../../models';
 import type { HttpErrorResponse } from '@angular/common/http';
 import { SearchService } from '../../search/search.service';
+import { ToastService } from '../../toast/toast.service';
 
 @Injectable()
 export abstract class JamendoAbstractService<T> {
   protected _jamendoService = inject(JamendoService);
   protected _searchService = inject(SearchService);
-  protected _notificationService = inject(NotificationService);
+  protected toastService = inject(ToastService);
 
   protected abstract endpoint: Key;
   protected abstract defaultParams?: Record<string, unknown>;
@@ -28,7 +28,7 @@ export abstract class JamendoAbstractService<T> {
       return this._jamendoService.getWithHttpClient<JamendoResponse<T[]>>(this.endpoint, params, this.endpoint).pipe(
         map((response) => response.results),
         catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
+          this.toastService.error(error.message || 'Something went wrong');
           return EMPTY;
         }),
       );
@@ -42,7 +42,7 @@ export abstract class JamendoAbstractService<T> {
       .pipe(
         map((response) => response.results[0]),
         catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
+          this.toastService.error(error.message || 'Something went wrong');
           return EMPTY;
         }),
       );

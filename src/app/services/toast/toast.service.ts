@@ -21,19 +21,19 @@ export class ToastService {
     this.toastsSignal.update((currentToasts) => currentToasts.filter((t) => t.id !== id));
   }
 
-  public success(title: string, message: string): number {
-    return this.show(title, message, 'success');
+  public success(message: string): number {
+    return this.show('Success', message, 'success');
   }
 
-  public error(title: string, message: string): number {
-    return this.show(title, message, 'error');
+  public error(message: string): number {
+    return this.show('Error', message, 'error');
   }
 
-  public warning(title: string, message: string): number {
-    return this.show(title, message, 'warning');
+  public warning(message: string): number {
+    return this.show('Warning', message, 'warning');
   }
 
-  public info(title: string, message: string): number {
-    return this.show(title, message, 'info');
+  public info(message: string): number {
+    return this.show('Info', message, 'info');
   }
 }

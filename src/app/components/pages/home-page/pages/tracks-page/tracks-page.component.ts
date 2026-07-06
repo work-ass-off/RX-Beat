@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TrackComponent } from '../../../../shared/track/track.component';
 import { LoadingService } from '../../../../../services/loading/loading.service';
-import { NotificationService } from '../../../../../services/notification/notification.service';
 import { map, tap, type Observable, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoaderSpinnerComponent } from '../../../../shared/loader-spinner/loader-spinner.component';
@@ -30,7 +29,6 @@ export class TracksPageComponent {
   private playerStoreService = inject(PlayerStoreService);
   private _authService = inject(AuthService);
 
-  public notificationService = inject(NotificationService);
   public isAuthorized = this._authService.isLoggedIn;
   public loading = this._loadingService.isLoaderActive('tracks');
 
