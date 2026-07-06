@@ -1,4 +1,4 @@
 export type HeaderLink = {
-  name: string;
+  label: string;
   link: string;
 };
