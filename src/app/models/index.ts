@@ -5,3 +5,4 @@ export * from './track.model';
 export * from './library.model';
 export * from './dropdown.model';
 export * from './rx-beat-api.model';
+export * from './toast.model';
