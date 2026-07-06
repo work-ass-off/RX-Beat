@@ -34,6 +34,8 @@ describe('AboutPageComponent', () => {
     const element = fixture.nativeElement;
     const description = element.querySelector('p');
     expect(description).toBeTruthy();
-    expect(description.textContent).toContain('WorkAssOff is an application that allows you to find information about artists, albums, tracks, and genres.');
+    expect(description.textContent).toContain(
+      'WorkAssOff is an application that allows you to find information about artists, albums, tracks, and genres.',
+    );
   });
 });
