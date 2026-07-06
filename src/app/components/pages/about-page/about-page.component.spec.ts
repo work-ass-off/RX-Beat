@@ -15,9 +15,25 @@ describe('AboutPageComponent', () => {
     fixture = TestBed.createComponent(AboutPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a title', () => {
+    const element = fixture.nativeElement;
+    console.log(element);
+    const title = element.querySelector('h2');
+    expect(title).toBeTruthy();
+    expect(title.textContent).toContain('About');
+  });
+
+  it('should have a description', () => {
+    const element = fixture.nativeElement;
+    const description = element.querySelector('p');
+    expect(description).toBeTruthy();
+    expect(description.textContent).toContain('This is the about page of the application.');
   });
 });
