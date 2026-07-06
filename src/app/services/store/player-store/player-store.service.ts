@@ -35,21 +35,7 @@ export class PlayerStoreService {
 
   //Player queue
   // Transit to the store
-  public queueOfPlayedTracks = signal<Track[]>([
-    {
-      id: 'local-1',
-      name: 'Topolonyy Puh',
-      duration: 231.327347,
-      releasedate: '1998-01-01',
-      position: 1,
-      artist_id: 'local-artist',
-      artist_name: 'Ivanushki International',
-      album_id: 'local-album',
-      album_name: 'Local Album',
-      image: 'vinyl-mock.jpg',
-      audio: '/ivanushki-international_-_topolinyy-puh.mp3',
-    },
-  ]);
+  public queueOfPlayedTracks = signal<Track[]>([]);
   public albumQueue = signal<Track[] | null>(null);
   public popularTracksQueue = signal<Track[] | null>(null);
   public activeQueue = signal<QueueName>('queueOfPlayedTracks');
