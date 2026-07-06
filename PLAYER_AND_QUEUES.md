@@ -1,258 +1,171 @@
-# RX-Beat: как работает плеер и очереди треков
+# RX-Beat: как работает плеер и очереди
 
-## 1) Общая идея
+Документ описывает текущую реализацию плеера и очередей в проекте.
 
-У тебя есть один центральный стор для плеера: `PlayerStoreService`.
+## 1) Центр управления
 
-Он хранит:
+Основная логика находится в `PlayerStoreService`.
 
-- текущий трек,
-- состояние воспроизведения,
-- прогресс/громкость,
-- несколько очередей,
-- активную очередь (какая сейчас считается основной для next/prev и правого сайдбара).
+Сервис хранит:
 
-Главная точка правды: `src/app/services/store/player-store/player-store.service.ts`.
+- текущий трек;
+- состояние воспроизведения;
+- прогресс и громкость;
+- набор очередей;
+- активную очередь, по которой работают next/prev и правый сайдбар.
 
----
+Файл: `src/app/services/store/player-store/player-store.service.ts`.
 
-## 2) Какие очереди есть сейчас
+## 2) Какие очереди есть
 
-В `PlayerStoreService`:
+В сторе есть 5 очередей:
 
-- `queueOfPlayedTracks: signal<Track[]>`
-  - история проигранных (и стартовая локальная очередь по умолчанию)
-- `albumQueue: signal<Track[] | null>`
-  - треки выбранного альбома
-- `popularTracksQueue: signal<Track[] | null>`
-  - треки страницы `tracks`/artist (у тебя сейчас это общий контейнер для не-альбомной ленты)
-- `activeQueue: signal<QueueName>`
-  - одна активная очередь: `'queueOfPlayedTracks' | 'albumQueue' | 'popularTracksQueue'`
+- `queueOfPlayedTracks` — история/локальная очередь проигранных;
+- `popularTracksQueue` — общий список треков (страница tracks без id);
+- `albumQueue` — треки выбранного альбома;
+- `artistQueue` — треки выбранного артиста;
+- `playlistQueue` — треки выбранного плейлиста.
 
-Вычисляемые:
+Также есть:
 
-- `currentQueue = computed(() => getQueueByName(activeQueue()))`
-- флаги выбора очереди:
-  - `isQueueOfPlayedTracksSelected`
-  - `isAlbumQueueSelected`
-  - `isPopularTracksQueueSelected`
-- `currentTrackIndexInQueue`
+- `activeQueue` — имя активной очереди;
+- `currentQueue` — вычисляемая текущая очередь по `activeQueue`;
+- `currentTrackIndexInQueue` — индекс текущего трека внутри `currentQueue`.
 
-Зачем это важно: теперь нет трех независимых boolean, которые могли конфликтовать. Выбор очереди централизован в `activeQueue`.
+Поддерживаемые значения `activeQueue`:
 
----
+- `queueOfPlayedTracks`
+- `popularTracksQueue`
+- `albumQueue`
+- `artistQueue`
+- `playlistQueue`
 
-## 3) Инициализация плеера
+## 3) Как выбирается активная очередь
 
-При создании `PlayerStoreService`:
+Есть два способа:
 
-- `currentTrack` получает первый трек из `queueOfPlayedTracks`, если он есть.
+- `changeQueueSelection(queueName)` — явный выбор очереди;
+- методы `set*Queue(tracks, autoSelect)` — заполнение очереди + опциональное авто-переключение.
 
-Это делает кнопку Play доступной сразу (если в очереди есть трек).
+Если `autoSelect = true`, сервис сразу делает эту очередь активной.
 
----
+После выбора выполняется `ensureCurrentTrackFromActiveQueue()`:
 
-## 4) Как работает воспроизведение
+- если активная очередь пустая, ничего не меняется;
+- если `currentTrack` отсутствует, берется первый трек из активной очереди;
+- если `currentTrack` уже есть, он не перезаписывается.
 
-### 4.1 setTrack
+## 4) Как запускается трек
 
-`setTrack(track, options?)` делает:
+`setTrack(track, options?)`:
 
-1. обновляет `currentTrack`,
-2. сбрасывает локальное состояние трека (`isPlaying = false`, `trackCurrentTime = 0`),
-3. (опционально) добавляет трек в историю `queueOfPlayedTracks`,
-4. вызывает `audio.load()`,
-5. если `autoplay = true`, включает `isPlaying = true` и снимает `isInitialLoading`.
-
-`options`:
-
-- `autoplay` по умолчанию `true`,
-- `addToHistory` по умолчанию `true`.
-
-### 4.2 togglePlay
+1. ставит `currentTrack`;
+2. сбрасывает локальное состояние трека (`isPlaying = false`, `trackCurrentTime = 0`);
+3. при `addToHistory = true` добавляет трек в `queueOfPlayedTracks` (без дублей);
+4. вызывает `audio.load()`;
+5. при `autoplay = true` включает проигрывание (`isPlaying = true`) и снимает `isInitialLoading`.
 
 `togglePlay()`:
 
-1. снимает `isInitialLoading` при первом взаимодействии,
-2. если нет `currentTrack`, выхоит,
-3. переключает `isPlaying`.
-4. если переходим в pause — вызывает `audio.pause()`.
+- если это первое взаимодействие, снимает `isInitialLoading`;
+- если нет текущего трека, завершает работу;
+- иначе переключает play/pause;
+- при паузе вызывает `audio.pause()`.
 
-### 4.3 Кто реально вызывает HTMLAudioElement.play()
+## 5) Кто реально управляет HTMLAudioElement
 
-Это делает не сервис, а `PlayerComponent` через `effect`:
+Сервис хранит состояние, а реальным `<audio>` управляет `PlayerComponent` через `effect`.
 
-- следит за `currentTrack` + `isPlaying`,
-- если нужно играть — вызывает `audio.play()` (с ожиданием `canplay`, если нужно),
-- если нужно пауза — `audio.pause()`.
+Что делает компонент:
+
+- следит за `currentTrack` и `isPlaying`;
+- вызывает `audio.play()` при старте;
+- вызывает `audio.pause()` при паузе;
+- ждет `canplay`, если трек еще не готов;
+- сохраняет ссылку на DOM-аудио в `playerStoreService.audio`.
 
 Файл: `src/app/components/shared/player/player.component.ts`.
 
-Это хороший паттерн: сервис решает **что** должно играть, компонент управляет реальным DOM-аудио.
+## 6) Откуда очереди получают данные
 
----
+Главная точка наполнения очередей — `TracksPageComponent`.
 
-## 5) Как заполняются очереди данными
+Файл: `src/app/components/pages/home-page/pages/tracks-page/tracks-page.component.ts`.
 
-## 5.1 На странице tracks
+Логика:
 
-Файл: `src/app/components/pages/home-page/pages/tracks-page/tracks-page.component.ts`
+- компонент читает route param `id`;
+- дополнительно определяет контекст родительского маршрута (`albums`, `artists`, `playlists`);
+- если `id` есть:
+  - запрашивает `getDataById(id)`;
+  - берет `entity.tracks`;
+  - кладет треки в нужную очередь:
+    - albums -> `setAlbumQueue(..., true)`
+    - artists -> `setArtistQueue(..., true)`
+    - playlists -> `setPlaylistQueue(..., true)`
+- если `id` нет:
+  - использует `data$`;
+  - кладет треки в `setPopularTracksQueue(..., true)`.
 
-Поток `tracks$` смотрит route params:
+Важно: страницы `albums` и `artists` сами очереди не заполняют, они показывают списки сущностей. Наполнение очереди происходит в дочернем маршруте с `TracksPageComponent`.
 
-- если `albumId`:
-  - грузит `getAlbumWithTracks(albumId)`
-  - вызывает `setAlbumQueue(tracks, true)`
-- если `artistId`:
-  - грузит `getArtistWithTracks(artistId)`
-  - вызывает `setPopularTracksQueue(tracks, true)`
-- иначе общий список tracks:
-  - грузит `getTracks()`
-  - вызывает `setPopularTracksQueue(tracks, true)`
+## 7) Next/Prev и activeQueue
 
-`autoSelect = true` означает: эта очередь становится `activeQueue`.
+Кнопки prev/next работают от активной очереди:
 
-## 5.2 На странице albums
-
-Файл: `src/app/components/pages/home-page/pages/albums-page/albums-page.component.ts`
-
-- По клику на альбом: dispatch `loadAlbumWithTracks({ albumId })`
-- Из стора читаются треки альбома селектором `selectTracksByAlbumId(albumId)`
-- Далее `setAlbumQueue(tracks, true)`
-
-Таким образом альбомная очередь синхронизируется с NgRx и становится активной.
-
----
-
-## 6) Как выбирается активная очередь
-
-Методы:
-
-- `changeQueueSelection(queueName)`
-- `setAlbumQueue(tracks, autoSelect)`
-- `setPopularTracksQueue(tracks, autoSelect)`
-
-После смены активной очереди вызывается `ensureCurrentTrackFromActiveQueue()`.
-
-Текущая логика `ensureCurrentTrackFromActiveQueue()`:
-
-- если очередь пустая — ничего не делаем,
-- если `currentTrack` отсутствует — берем первый трек из активной очереди без autoplay и без записи в history,
-- если `currentTrack` уже есть — **не сбрасываем его** (это было важно для бага при переходе вкладок).
-
----
-
-## 7) Next/Prev и связь с activeQueue
-
-В `track-controls`:
-
-- `prev`/`next` работают через `setPreviousTrackFromQueue()` / `setNextTrackFromQueue()`.
+- `setPreviousTrackFromQueue()`;
+- `setNextTrackFromQueue()`.
 
 Обе функции используют:
 
-- `currentQueue()` (то есть активную очередь),
+- `currentQueue()`;
 - `currentTrackIndexInQueue()`.
 
-Следствие:
+Если текущий трек не найден в активной очереди, индекс будет `-1`, и переход вперед/назад не выполнится.
 
-- если текущий трек не входит в активную очередь, индекс будет `-1`, кнопки могут стать неактивными или вести себя “как будто трека нет в списке”.
+## 8) Откуда пользователь запускает воспроизведение
 
-Это ожидаемо при модели “одна активная очередь”.
+- В списке треков (`app-track`) клик вызывает `setTrack(track)`.
+- В правом сайдбаре (`track-item`):
+  - если клик по текущему треку -> `togglePlay()`;
+  - если по другому -> `setTrack(track, { autoplay: true, addToHistory: true })`.
 
----
+## 9) Очередь истории и кнопка "Queue"
 
-## 8) Откуда пользователь запускает трек
+История (`queueOfPlayedTracks`) пополняется в `setTrack` при `addToHistory = true`.
 
-### 8.1 Из списка треков
+Кнопка переключения на очередь в плеере (`toggleQueue`) делает:
 
-`src/app/components/shared/track/track.component.ts`
+- `setQueueOfPlayedTracks(queueOfPlayedTracks(), true)`.
 
-- клик по `app-track` => `setTrack(this.track())`
+То есть активной становится очередь истории.
 
-### 8.2 Из элемента очереди справа
-
-`src/app/components/shared/track/track-item/track-item.component.ts`
-
-- если это текущий трек: `togglePlay()`
-- если другой трек: `setTrack(track, { autoplay: true, addToHistory: true })`
-
-Это уже без двойного toggle (раньше была гонка, когда setTrack и потом ещё toggle запускались подряд).
-
-### 8.3 Из track-card
-
-`src/app/components/shared/track-card/track-card.component.ts`
-
-- `setTrack(this.track())`
-
----
-
-## 9) Почему раньше трек сбрасывался при переключении вкладок
-
-Причина была в старой логике `ensureCurrentTrackFromActiveQueue()`:
-
-- при смене `activeQueue` проверялось, есть ли текущий трек в новой очереди,
-- если нет — ставился первый трек новой очереди.
-
-Теперь это изменено:
-
-- подмена происходит только когда `currentTrack === null`.
-
-Итог:
-
-- можно перейти из альбома на tracks, а играющий трек не потеряется.
-
----
-
-## 10) Где может быть следующая точка улучшения
-
-Сейчас `popularTracksQueue` используется и для "общих tracks", и для artist-контекста.
-
-Для более чистой модели можно добавить:
-
-- `artistQueue`,
-- и расширить `QueueName` до 4 значений.
-
-Это даст:
-
-- более предсказуемый `activeQueue`,
-- более прозрачный UI-индикатор текущего источника очереди,
-- проще дебажить next/prev.
-
----
-
-## 11) Быстрый сценарий жизненного цикла
+## 10) Краткая схема
 
 ```mermaid
 flowchart TD
-    A[Открыли страницу] --> B{Какой route?}
-    B -->|albumId| C[Загрузка album tracks]
-    B -->|artistId| D[Загрузка artist tracks]
-    B -->|без params| E[Загрузка популярных tracks]
+    A[Route change or click] --> B{Есть id?}
+    B -->|Нет| C[data$ -> popularTracksQueue]
+    B -->|Да| D[getDataById(id) -> tracks]
 
-    C --> F[setAlbumQueue(tracks, true)]
-    D --> G[setPopularTracksQueue(tracks, true)]
-    E --> G
+    D --> E{Контекст route}
+    E -->|albums| F[albumQueue]
+    E -->|artists| G[artistQueue]
+    E -->|playlists| H[playlistQueue]
 
-    F --> H[activeQueue=albumQueue]
-    G --> I[activeQueue=popularTracksQueue]
+    C --> I[activeQueue set]
+    F --> I
+    G --> I
+    H --> I
 
-    H --> J[ensureCurrentTrackFromActiveQueue]
-    I --> J
-
-    J -->|currentTrack есть| K[Оставить текущий трек]
-    J -->|currentTrack null| L[Взять queue[0] без autoplay]
-
-    M[Пользователь жмет Play] --> N[togglePlay]
-    N --> O[isPlaying true/false]
-    O --> P[PlayerComponent effect вызывает play/pause]
+    I --> J[ensureCurrentTrackFromActiveQueue]
+    J --> K[currentTrack ready]
+    K --> L[PlayerComponent effect -> play/pause]
 ```
 
----
+## 11) Резюме
 
-## 12) Короткое резюме
-
-- Вся логика плеера централизована в `PlayerStoreService`.
-- `activeQueue` — единый источник правды по текущей очереди.
-- `setTrack` управляет выбором трека и autoplay.
-- `PlayerComponent` управляет реальным `<audio>`.
-- Переход между вкладками больше не должен сбрасывать играющий трек, если он уже выбран.
+- Плеер опирается на один централизованный store-сервис.
+- Все очереди сведены к модели "одна активная очередь".
+- Источники данных определяются контекстом маршрута и `id`.
+- DOM-аудио контролируется компонентом, а не сервисом.
