@@ -15,7 +15,7 @@ import { JamendoAbstractService } from '../../../../../services/jamendo/jamendo-
   templateUrl: './artists-page.component.html',
   styleUrl: './artists-page.component.scss',
   host: {
-    class: 'artists',
+    class: 'two-columns',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

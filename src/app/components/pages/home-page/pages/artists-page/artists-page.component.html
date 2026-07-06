@@ -3,9 +3,9 @@
 @if (loading()) {
   <app-loader-spinner />
 } @else {
-  <ul class="artists-list">
+  <ul class="list">
     @for (artist of artists; track artist.id) {
-      <li class="artist-item">
+      <li class="item">
         <app-artist [artist]="artist" [routerLink]="[artist.id]" />
       </li>
     }

@@ -1,0 +1,5 @@
+@use '../../../../../styles/mixins' as *;
+.list {
+  padding: 1rem;
+  @include flex($direction: column, $align: flex-start, $justify: flex-start, $gap: 0.5rem);
+}

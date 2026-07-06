@@ -49,9 +49,20 @@ export class JamendoService {
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          httpParams = httpParams.set(key, String(value));
+        if (value === undefined || value === null) return;
+
+        // ✔ массив
+        if (Array.isArray(value)) {
+          value.forEach((v) => {
+            if (v !== undefined && v !== null) {
+              httpParams = httpParams.append(key, String(v));
+            }
+          });
+          return;
         }
+
+        // ✔ обычное значение
+        httpParams = httpParams.set(key, String(value));
       });
     }
 

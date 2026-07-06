@@ -3,13 +3,11 @@
 @if (loading()) {
   <app-loader-spinner />
 } @else {
-  <ul class="artists-list">
+  <div class="list">
     @for (playlist of playlists; track playlist.id) {
-      <li class="artist-item">
-        {{ playlist.name }}
-        <!-- <app- [artist]="playlist" [routerLink]="[playlist.id]" /> -->
-      </li>
+      <button class="btn-icon" (click)="navigateToPlaylist(playlist)">{{ playlist.name }}</button>
     }
-  </ul>
-  <router-outlet />
+    <app-new-playlist-btn></app-new-playlist-btn>
+  </div>
+  <router-outlet [routerOutletData]="activeTracks()" />
 }

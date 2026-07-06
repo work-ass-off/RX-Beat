@@ -1,23 +1,23 @@
-@use '../../../../../styles/mixins' as *;
+// @use '../../../../../styles/mixins' as *;
 
-:host(.albums) {
-  @include flex($align: flex-start);
+// :host(.albums) {
+//   @include flex($align: flex-start);
 
-  height: 100%;
-  overflow: hidden;
+//   height: 100%;
+//   overflow: hidden;
 
-  .albums-list {
-    @include flex($wrap: wrap);
+//   .albums-list {
+//     @include flex($wrap: wrap);
 
-    flex: 1 1 0;
-    min-width: 0;
-    height: 100%;
-    overflow: hidden scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+//     flex: 1 1 0;
+//     min-width: 0;
+//     height: 100%;
+//     overflow: hidden scroll;
+//     scrollbar-width: none;
+//     -ms-overflow-style: none;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-}
+//     &::-webkit-scrollbar {
+//       display: none;
+//     }
+//   }
+// }

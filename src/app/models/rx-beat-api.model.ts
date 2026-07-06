@@ -14,7 +14,6 @@ export type Playlist = {
   createdAt: number;
   updatedAt: number;
   tracks: string[];
-  // isTrackInPlaylist?: boolean;
 };
 
 export type User = {

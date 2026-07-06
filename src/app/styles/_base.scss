@@ -149,3 +149,25 @@ body {
 .form {
   @include flex($direction: column, $gap: 0.5rem);
 }
+
+.two-columns {
+  @include flex($align: flex-start);
+
+  height: 100%;
+  overflow: hidden;
+
+  .list {
+    @include flex($wrap: wrap);
+
+    flex: 1 1 0;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

@@ -98,8 +98,8 @@ export const HOME_ROUTES: Routes = [
       {
         path: ':playlistId',
         loadComponent: () =>
-          import('../components/pages/home-page/pages/tracks-page/tracks-page.component').then(
-            (m) => m.TracksPageComponent,
+          import('../components/pages/home-page/pages/playlists-page/playlists-tracks/playlists-tracks.component').then(
+            (m) => m.PlaylistsTracksComponent,
           ),
       },
     ],
