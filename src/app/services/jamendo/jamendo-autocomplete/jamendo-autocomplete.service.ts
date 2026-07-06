@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import type { Autocomplete, JamendoAutocompleteResponseNew } from '../../../models';
+import type { Autocomplete, JamendoAutocompleteResponse } from '../../../models';
 import { catchError, debounceTime, distinctUntilChanged, EMPTY, map, switchMap, type Observable } from 'rxjs';
 import type { HttpErrorResponse } from '@angular/common/http';
 import { JamendoService } from '../jamendo.service';
@@ -20,7 +20,7 @@ export class JamendoAutocompleteService {
 
   public getAutocomplete(prefix: string): Observable<Autocomplete> {
     return this._jamendoService
-      .getWithHttpClient<JamendoAutocompleteResponseNew>('autocomplete', {
+      .getWithHttpClient<JamendoAutocompleteResponse>('autocomplete', {
         limit: 30,
         prefix,
         entity: this.routingService.path(),

@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import type { Track } from '../../../models/jamendo.model';
 
-type QueueName = 'popularTracksQueue' | 'albumQueue' | 'queueOfPlayedTracks';
+type QueueName = 'popularTracksQueue' | 'albumQueue' | 'artistQueue' | 'playlistQueue' | 'queueOfPlayedTracks';
 
 @Injectable({
   providedIn: 'root',
@@ -34,16 +34,20 @@ export class PlayerStoreService {
   });
 
   //Player queue
-  // Transit to the store
   public queueOfPlayedTracks = signal<Track[]>([]);
-  public albumQueue = signal<Track[] | null>(null);
   public popularTracksQueue = signal<Track[] | null>(null);
+  public albumQueue = signal<Track[] | null>(null);
+  public artistQueue = signal<Track[] | null>(null);
+  public playlistQueue = signal<Track[] | null>(null);
+
   public activeQueue = signal<QueueName>('queueOfPlayedTracks');
 
   public currentQueue = computed(() => this.getQueueByName(this.activeQueue()));
   public isQueueOfPlayedTracksSelected = computed(() => this.activeQueue() === 'queueOfPlayedTracks');
   public isAlbumQueueSelected = computed(() => this.activeQueue() === 'albumQueue');
   public isPopularTracksQueueSelected = computed(() => this.activeQueue() === 'popularTracksQueue');
+  public isArtistQueueSelected = computed(() => this.activeQueue() === 'artistQueue');
+  public isPlaylistQueueSelected = computed(() => this.activeQueue() === 'playlistQueue');
   public currentTrackIndexInQueue = computed(() => {
     const track = this.currentTrack();
     const queue = this.currentQueue();
@@ -68,6 +72,14 @@ export class PlayerStoreService {
       return this.popularTracksQueue() ?? [];
     }
 
+    if (queueName === 'artistQueue') {
+      return this.artistQueue() ?? [];
+    }
+
+    if (queueName === 'playlistQueue') {
+      return this.playlistQueue() ?? [];
+    }
+
     return this.queueOfPlayedTracks();
   }
 
@@ -89,16 +101,6 @@ export class PlayerStoreService {
     this.ensureCurrentTrackFromActiveQueue();
   }
 
-  public setAlbumQueue(tracks: Track[], autoSelect = false): void {
-    this.albumQueue.set(tracks);
-
-    if (autoSelect) {
-      this.activeQueue.set('albumQueue');
-    }
-
-    this.ensureCurrentTrackFromActiveQueue();
-  }
-
   public setPopularTracksQueue(tracks: Track[], autoSelect = false): void {
     this.popularTracksQueue.set(tracks);
 
@@ -109,9 +111,48 @@ export class PlayerStoreService {
     this.ensureCurrentTrackFromActiveQueue();
   }
 
+  public setAlbumQueue(tracks: Track[], autoSelect = false): void {
+    this.albumQueue.set(tracks);
+
+    if (autoSelect) {
+      this.activeQueue.set('albumQueue');
+    }
+
+    this.ensureCurrentTrackFromActiveQueue();
+  }
+
+  public setArtistQueue(tracks: Track[], autoSelect = false): void {
+    this.artistQueue.set(tracks);
+
+    if (autoSelect) {
+      this.activeQueue.set('artistQueue');
+    }
+
+    this.ensureCurrentTrackFromActiveQueue();
+  }
+
+  public setPlaylistQueue(tracks: Track[], autoSelect = false): void {
+    this.playlistQueue.set(tracks);
+
+    if (autoSelect) {
+      this.activeQueue.set('playlistQueue');
+    }
+
+    this.ensureCurrentTrackFromActiveQueue();
+  }
+
+  public setQueueOfPlayedTracks(tracks: Track[], autoSelect = false): void {
+    this.queueOfPlayedTracks.set(tracks);
+
+    if (autoSelect) {
+      this.activeQueue.set('queueOfPlayedTracks');
+    }
+
+    this.ensureCurrentTrackFromActiveQueue();
+  }
+
   protected addTrackToQueue(track: Track): void {
     this.queueOfPlayedTracks.update((queue) => (queue.find((t) => t.id === track.id) ? queue : [track, ...queue]));
-    console.log('Current queue in PlayerStoreService:', this.queueOfPlayedTracks());
   }
 
   public setPreviousTrackFromQueue(): void {

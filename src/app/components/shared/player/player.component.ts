@@ -68,6 +68,6 @@ export class PlayerComponent {
   }
 
   public toggleQueue(): void {
-    this.playerStoreService.activeQueue.set('queueOfPlayedTracks');
+    this.playerStoreService.setQueueOfPlayedTracks(this.playerStoreService.queueOfPlayedTracks(), true);
   }
 }

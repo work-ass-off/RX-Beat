@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { JamendoTracksService } from '../../../services/jamendo/jamendo-tracks/jamendo-tracks.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { TrackCardComponent } from '../track-card/track-card.component';
 import { LoadingService } from '../../../services/loading/loading.service';
 import { AsyncPipe } from '@angular/common';
+import { JamendoAbstractService } from '../../../services/jamendo/jamendo-abstract/jamendo-abstract.service';
 
 @Component({
   selector: 'app-jamendo',
@@ -13,10 +13,10 @@ import { AsyncPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JamendoComponent {
-  private jamendoTracksService = inject(JamendoTracksService);
+  private jamendoService = inject(JamendoAbstractService);
   private loadingService = inject(LoadingService);
 
   // public tracks = this.jamendoTracksService.tracksResource;
-  public tracks$ = this.jamendoTracksService.tracks$;
+  public tracks$ = this.jamendoService.data$;
   public loading = this.loadingService.isLoaderActive('tracks');
 }

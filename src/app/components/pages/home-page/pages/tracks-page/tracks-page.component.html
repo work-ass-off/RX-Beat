@@ -1,22 +1,31 @@
-@let tracks = tracks$ | async;
-
-@if (loading()) {
-  <app-loader-spinner />
-} @else {
-  @if (tracks && tracks.length > 0) {
-    <ul class="tracks-list">
-      @for (track of tracks; track track.id) {
-        <li class="track-item">
-          <app-track [track]="track" [index]="$index + 1" />
-        </li>
+@if (isAuthorized()) {
+  @let tracks = tracks$ | async;
+  @if (loading()) {
+    <app-loader-spinner />
+  } @else {
+    @if (notificationService.notification()) {
+      <div class="error-state">
+        <p>{{ notificationService.notification() }}</p>
+      </div>
+    } @else {
+      @if (tracks && tracks.length) {
+        <ul class="tracks-list">
+          @for (track of tracks; track track.id) {
+            <li class="track-item">
+              <app-track [track]="track" [index]="$index + 1" />
+            </li>
+          }
+        </ul>
+      } @else if (tracks && !tracks.length) {
+        <div class="empty-state">
+          <p>Tracks not found.</p>
+        </div>
       }
-    </ul>
-  } @else if (tracks && tracks.length === 0) {
-    <div class="empty-state">
-      <p>No tracks found for this selection.</p>
-    </div>
+    }
   }
-}
-@if (notificationService.notification()) {
-  <div class="error">{{ notificationService.notification() }}</div>
+} @else {
+  <div class="auth-required">
+    <p>Please log in to listen to music.</p>
+    <a class="btn" routerLink="/login">Login to view tracks</a>
+  </div>
 }
