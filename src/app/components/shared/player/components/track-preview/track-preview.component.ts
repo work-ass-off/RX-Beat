@@ -12,13 +12,4 @@ import { PlaylistMenuComponent } from '../../../playlist-menu/playlist-menu.comp
 export class TrackPreviewComponent {
   private readonly playerStoreService = inject(PlayerStoreService);
   protected readonly track = computed(() => this.playerStoreService.currentTrack());
-  // protected readonly isTrackExists = computed(() => !!this.track()?.id);
-  // protected readonly trackImage = computed(() => (this.isTrackExists() ? this.track()?.image : ''));
-  // protected readonly trackName = computed(() => (this.isTrackExists() ? this.track()?.name : ''));
-  // protected readonly artistName = computed(() => (this.isTrackExists() ? this.track()?.artist_name : ''));
-  // protected readonly isLikedTrack = computed(() => this.playerStoreService.isLikedTrack());
-
-  // protected toggleLike(): void {
-  //   this.playerStoreService.isLikedTrack.set(!this.playerStoreService.isLikedTrack());
-  // }
 }

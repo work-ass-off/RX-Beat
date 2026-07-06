@@ -14,11 +14,13 @@ export class NewPlaylistBtnComponent {
 
   public openDialog(): void {
     const dialogRef = this.dialog.open<string>(NewPlaylistComponent, {
+      // for possible future use, if we want to pass data to the dialog
       // width: '250px',
       // data: { name: this.name, animal: this.animal },
     });
 
     dialogRef.closed.subscribe(() => {
+      // for possible future use, if we want to handle the result from the dialog
       // this.animal = result;
     });
   }

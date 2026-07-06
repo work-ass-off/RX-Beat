@@ -3,7 +3,7 @@ import { TrackComponent } from '../../../../../shared/track/track.component';
 import { LoadingService } from '../../../../../../services/loading/loading.service';
 import { NotificationService } from '../../../../../../services/notification/notification.service';
 import { of, switchMap } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoaderSpinnerComponent } from '../../../../../shared/loader-spinner/loader-spinner.component';
 import { JamendoPlaylistService } from '../../../../../../services/jamendo/jamendo-playlist/jamendo-playlist.service';
 import { ROUTER_OUTLET_DATA } from '@angular/router';
@@ -11,7 +11,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-playlists-tracks',
-  imports: [TrackComponent, AsyncPipe, LoaderSpinnerComponent, JsonPipe],
+  imports: [TrackComponent, AsyncPipe, LoaderSpinnerComponent],
   templateUrl: './playlists-tracks.component.html',
   styleUrl: './playlists-tracks.component.scss',
   host: {

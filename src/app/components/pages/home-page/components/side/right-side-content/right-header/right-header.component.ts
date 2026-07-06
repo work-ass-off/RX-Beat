@@ -24,7 +24,6 @@ export class RightHeaderComponent {
   }
 
   public handelDropdown(event: Event): void {
-    // TODO: Test
     console.log(event.currentTarget);
   }
 }

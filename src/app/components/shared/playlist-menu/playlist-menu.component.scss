@@ -1,11 +1,5 @@
 @use '../../../styles/mixins' as *;
 
-// .menu {
-
-//   background-color: var(--bg-surface-elevated);
-//   border: 1px solid var(--border);
-//   padding: 0.5rem;
-// }
 .menu {
   @include flex($direction: column);
 

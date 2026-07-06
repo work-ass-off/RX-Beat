@@ -1,6 +1,5 @@
 <p>Tracks Page</p>
 @let tracks = tracks$ | async;
-<!-- <pre>{{ tracks | json }}</pre> -->
 @if (loading()) {
   <app-loader-spinner />
 } @else {

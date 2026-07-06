@@ -16,7 +16,6 @@ export class JamendoComponent {
   private jamendoService = inject(JamendoAbstractService);
   private loadingService = inject(LoadingService);
 
-  // public tracks = this.jamendoTracksService.tracksResource;
   public tracks$ = this.jamendoService.data$;
   public loading = this.loadingService.isLoaderActive('tracks');
 }

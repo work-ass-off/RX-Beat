@@ -1,7 +1,4 @@
 <a class="btn-primary" routerLink="/about">{{ 'HEADER.ABOUT' | translate }}</a>
-<a class="btn-primary" routerLink="/search">Search</a>
-<a class="btn-primary" routerLink="/api">API</a>
-<a class="btn-primary" routerLink="/store">Store</a>
 @if (isLoggedIn()) {
   <button class="btn" (click)="onLogout()">{{ 'HEADER.LOGOUT' | translate }}</button>
 } @else {
