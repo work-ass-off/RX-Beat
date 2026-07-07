@@ -30,10 +30,18 @@
     &-content {
       flex-grow: 1;
       padding: 1rem 0.5rem;
+      min-width: 0;
 
       .title {
         margin-bottom: 0.2rem;
         font-weight: bold;
+      }
+
+      .message {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 
