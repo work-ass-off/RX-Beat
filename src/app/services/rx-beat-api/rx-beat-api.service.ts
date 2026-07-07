@@ -1,10 +1,11 @@
-import { HttpClient, type HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, type HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, EMPTY, shareReplay, switchMap, tap, type Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../environments/environment';
 import type { AuthDto, Playlist, PlaylistDto, Token, User } from '../../models/';
 import { ToastService } from '../toast/toast.service';
+import { LOADER_TYPE } from '../loading/loading.context';
 
 @Injectable({
   providedIn: 'root',
@@ -67,7 +68,9 @@ export class RxBeatApiService {
 
   public playlists$ = this.refreshSubject$.pipe(
     switchMap(() =>
-      this.HttpClient.get<Playlist[]>(`${this._baseUrl}/playlists`).pipe(
+      this.HttpClient.get<Playlist[]>(`${this._baseUrl}/playlists`, {
+        context: new HttpContext().set(LOADER_TYPE, 'playlists'),
+      }).pipe(
         catchError((err: HttpErrorResponse) => {
           if (err.status === 401) {
             this.toastService.error(err.error?.message || 'Sign in to see your playlists');

@@ -29,11 +29,19 @@
 
     &-content {
       flex-grow: 1;
+      min-width: 0;
       padding: 1rem 0.5rem;
 
       .title {
         margin-bottom: 0.2rem;
         font-weight: bold;
+      }
+
+      .message {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 

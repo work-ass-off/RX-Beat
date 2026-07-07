@@ -14,7 +14,7 @@ export class JamendoPlaylistService {
 
   public getPlaylistTracks(id: string[]): Observable<Track[]> {
     return this._jamendoService
-      .getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30, id: id.join(' ') })
+      .getWithHttpClient<JamendoTracksResponse>('tracks', { limit: 30, id: id.join(' ') }, 'tracks')
       .pipe(
         map((response) => response.results),
         catchError((error: HttpErrorResponse) => {
