@@ -97,6 +97,7 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "coverage": true
+            
           }
         },
         "lint": {
