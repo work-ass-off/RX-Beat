@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RxBeatApiService } from '../../../../services/rx-beat-api/rx-beat-api.service';
-import { NotificationService } from '../../../../services/notification/notification.service';
 import { take, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
@@ -16,7 +15,6 @@ import { Router } from '@angular/router';
 export class SigninFormComponent {
   public readonly RxBeatApiService = inject(RxBeatApiService);
   private formBuilder = inject(FormBuilder);
-  public notificationService = inject(NotificationService);
   private router = inject(Router);
 
   public isDirty = signal(false);
@@ -33,8 +31,6 @@ export class SigninFormComponent {
   }
 
   public onSignIn(): void {
-    console.log(this.signinForm.value);
-    this.notificationService.clear();
     if (this.signinForm.invalid) {
       return;
     }

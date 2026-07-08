@@ -24,20 +24,6 @@
       &::-webkit-scrollbar {
         display: none;
       }
-
-      a {
-        display: inline-flex;
-        align-items: center;
-        padding: 10px 20px;
-        color: var(--text-main);
-        background-color: var(--action-surface);
-        border-radius: 20px;
-
-        &.active {
-          color: var(--bg-surface-elevated);
-          background-color: var(--action-primary);
-        }
-      }
     }
 
     .arrow-overlay {
@@ -50,7 +36,7 @@
       z-index: 5;
       width: 60px;
       pointer-events: none;
-      background: linear-gradient(90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+      background: var(--overlay-gradient-right);
 
       .arrow-btn {
         @include flex($justify: center, $align: center);
@@ -58,19 +44,19 @@
         width: 32px;
         height: 32px;
         margin-right: 4px;
-        color: #b3b3b3;
+        color: var(--text-sub);
         pointer-events: auto;
         cursor: pointer;
-        background-color: #121212;
+        background-color: var(--bg-base);
         border: none;
         border-radius: 50%;
-        box-shadow: 0 8px 16px rgb(0 0 0 / 0.3);
+        box-shadow: 0 8px 16px var(--shadow);
         transition:
           color 0.2s,
           transform 0.2s;
 
         &:hover {
-          color: #ffffff;
+          color: var(--text-bright);
           transform: scale(1.05);
         }
       }
@@ -79,7 +65,7 @@
     .right-overlay {
       right: 0;
       justify-content: flex-end;
-      background: linear-gradient(90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+      background: var(--overlay-gradient-right);
 
       .arrow-btn {
         margin-right: 4px;
@@ -89,7 +75,7 @@
     .left-overlay {
       left: 0;
       justify-content: flex-start;
-      background: linear-gradient(-90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+      background: var(--overlay-gradient-left);
 
       .arrow-btn {
         margin-left: 4px;

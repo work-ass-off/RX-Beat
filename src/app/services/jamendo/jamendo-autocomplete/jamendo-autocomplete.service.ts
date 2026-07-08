@@ -3,16 +3,17 @@ import type { Autocomplete, JamendoAutocompleteResponse } from '../../../models'
 import { catchError, debounceTime, distinctUntilChanged, EMPTY, map, switchMap, type Observable } from 'rxjs';
 import type { HttpErrorResponse } from '@angular/common/http';
 import { JamendoService } from '../jamendo.service';
-import { NotificationService } from '../../notification/notification.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { RoutingService } from '../../routing/routing.service';
+import { ToastService } from '../../toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JamendoAutocompleteService {
   private _jamendoService = inject(JamendoService);
-  private _notificationService = inject(NotificationService);
+  private toastService = inject(ToastService);
+
   private routingService = inject(RoutingService);
 
   public readonly queryData = signal<string>('');
@@ -28,7 +29,7 @@ export class JamendoAutocompleteService {
       .pipe(
         map((response) => response.results),
         catchError((error: HttpErrorResponse) => {
-          this._notificationService.show(error.message || 'Something went wrong');
+          this.toastService.error(error.message || 'Something went wrong');
           return EMPTY;
         }),
       );

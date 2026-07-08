@@ -3,11 +3,11 @@ import { environment } from '../../environments/environment';
 import { LocalStorageService } from '../services/local-storage/local-storage.service';
 import { inject } from '@angular/core';
 import { catchError, EMPTY } from 'rxjs';
-import { NotificationService } from '../services/notification/notification.service';
+import { ToastService } from '../services/toast/toast.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const localStorageService = inject(LocalStorageService);
-  const notificationService = inject(NotificationService);
+  const toastService = inject(ToastService);
   if (!req.url.startsWith(environment.rxBeatUrl)) {
     return next(req);
   }
@@ -26,7 +26,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       if (err.status === 401) {
         localStorageService.removeItem('token');
       }
-      notificationService.show('Please log in to continue');
+      toastService.info('Please log in to continue');
       return EMPTY;
     }),
   );

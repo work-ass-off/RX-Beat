@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SidebarService } from '../../../../../../../services/sidebar/sidebar.service';
 import { DropdownComponent } from '../../../../../../shared/dropdown/dropdown.component';
 import { DROPDOWN_CONFIG } from './config/dropdown.config';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-right-header',
-  imports: [DropdownComponent],
+  imports: [DropdownComponent, TranslatePipe],
   templateUrl: './right-header.component.html',
   styleUrl: './right-header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,7 +25,6 @@ export class RightHeaderComponent {
   }
 
   public handelDropdown(event: Event): void {
-    // TODO: Test
     console.log(event.currentTarget);
   }
 }

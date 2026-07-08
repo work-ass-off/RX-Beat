@@ -1,0 +1,22 @@
+@let playlists = playlists$ | async;
+<button [cdkMenuTriggerFor]="menu" class="btn-icon material-symbols-rounded">playlist_add</button>
+
+<ng-template #menu>
+  @if (playlists) {
+    <div class="menu" cdkMenu>
+      @for (playlist of playlists; track playlist.id) {
+        @let isIncluded = playlist.tracks.includes(trackId());
+        <div class="menu-item" [class.active]="isIncluded" cdkMenuItem>
+          <button class="btn-icon material-symbols-rounded" (click)="togglePlaylist(playlist.id, isIncluded)">
+            {{ isIncluded ? 'playlist_add_check' : 'music_note_add' }}
+          </button>
+          <p>{{ playlist.name }}</p>
+          <button class="btn-icon material-symbols-rounded" (click)="deletePlaylist(playlist.id)">
+            delete_forever
+          </button>
+        </div>
+      }
+      <app-new-playlist-btn cdkMenuItem></app-new-playlist-btn>
+    </div>
+  }
+</ng-template>
