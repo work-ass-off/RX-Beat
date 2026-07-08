@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import type { Track } from '../../../models/jamendo.model';
 
-type QueueName = 'popularTracksQueue' | 'albumQueue' | 'artistQueue' | 'playlistQueue' | 'queueOfPlayedTracks';
+export type QueueName = 'popularTracksQueue' | 'albumQueue' | 'artistQueue' | 'playlistQueue' | 'queueOfPlayedTracks';
 
 @Injectable({
   providedIn: 'root',

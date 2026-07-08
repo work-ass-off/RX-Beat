@@ -46,7 +46,7 @@ describe('PlayerStoreService', () => {
     expect(service.isPlaying()).toBeFalsy();
   });
 
-  it('isLidkedTrack should be false by default', () => {
+  it('isLikedTrack should be false by default', () => {
     expect(service.isLikedTrack()).toBeFalsy();
   });
 
@@ -54,28 +54,121 @@ describe('PlayerStoreService', () => {
     expect(service.volume()).toBe(1);
   });
 
-  it('trackCurrentTime should be 0 by default', () => {
-    expect(service.trackCurrentTime()).toBe(0);
+  it('trackDuration should be 0 by default', () => {
+    expect(service.trackDuration()).toBe(0);
+  });
+
+  it('trackProgressPresentage should be 0 by default', () => {
+    expect(service.trackProgressPresentage()).toBe(0);
   });
 
   it('queueOfPlayedTracks should be empty by default', () => {
     expect(service.queueOfPlayedTracks()).toEqual([]);
   });
 
+
+  it('popularTracksQueue should be null by default', () => {
+    expect(service.popularTracksQueue()).toBeNull();
+  });
+
+  it('trackCurrentTime should be 0 by default', () => {
+    expect(service.trackCurrentTime()).toBe(0);
+  });
+
+  it('albumQueue should be null by default', () => {
+    expect(service.albumQueue()).toBeNull();
+  });
+
+  it('artistQueue should be null by default', () => {
+    expect(service.artistQueue()).toBeNull();
+  });
+
+  it('playlistQueue should be null by default', () => {
+    expect(service.playlistQueue()).toBeNull();
+  });
+
   it('queueOfPlayedTracks should be as active queue by default', () => {
     expect(service.activeQueue()).toBe('queueOfPlayedTracks');
   });
 
-  it('setTrack is set track current track', () => {
+  it('currentQueue should be queueOfPlayedTracks by default', () => {
+    expect(service.currentQueue()).toEqual([]);
+  });
+
+  it('isQueueOfPlayedTracksSelected should be true by selected', () => {
+    service.changeQueueSelection('queueOfPlayedTracks');
+    expect(service.isQueueOfPlayedTracksSelected()).toBe(true);
+  });
+
+  it('isAlbumQueueSelected should be true by selected', () => {
+    service.changeQueueSelection('albumQueue');
+    expect(service.isAlbumQueueSelected()).toBe(true);
+  });
+
+  it('isPopularTracksQueueSelected should be true by selected', () => {
+    service.changeQueueSelection('popularTracksQueue');
+    expect(service.isPopularTracksQueueSelected()).toBe(true);
+  });
+
+  it('isArtistQueueSelected should be true by selected', () => {
+    service.changeQueueSelection('artistQueue');
+    expect(service.isArtistQueueSelected()).toBe(true);
+  });
+
+  it('isPlaylistQueueSelected should be true by selected', () => {
+    service.changeQueueSelection('playlistQueue');
+    expect(service.isPlaylistQueueSelected()).toBe(true);
+  });
+
+  it('currentTrackIndexInQueue should return -1 when currentTrack is null', () => {
+    const track = service.currentTrack();
+    const queue = service.currentQueue();
+    expect(track).toBeNull();
+    expect(queue).toEqual([]);
+    expect(service.currentTrackIndexInQueue()).toBe(-1);
+  });
+
+  it('currentTrackIndexInQueue should return 0 when currentTrack is the first track in the queue', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+    expect(service.currentTrackIndexInQueue()).toBe(0);
+  });
+
+  it('getQueueByName should return the correct queue based on the queue name', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+
+    // Test the private method getQueueByName using bracket notation
+    expect(service['getQueueByName']('queueOfPlayedTracks')).toEqual([track]);
+    expect(service['getQueueByName']('albumQueue')).toEqual([]);
+    expect(service['getQueueByName']('popularTracksQueue')).toEqual([]);
+    expect(service['getQueueByName']('artistQueue')).toEqual([]);
+    expect(service['getQueueByName']('playlistQueue')).toEqual([]);
+  });
+
+  
+
+  it('trackProgressPresentage should be 50 when trackCurrentTime is half of trackDuration', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+    service.trackCurrentTime.set(track.duration / 2);
+
+    expect(service.trackProgressPresentage()).toBe(50);
+  });
+
+  it('setTrack should set currentTrack', () => {
     const track = createTrack('track-1');
 
     service.setTrack(track);
+
     expect(service.currentTrack()).toEqual(track);
   });
 
   it('resetTrackState should reset track state', () => {
-    service.isPlaying.set(true);
-    service.trackCurrentTime.set(100);
+    const track = createTrack('track-1');
+    service.setTrack(track);
+  
+    service.trackCurrentTime.set(track.duration);
 
     service.resetTrackState();
 
@@ -83,37 +176,50 @@ describe('PlayerStoreService', () => {
     expect(service.trackCurrentTime()).toBe(0);
   });
 
-  it('togglePlay should turn on pause for initial loading', () => {
-    service.isInitialLoading.set(true);
+  it('setTrack should enable playback by default', () => {
+    const track = createTrack('track-1');
 
+    service.setTrack(track);
+
+    expect(service.isInitialLoading()).toBe(false);
+    expect(service.isPlaying()).toBe(true);
+  });
+
+  it('setTrack should not enable playback when autoplay is false', () => {
+    const track = createTrack('track-1');
+
+    service.setTrack(track, { autoplay: false });
+
+    expect(service.currentTrack()).toEqual(track);
     expect(service.isInitialLoading()).toBe(true);
     expect(service.isPlaying()).toBe(false);
   });
-  // it('changeQueueSelection should change active queue', () => {
-  //   service.changeQueueSelection('albumQueue');
 
-  //   expect(service.activeQueue()).toBe('albumQueue');
-  // });
+  it('addTrackToQueue should add track to queueOfPlayedTracks', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+    expect(service.queueOfPlayedTracks()).toContain(track);
 
-  // it('changeQueueSelection should set first track from selected queue when currentTrack is null', () => {
-  //   const albumTrack = createTrack('track-1');
-  //   service.setAlbumQueue([albumTrack]);
+    const track2 = createTrack('track-2');
+    service.setTrack(track2);
+    expect(service.queueOfPlayedTracks()).toEqual([track2, track]);
+  });
 
-  //   service.changeQueueSelection('albumQueue');
+  it('changeQueueSelection should change the active queue', () => {
+    service.changeQueueSelection('popularTracksQueue');
+    expect(service.activeQueue()).toBe('popularTracksQueue');
 
-  //   expect(service.activeQueue()).toBe('albumQueue');
-  //   expect(service.currentTrack()).toEqual(albumTrack);
-  //   expect(service.queueOfPlayedTracks()).toEqual([]);
-  // });
+    service.changeQueueSelection('albumQueue');
+    expect(service.activeQueue()).toBe('albumQueue');
 
-  // it('changeQueueSelection should not replace existing currentTrack', () => {
-  //   const currentTrack = createTrack('track-current');
-  //   const albumTrack = createTrack('track-album');
-  //   service.setTrack(currentTrack, { autoplay: false });
-  //   service.setAlbumQueue([albumTrack]);
+    service.changeQueueSelection('artistQueue');
+    expect(service.activeQueue()).toBe('artistQueue');
 
-  //   service.changeQueueSelection('albumQueue');
+    service.changeQueueSelection('playlistQueue');
+    expect(service.activeQueue()).toBe('playlistQueue');
 
-  //   expect(service.currentTrack()).toEqual(currentTrack);
-  // });
+    service.changeQueueSelection('queueOfPlayedTracks');
+    expect(service.activeQueue()).toBe('queueOfPlayedTracks');
+  });
+
 });
