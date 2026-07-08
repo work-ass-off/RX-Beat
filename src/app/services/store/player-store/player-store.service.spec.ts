@@ -7,7 +7,7 @@ describe('PlayerStoreService', () => {
   let service: PlayerStoreService;
 
   //factory function to create a Track object for testing
-  const createTrack = ((id: string): Track => ({
+  const createTrack = (id: string): Track => ({
     id,
     name: `Track ${id}`,
     duration: 180,
@@ -19,8 +19,7 @@ describe('PlayerStoreService', () => {
     artist_name: 'Artist',
     album_id: 'album-1',
     album_name: 'Album1',
-  }));
-  
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -83,7 +82,6 @@ describe('PlayerStoreService', () => {
     expect(service.isPlaying()).toBe(false);
     expect(service.trackCurrentTime()).toBe(0);
   });
-
 
   it('togglePlay should turn on pause for initial loading', () => {
     service.isInitialLoading.set(true);
