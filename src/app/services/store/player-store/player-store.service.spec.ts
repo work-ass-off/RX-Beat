@@ -66,7 +66,6 @@ describe('PlayerStoreService', () => {
     expect(service.queueOfPlayedTracks()).toEqual([]);
   });
 
-
   it('popularTracksQueue should be null by default', () => {
     expect(service.popularTracksQueue()).toBeNull();
   });
@@ -146,8 +145,6 @@ describe('PlayerStoreService', () => {
     expect(service['getQueueByName']('playlistQueue')).toEqual([]);
   });
 
-  
-
   it('trackProgressPresentage should be 50 when trackCurrentTime is half of trackDuration', () => {
     const track = createTrack('track-1');
     service.setTrack(track);
@@ -167,7 +164,7 @@ describe('PlayerStoreService', () => {
   it('resetTrackState should reset track state', () => {
     const track = createTrack('track-1');
     service.setTrack(track);
-  
+
     service.trackCurrentTime.set(track.duration);
 
     service.resetTrackState();
@@ -221,5 +218,4 @@ describe('PlayerStoreService', () => {
     service.changeQueueSelection('queueOfPlayedTracks');
     expect(service.activeQueue()).toBe('queueOfPlayedTracks');
   });
-
 });
