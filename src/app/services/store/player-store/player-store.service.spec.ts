@@ -164,7 +164,7 @@ describe('PlayerStoreService', () => {
     expect(service.popularTracksQueue()).toEqual(tracks);
   });
 
-   it('setPopularTracksQueue should set popularTracksQueue if autoSelect is true', () => {
+  it('setPopularTracksQueue should set popularTracksQueue if autoSelect is true', () => {
     const tracks = [createTrack('tracks-1'), createTrack('track-2')];
     service.setPopularTracksQueue(tracks, true);
     expect(service.popularTracksQueue()).toEqual(tracks);
@@ -190,7 +190,7 @@ describe('PlayerStoreService', () => {
     expect(service.artistQueue()).toEqual(tracks);
   });
 
-   it('setArtistQueue should set artistQueue if autoSelect is true', () => {
+  it('setArtistQueue should set artistQueue if autoSelect is true', () => {
     const tracks = [createTrack('tracks-1'), createTrack('track-2')];
     service.setArtistQueue(tracks, true);
     expect(service.artistQueue()).toEqual(tracks);
@@ -241,7 +241,7 @@ describe('PlayerStoreService', () => {
     expect(service.currentTrack()).toEqual(track2);
   });
 
-   it('setTrack should set currentTrack', () => {
+  it('setTrack should set currentTrack', () => {
     const track = createTrack('track-1');
 
     service.setTrack(track);
@@ -257,7 +257,7 @@ describe('PlayerStoreService', () => {
     expect(service.queueOfPlayedTracks()).toEqual([track2, track]);
   });
 
-   it('setTrack should enable playback by default', () => {
+  it('setTrack should enable playback by default', () => {
     const track = createTrack('track-1');
 
     service.setTrack(track);
@@ -322,7 +322,6 @@ describe('PlayerStoreService', () => {
     expect(service.isCurrentTrackChosen(track)).toBe(true);
   });
 
-
   it('isCurrentTrackInQueue should return false when currentTrack is not in the queue', () => {
     const track1 = createTrack('track-1');
     const track2 = createTrack('track-2');
@@ -345,5 +344,4 @@ describe('PlayerStoreService', () => {
 
     expect(service.isCurrentTrackPlaying(track)).toBe(false);
   });
-
 });
