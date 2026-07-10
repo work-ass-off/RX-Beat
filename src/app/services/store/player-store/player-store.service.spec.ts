@@ -62,6 +62,14 @@ describe('PlayerStoreService', () => {
     expect(service.trackProgressPresentage()).toBe(0);
   });
 
+  it('trackProgressPresentage should be 50 when trackCurrentTime is half of trackDuration', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+    service.trackCurrentTime.set(track.duration / 2);
+
+    expect(service.trackProgressPresentage()).toBe(50);
+  });
+
   it('queueOfPlayedTracks should be empty by default', () => {
     expect(service.queueOfPlayedTracks()).toEqual([]);
   });
@@ -133,24 +141,104 @@ describe('PlayerStoreService', () => {
     expect(service.currentTrackIndexInQueue()).toBe(0);
   });
 
-  it('getQueueByName should return the correct queue based on the queue name', () => {
-    const track = createTrack('track-1');
-    service.setTrack(track);
+  it('changeQueueSelection should change the active queue', () => {
+    service.changeQueueSelection('popularTracksQueue');
+    expect(service.activeQueue()).toBe('popularTracksQueue');
 
-    // Test the private method getQueueByName using bracket notation
-    expect(service['getQueueByName']('queueOfPlayedTracks')).toEqual([track]);
-    expect(service['getQueueByName']('albumQueue')).toEqual([]);
-    expect(service['getQueueByName']('popularTracksQueue')).toEqual([]);
-    expect(service['getQueueByName']('artistQueue')).toEqual([]);
-    expect(service['getQueueByName']('playlistQueue')).toEqual([]);
+    service.changeQueueSelection('albumQueue');
+    expect(service.activeQueue()).toBe('albumQueue');
+
+    service.changeQueueSelection('artistQueue');
+    expect(service.activeQueue()).toBe('artistQueue');
+
+    service.changeQueueSelection('playlistQueue');
+    expect(service.activeQueue()).toBe('playlistQueue');
+
+    service.changeQueueSelection('queueOfPlayedTracks');
+    expect(service.activeQueue()).toBe('queueOfPlayedTracks');
   });
 
-  it('trackProgressPresentage should be 50 when trackCurrentTime is half of trackDuration', () => {
-    const track = createTrack('track-1');
-    service.setTrack(track);
-    service.trackCurrentTime.set(track.duration / 2);
+  it('setPopularTracksQueue should set popularTracksQueue', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setPopularTracksQueue(tracks);
+    expect(service.popularTracksQueue()).toEqual(tracks);
+  });
 
-    expect(service.trackProgressPresentage()).toBe(50);
+  it('setPopularTracksQueue should set popularTracksQueue if autoSelect is true', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setPopularTracksQueue(tracks, true);
+    expect(service.popularTracksQueue()).toEqual(tracks);
+    expect(service.activeQueue()).toBe('popularTracksQueue');
+  });
+
+  it('setAlbumQueue should set albumQueue', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setAlbumQueue(tracks);
+    expect(service.albumQueue()).toEqual(tracks);
+  });
+
+  it('setAlbumQueue should set albumQueue if autoSelect is true', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setAlbumQueue(tracks, true);
+    expect(service.albumQueue()).toEqual(tracks);
+    expect(service.activeQueue()).toBe('albumQueue');
+  });
+
+  it('setArtistQueue should set artistQueue', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setArtistQueue(tracks);
+    expect(service.artistQueue()).toEqual(tracks);
+  });
+
+  it('setArtistQueue should set artistQueue if autoSelect is true', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setArtistQueue(tracks, true);
+    expect(service.artistQueue()).toEqual(tracks);
+    expect(service.activeQueue()).toBe('artistQueue');
+  });
+
+  it('setPlaylistQueue should set playlistQueue', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setPlaylistQueue(tracks);
+    expect(service.playlistQueue()).toEqual(tracks);
+  });
+
+  it('setPlaylistQueue should set playlistQueue if autoSelect is true', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setPlaylistQueue(tracks, true);
+    expect(service.playlistQueue()).toEqual(tracks);
+    expect(service.activeQueue()).toBe('playlistQueue');
+  });
+
+  it('setQueueOfPlayedTracks should set queueOfPlayedTracks', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setQueueOfPlayedTracks(tracks);
+    expect(service.queueOfPlayedTracks()).toEqual(tracks);
+  });
+
+  it('setQueueOfPlayedTracks should set queueOfPlayedTracks if autoSelect is true', () => {
+    const tracks = [createTrack('tracks-1'), createTrack('track-2')];
+    service.setQueueOfPlayedTracks(tracks, true);
+    expect(service.queueOfPlayedTracks()).toEqual(tracks);
+    expect(service.activeQueue()).toBe('queueOfPlayedTracks');
+  });
+
+  it('setPreviousTrackFromQueue should set the previous track in the queue as currentTrack', () => {
+    const track1 = createTrack('track-1');
+    const track2 = createTrack('track-2');
+    service.setQueueOfPlayedTracks([track1, track2]);
+    service.setTrack(track2);
+    service.setPreviousTrackFromQueue();
+    expect(service.currentTrack()).toEqual(track1);
+  });
+
+  it('setNextTrackFromQueue should set the next track in the queue as currentTrack', () => {
+    const track1 = createTrack('track-1');
+    const track2 = createTrack('track-2');
+    service.setQueueOfPlayedTracks([track1, track2]);
+    service.setTrack(track1);
+    service.setNextTrackFromQueue();
+    expect(service.currentTrack()).toEqual(track2);
   });
 
   it('setTrack should set currentTrack', () => {
@@ -161,16 +249,12 @@ describe('PlayerStoreService', () => {
     expect(service.currentTrack()).toEqual(track);
   });
 
-  it('resetTrackState should reset track state', () => {
+  it('setTrack should update queueOfPlayedTracks', () => {
     const track = createTrack('track-1');
     service.setTrack(track);
-
-    service.trackCurrentTime.set(track.duration);
-
-    service.resetTrackState();
-
-    expect(service.isPlaying()).toBe(false);
-    expect(service.trackCurrentTime()).toBe(0);
+    const track2 = createTrack('track-2');
+    service.setTrack(track2);
+    expect(service.queueOfPlayedTracks()).toEqual([track2, track]);
   });
 
   it('setTrack should enable playback by default', () => {
@@ -192,30 +276,72 @@ describe('PlayerStoreService', () => {
     expect(service.isPlaying()).toBe(false);
   });
 
-  it('addTrackToQueue should add track to queueOfPlayedTracks', () => {
+  it('resetTrackState should reset track state', () => {
     const track = createTrack('track-1');
     service.setTrack(track);
-    expect(service.queueOfPlayedTracks()).toContain(track);
 
-    const track2 = createTrack('track-2');
-    service.setTrack(track2);
-    expect(service.queueOfPlayedTracks()).toEqual([track2, track]);
+    service.trackCurrentTime.set(track.duration);
+
+    service.resetTrackState();
+
+    expect(service.isPlaying()).toBe(false);
+    expect(service.trackCurrentTime()).toBe(0);
   });
 
-  it('changeQueueSelection should change the active queue', () => {
-    service.changeQueueSelection('popularTracksQueue');
-    expect(service.activeQueue()).toBe('popularTracksQueue');
+  it('togglePlayback should toggle playback state', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
 
-    service.changeQueueSelection('albumQueue');
-    expect(service.activeQueue()).toBe('albumQueue');
+    service.togglePlay();
 
-    service.changeQueueSelection('artistQueue');
-    expect(service.activeQueue()).toBe('artistQueue');
+    expect(service.isPlaying()).toBe(false);
 
-    service.changeQueueSelection('playlistQueue');
-    expect(service.activeQueue()).toBe('playlistQueue');
+    service.togglePlay();
 
-    service.changeQueueSelection('queueOfPlayedTracks');
-    expect(service.activeQueue()).toBe('queueOfPlayedTracks');
+    expect(service.isPlaying()).toBe(true);
+  });
+
+  it.todo('audion should be set when setTrack is called');
+
+  it('clearTrack should remove currentTrack and reset track state', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+
+    service.clearTrack();
+
+    expect(service.currentTrack()).toBeNull();
+    expect(service.isPlaying()).toBe(false);
+    expect(service.trackCurrentTime()).toBe(0);
+  });
+
+  it('isCurrentTrackInQueue should return true when currentTrack is in the queue', () => {
+    const track = createTrack('track-1');
+    service.setQueueOfPlayedTracks([track]);
+    service.setTrack(track);
+
+    expect(service.isCurrentTrackChosen(track)).toBe(true);
+  });
+
+  it('isCurrentTrackInQueue should return false when currentTrack is not in the queue', () => {
+    const track1 = createTrack('track-1');
+    const track2 = createTrack('track-2');
+    service.setQueueOfPlayedTracks([track1]);
+    service.setTrack(track1);
+
+    expect(service.isCurrentTrackChosen(track2)).toBe(false);
+  });
+
+  it('isCurrentTrackPlaying should return true when currentTrack is playing', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track);
+
+    expect(service.isCurrentTrackPlaying(track)).toBe(true);
+  });
+
+  it('isCurrentTrackPlaying should return false when currentTrack is not playing', () => {
+    const track = createTrack('track-1');
+    service.setTrack(track, { autoplay: false });
+
+    expect(service.isCurrentTrackPlaying(track)).toBe(false);
   });
 });
