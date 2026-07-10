@@ -18,18 +18,15 @@ describe('AboutPageComponent', () => {
     await fixture.whenStable();
   });
 
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 
   it('should have an image', () => {
     const element = fixture.nativeElement;
     const image = element.querySelector('img');
     expect(image).toBeTruthy();
     expect(image.src).toContain('assets/gif/black-cat.gif');
-
   });
 
   it('title should have a text', () => {
