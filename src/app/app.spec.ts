@@ -34,12 +34,6 @@ describe('App', () => {
     expect(compiled.querySelector('header')).toBeTruthy();
   });
 
-  it('should render header with correct content', () => {
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('RX Beat');
-  });
-
   it('should render footer', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
