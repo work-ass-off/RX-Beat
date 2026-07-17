@@ -14,7 +14,7 @@ npm run stylelint:fix
 npm run stylelint
 
 
-# echo "🌻 Running tests..."
-# npm run test
+echo "🌻 Running tests..."
+npm run test:ci
 
 echo "🌸 All checks passed!"
