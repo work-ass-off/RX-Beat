@@ -1,11 +1,17 @@
-<div class="track-cover">
-  <img [src]="trackImage()" alt="track cover" class="track-cover" />
-</div>
-<div class="track-info">
-  <h3>{{ trackName() }}</h3>
-  <p>{{ artistName() }}</p>
-</div>
+@if (track(); as currentTrack) {
+  @if (currentTrack.image) {
+    <div class="track-cover">
+      <img [src]="currentTrack.image" alt="track cover" class="track-cover" />
+    </div>
+  } @else {
+    <div class="img-fallback">
+      <span class="material-symbols-rounded"> music_note_2 </span>
+    </div>
+  }
+  <div class="track-info">
+    <h3>{{ currentTrack.name }}</h3>
+    <p>{{ currentTrack.artist_name }}</p>
+  </div>
 
-<button class="btn btn-player like-button" (click)="toggleLike()">
-  <span class="material-symbols-outlined"> {{ isLikedTrack() ? 'check_circle' : 'add_circle' }} </span>
-</button>
+  <app-playlist-menu [trackId]="currentTrack.id"></app-playlist-menu>
+}

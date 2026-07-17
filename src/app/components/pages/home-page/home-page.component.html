@@ -1,11 +1,7 @@
-<!-- <app-sidebar-wrapper>
-  <app-left-header sidebarHeader />
-  <app-left-content sidebarBody />
-</app-sidebar-wrapper> -->
 <div class="wrapper">
   <header app-home-header></header>
   <main class="main">
-    <router-outlet></router-outlet>
+    <router-outlet />
   </main>
   <footer app-home-footer></footer>
 </div>
@@ -13,3 +9,5 @@
   <app-right-header sidebarHeader />
   <app-right-content sidebarBody />
 </app-sidebar-wrapper>
+
+<app-toast />

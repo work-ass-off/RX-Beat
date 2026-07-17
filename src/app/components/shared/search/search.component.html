@@ -9,17 +9,17 @@
     id="search"
     type="text"
     placeholder="{{ 'HEADER.SEARCH' | translate }}"
-    [value]="jamendoTracksService.query()"
+    [value]="query()"
     (input)="onTypeSearch(searchInput.value)"
-    (focus)="jamendoTracksService.isAutocompleteOpen.set(true)"
-    (blur)="jamendoTracksService.isAutocompleteOpen.set(false)"
+    (focus)="isOpened(true)"
+    (blur)="isOpened(false)"
   />
   <button class="btn-icon material-icons browser" type="button">browser_updated</button>
 </form>
-@if (jamendoTracksService.isAutocompleteOpen() && jamendoTracksService.autocompleteResource.value(); as suggestions) {
+@if (isAutocompleteOpen() && (autocomplete$ | async); as autocomplete) {
   <ul class="autocomplete">
-    @for (item of suggestions.tracks; track item) {
-      <li (mousedown)="onConfirmSearch(item)">
+    @for (item of getItem(autocomplete); track item) {
+      <li (mousedown)="$event.preventDefault(); onConfirmSearch(item)">
         {{ item }}
       </li>
     }

@@ -1,5 +1,5 @@
 <header app-header></header>
-<section class="section" [style.paddingBottom.px]="isLoggedIn() ? 120 : 0">
+<section class="section" [class.has-player]="isLoggedIn()">
   <router-outlet></router-outlet>
 </section>
 <footer app-footer></footer>

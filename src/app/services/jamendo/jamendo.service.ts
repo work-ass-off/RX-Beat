@@ -8,53 +8,31 @@ import { LOADER_TYPE } from '../loading/loading.context';
   providedIn: 'root',
 })
 export class JamendoService {
-  // * ADD HTTP CLIENT
   private readonly http = inject(HttpClient);
 
   private readonly baseUrl = 'https://api.jamendo.com/v3.0';
 
   private readonly clientId = environment.jamendoClientId;
 
-  private buildUrl(endpoint: string, params?: Record<string, unknown>): string {
-    const searchParams = new URLSearchParams({
-      client_id: this.clientId,
-      format: 'json',
-    });
-
-    Object.entries(params ?? {}).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        searchParams.set(key, String(value));
-      }
-    });
-
-    return `${this.baseUrl}/${endpoint}?${searchParams}`;
-  }
-
-  public async get<T>(endpoint: string, params?: Record<string, unknown>, signal?: AbortSignal): Promise<T> {
-    const response = await fetch(this.buildUrl(endpoint, params), {
-      signal,
-    });
-
-    if (!response.ok) {
-      throw new Error(`Jamendo API error: ${response.status}`);
-    }
-
-    return response.json() as Promise<T>;
-  }
-
-  // * NEW IMPLEMINTATION WITH HTTP CLIENT
-
   private buildParams(params?: Record<string, unknown>): HttpParams {
     let httpParams = new HttpParams().set('client_id', this.clientId).set('format', 'json');
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          httpParams = httpParams.set(key, String(value));
+        if (value === undefined || value === null) return;
+
+        if (Array.isArray(value)) {
+          value.forEach((v) => {
+            if (v !== undefined && v !== null) {
+              httpParams = httpParams.append(key, String(v));
+            }
+          });
+          return;
         }
+
+        httpParams = httpParams.set(key, String(value));
       });
     }
-
     return httpParams;
   }
 

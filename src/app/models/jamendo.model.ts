@@ -59,9 +59,15 @@ export type Album = {
 
 export type JamendoAlbumsResponse = JamendoResponse<Album[]>;
 
-export type JamendoAutocompleteResponse = {
+export type Key = 'tracks' | 'artists' | 'albums';
+
+export type Autocomplete = { [K in Key]: Record<K, string[]> }[Key];
+
+export type JamendoAutocompleteResponse = JamendoResponse<Autocomplete>;
+
+/* export type JamendoAutocompleteResponse = {
   tracks: string[];
   artists: string[];
   albums: string[];
   tags: string[];
-};
+}; */

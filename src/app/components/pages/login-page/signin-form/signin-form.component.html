@@ -17,6 +17,3 @@
 
   <button type="submit" [disabled]="signinForm.invalid" class="btn-primary">Log in</button>
 </form>
-@if (notificationService.notification()) {
-  <p class="error">{{ notificationService.notification() }}</p>
-}

@@ -1,7 +1,7 @@
 import type { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { LoadingService } from '../services/loading/loading.service';
-import { finalize } from 'rxjs';
+import { delay, finalize } from 'rxjs';
 import { LOADER_TYPE } from '../services/loading/loading.context';
 
 export const loadingInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
@@ -12,6 +12,7 @@ export const loadingInterceptor: HttpInterceptorFn = (request: HttpRequest<unkno
   loadingService.show(loaderType);
 
   return next(request).pipe(
+    delay(250),
     finalize(() => {
       loadingService.hide(loaderType);
     }),

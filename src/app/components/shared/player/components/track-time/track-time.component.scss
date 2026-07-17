@@ -3,7 +3,9 @@
 :host {
   @include flex($gap: 0);
 
-  width: 100px;
+  width: clamp(4rem, 8vw, 6.5rem);
+  min-width: 0;
+  overflow: hidden;
   font-size: 0.875rem;
   background-color: var(--bg-surface);
 }

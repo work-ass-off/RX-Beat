@@ -15,6 +15,7 @@ import { appReducer } from './store/app.state';
 import { ArtistsEffects } from './store/artists/artist.effects';
 import { TracksEffects } from './store/track/track.effects';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -39,5 +40,6 @@ export const appConfig: ApplicationConfig = {
     provideStore(appReducer),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([AlbumsEffects, ArtistsEffects, TracksEffects]),
+    provideAnimations(),
   ],
 };

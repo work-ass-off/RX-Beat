@@ -1,0 +1,13 @@
+@for (toast of toasts(); track toast.id) {
+  <div class="toast" [ngClass]="toast.type" [@toastAnimation]>
+    <div class="toast-icon">
+      <span class="material-symbols-rounded">{{ toast.type === 'success' ? 'done' : toast.type }}</span>
+    </div>
+    <div class="toast-content">
+      <div class="title">{{ toast.title }}</div>
+      <div class="message">{{ toast.message }}</div>
+    </div>
+    <button class="toast-close" (click)="removeToast(toast.id)">X</button>
+    <div class="toast-loader"></div>
+  </div>
+}

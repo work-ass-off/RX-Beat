@@ -10,8 +10,10 @@ export type PlaylistDto = {
 export type Playlist = {
   id: string;
   name: string;
+  userId: string;
   createdAt: number;
   updatedAt: number;
+  tracks: string[];
 };
 
 export type User = {

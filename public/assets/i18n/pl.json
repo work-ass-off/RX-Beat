@@ -16,8 +16,8 @@
           "PLAYLISTS": "Playlisty",
           "ARTISTS": "Artyści",
           "ALBUMS": "Albumy",
-          "PODCASTS": "Podcasty",
-          "RADIO": "Radio"
+          "HISTORY": "Historia odtwarzania",
+          "TRACKS": "Piosenki"
         }
       }
     }
@@ -27,5 +27,12 @@
     "CONFIRM_MESSAGE": "Czy na pewno chcesz opuścić tę stronę? Wprowadzone zmiany zostaną utracone.",
     "CONFIRM_BUTTON": "Tak",
     "CANCEL_BUTTON": "Nie"
+  },
+  "ABOUT": {
+    "TITLE": "O nas",
+    "DESCRIPTION": "To aplikacja do odtwarzania muzyki, która pozwala słuchać ulubionych utworów, albumów i playlist. Możesz również tworzyć własne playlisty i zarządzać swoją biblioteką muzyczną.",
+    "VERSION": "Wersja",
+    "AUTHORS": "Autorzy",
+    "CONTACT": "Kontakt"
   }
 }

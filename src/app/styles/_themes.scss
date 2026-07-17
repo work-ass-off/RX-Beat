@@ -22,6 +22,13 @@
     --border: #282828;
     --border-none: none;
     --shadow: 0 8px 24px rgb(0 0 0 / 0.5);
+
+    // Gradient
+    --overlay-gradient-right: linear-gradient(90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+    --overlay-gradient-left: linear-gradient(-90deg, rgb(18 18 18 / 0) 0%, rgb(18 18 18 / 1) 80%);
+
+    // Shadow
+    --overlay-shadow: rgb(0 0 0 / 0.3);
   }
 
   [data-theme='light'] {
@@ -45,5 +52,12 @@
     --border: #e0e0e0;
     --border-none: none;
     --shadow: 0 8px 24px rgb(0 0 0 / 0.1);
+
+    // Gradient
+    --overlay-gradient-right: linear-gradient(90deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 1) 80%);
+    --overlay-gradient-left: linear-gradient(-90deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 1) 80%);
+
+    // Shadow
+    --overlay-shadow: rgb(0 0 0 / 0.2);
   }
 }

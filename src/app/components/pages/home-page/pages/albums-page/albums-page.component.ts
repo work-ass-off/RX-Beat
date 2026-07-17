@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { JamendoAlbumsService } from '../../../../../services/jamendo/jamendo-albums/jamendo-albums.service';
-import { NotificationService } from '../../../../../services/notification/notification.service';
-import type { Observable } from 'rxjs';
+import { type Observable } from 'rxjs';
 import type { Album } from '../../../../../models';
 import { AsyncPipe } from '@angular/common';
 import { LoadingService } from '../../../../../services/loading/loading.service';
 import { AlbumComponent } from '../../../../shared/album/album.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoaderSpinnerComponent } from '../../../../shared/loader-spinner/loader-spinner.component';
+import { JamendoAbstractService } from '../../../../../services/jamendo/jamendo-abstract/jamendo-abstract.service';
 
 @Component({
   selector: 'app-albums-page',
@@ -15,16 +14,13 @@ import { LoaderSpinnerComponent } from '../../../../shared/loader-spinner/loader
   templateUrl: './albums-page.component.html',
   styleUrl: './albums-page.component.scss',
   host: {
-    class: 'albums',
+    class: 'two-columns',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlbumsPageComponent {
-  private jamendoAlbumsService = inject(JamendoAlbumsService);
-  private loadingService = inject(LoadingService);
-
-  public notificationService = inject(NotificationService);
-
-  public albums$: Observable<Album[]> = this.jamendoAlbumsService.getAlbums();
-  public loading = this.loadingService.isLoaderActive('albums');
+  private _jamendoService = inject(JamendoAbstractService);
+  private _loadingService = inject(LoadingService);
+  public loading = this._loadingService.isLoaderActive('albums');
+  public albums$: Observable<Album[]> = this._jamendoService.data$;
 }

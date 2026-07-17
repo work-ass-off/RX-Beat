@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import type { Track } from '../../../models';
 import { TrackTimePipe } from '../../../pipes/track-time/track-time.pipe';
+import { PlayerStoreService } from '../../../services/store/player-store/player-store.service';
 
 @Component({
   selector: 'app-track',
@@ -9,10 +10,17 @@ import { TrackTimePipe } from '../../../pipes/track-time/track-time.pipe';
   styleUrl: './track.component.scss',
   host: {
     class: 'track',
+    '(click)': 'onAddToTrackQueue()',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrackComponent {
+  private playerStoreService = inject(PlayerStoreService);
+
   public track = input.required<Track>();
   public index = input.required<number>();
+
+  public onAddToTrackQueue(): void {
+    this.playerStoreService.setTrack(this.track());
+  }
 }

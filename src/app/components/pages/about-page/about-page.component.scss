@@ -5,3 +5,11 @@
 
   margin-bottom: auto;
 }
+
+.description {
+  @include flex($direction: column);
+
+  max-width: 800px;
+  margin-bottom: 20px;
+  text-align: center;
+}
