@@ -2,7 +2,7 @@ import { type HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { LocalStorageService } from '../services/local-storage/local-storage.service';
 import { inject } from '@angular/core';
-import { catchError, EMPTY } from 'rxjs';
+import { catchError, EMPTY, throwError } from 'rxjs';
 import { ToastService } from '../services/toast/toast.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
@@ -25,9 +25,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err) => {
       if (err.status === 401) {
         localStorageService.removeItem('token');
+        toastService.warning('Please log in to continue');
+        return EMPTY;
       }
-      toastService.info('Please log in to continue');
-      return EMPTY;
+
+      return throwError(() => err);
     }),
   );
 };
