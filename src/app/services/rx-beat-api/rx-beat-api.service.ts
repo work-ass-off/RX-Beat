@@ -12,7 +12,7 @@ import { LOADER_TYPE } from '../loading/loading.context';
 })
 export class RxBeatApiService {
   private HttpClient = inject(HttpClient);
-  private toastService = inject(ToastService);
+  public toastService = inject(ToastService);
   private authService = inject(AuthService);
 
   private readonly _baseUrl = environment.rxBeatUrl;
@@ -24,7 +24,7 @@ export class RxBeatApiService {
       }),
       catchError((err: HttpErrorResponse) => {
         if (err.status === 409) {
-          this.toastService.error(err.error?.message || 'User already exists');
+          this.toastService.error('User already exists. Use another login');
         } else if (err.status === 400) {
           this.toastService.error(err.error?.message || 'Bad request');
         } else {
