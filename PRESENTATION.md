@@ -148,11 +148,19 @@ Worked on backend-oriented features, API integration, authentication flow and sy
 
 #### Features
 
-...
+Tracks
+Albums → Tracks navigation
+Artists → Tracks navigation
+Reusable API service architecture
+Left Sidebar wrapper
+Loader system with HTTP Interceptor
+Toast
 
 #### Learned
 
-...
+Implemented Jamendo API integration using an abstract service pattern with separate services for Tracks, Albums, and Artists. Used Angular Dependency Injection to dynamically provide different services depending on the route.
+Worked with RxJS streams, Signals, HTTP Interceptors, and HttpContext to build reactive data loading and a reusable loader system.
+Created reusable layout components with a wrapper-based approach and improved my understanding of Angular architecture, dependency injection, and reactive programming.
 
 ### @DzmitryAliakseyeu
 
