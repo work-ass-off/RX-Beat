@@ -1,28 +1,77 @@
-# 2. The team showed the architecture and explained at least 2 decisions with trade-offs
+# 🎵 Music App
 
-## Architecture & Key Decisions
+A collaborative educational project built with **Angular 21** as part of the RS School Angular course.
+The application is inspired by Spotify and focuses on modern frontend development, teamwork, and best practices.
 
-### High-Level Architecture
+---
+
+# 🎬 Product Demo
+
+## User Story
+
+> 📹 Demo video (link will be here)
+
+The user:
+
+1. Creates an account
+2. Logs in
+3. Browses artists and albums
+4. Creates a playlist
+5. Adds tracks
+6. Returns later and sees saved playlists
+
+---
+
+# 🏗 Architecture
+
+## Application Overview
 
 ```text
-
-[ Angular UI / Components ]
-
-            │
-
-            ▼
-
-[ Feature Services (RxJS) ]
-
-            │
-
-            ▼
-
-[ REST API / Backend ]
+                           Browser
+                               │
+                               ▼
+                        Angular Router
+                               │
+     ┌─────────────────────────┴────────────────────────┐
+     │                                                  │
+ Authentication Feature                    Music Features
+ (Login / Sign Up)              Artists / Albums / Tracks / Playlists
+     │                                                  │
+     └─────────────────────────┬────────────────────────┘
+                               ▼
+                      Services (RxJS)
+                               │
+                         HttpClient
+                               │
+                               ▼
+                          REST Backend
 
 ```
 
----
+## Folder Structure
+
+```
+src/app
+│
+├── components/
+│   ├── shared/
+│   ├── pages/
+│   └── ...
+│
+├── services/
+│   ├── auth/
+│   ├── notification/
+│   └── ...
+│
+├── guards/
+├── pipes/
+├── routes/
+├── styles/
+├── modals/
+├── directives/
+├── interceptors/
+└── store/
+```
 
 ## Key Decisions & Trade-Offs
 
@@ -49,3 +98,77 @@
   - _Pros:_ The app loads faster because pages load only when the user opens them.
   - _Cons:_ Requires a bit more work to set up routes correctly.
 - **Why We Chose Option B:** We chose lazy loading to make the app start faster for the user and to keep our code clean and organized by features.
+
+## ❌ Failure Story
+
+### Problem
+
+During testing we discovered that after logging out the application still displayed playlists.
+
+### Why it happened
+
+The authentication token was removed successfully, but the playlist data remained cached inside the Angular service.
+
+### What we tried
+
+Verified route guards
+Checked token removal
+Tested API authorization
+
+Everything worked correctly.
+
+### Root Cause
+
+The cached playlist state inside the service wasn't cleared on logout.
+
+### Solution
+
+The logout process should also reset cached data inside application services (or a global state). This bug was found after the final sprint, so we documented it as technical debt.
+
+### Lesson Learned
+
+Removing authentication is only one part of logout. Client-side cached data must also be cleared.
+
+## 👥 Team Contributions
+
+### @dzichonka
+
+#### Features
+
+Login
+Sign Up
+Playlists
+Backend integration
+
+#### Learned
+
+Worked on backend-oriented features, API integration, authentication flow and synchronization between frontend and backend.
+
+### @snitkon
+
+#### Features
+
+...
+
+#### Learned
+
+...
+
+### @DzmitryAliakseyeu
+
+#### Features
+
+...
+
+#### Learned
+
+...
+
+## 🚀 What We Learned
+
+Angular standalone architecture
+Routing and lazy loading
+RxJS
+Working with REST APIs
+Team collaboration using Git
+Sprint planning and code reviews
