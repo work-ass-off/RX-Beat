@@ -180,3 +180,18 @@ RxJS
 Working with REST APIs
 Team collaboration using Git
 Sprint planning and code reviews
+
+## 📷 Screen shots
+
+![Log in](https://pic2url.com/wp-content/uploads/2026/08/rXdb37uWGyUu.png)
+![Sign up](https://pic2url.com/wp-content/uploads/2026/08/niTblJoPpeeL.png)
+![Tracks](https://pic2url.com/wp-content/uploads/2026/08/amzNVDrjjXBe.png)
+![Albums](https://pic2url.com/wp-content/uploads/2026/08/XBwCS5Q8yySW.png)
+![Artists](https://pic2url.com/wp-content/uploads/2026/08/yjV0qt7lrVlv.png)
+![Playlists](https://pic2url.com/wp-content/uploads/2026/08/qqfP9LkSG8QG.png)
+![Tracks queue](https://pic2url.com/wp-content/uploads/2026/08/ammhEWjhYrd6.png)
+![Light theme](https://pic2url.com/wp-content/uploads/2026/08/49LTV3bR08gT.png)
+![Search](https://pic2url.com/wp-content/uploads/2026/08/g1Zx9wX1BsSO.png)
+![Tost info](https://pic2url.com/wp-content/uploads/2026/08/DlanqUFzEvap.png)
+![About](https://pic2url.com/wp-content/uploads/2026/08/X9LuuXezuvqc.png)
+![Toast error](https://pic2url.com/wp-content/uploads/2026/08/my1dkkqnj9js.png)
