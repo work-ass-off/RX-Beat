@@ -9,7 +9,70 @@ The application is inspired by Spotify and focuses on modern frontend developmen
 
 ## User Story
 
-> 📹 Demo video (link will be here)
+> 📹 Demo video ([Demo](https://youtu.be/aE36MIKuBQM))
+
+##### Description
+
+1. New Account Registration (00:00 — 00:11)
+   Initial State: The user arrives at the main page for unauthenticated users displaying the message "Please log in to listen to music".
+
+Navigation: Clicks the Sign up button in the top right corner.
+
+Form Completion:
+
+Enters the username (Login): Rxbeat1.
+
+Fills in the Password field.
+
+Begins typing in the Confirm password field; a validation error appears ("Passwords do not match") until the input matches the password above.
+
+Submission: Clicks the green Sign up button.
+
+2. Sign-In & Content Viewing (00:12 — 00:18)
+   Successful Login: A notification toast appears reading "Info: You are login".
+
+Data Loading: A list of tracks is displayed (including Wish You Were Here, RED LIGHT, What is Love, etc.).
+
+Storage Check: The user opens Chrome DevTools (Application -> Local Storage) to inspect the saved user key/token.
+
+Sign-Out: Clicks the Log out button ("Info: You are log out" toast appears).
+
+3. Re-Authentication & Invalid Password Handling (00:26 — 01:03)
+   First Post-Registration Login: Clicks Log in, enters Rxbeat! with the correct password, successfully logs in, and then logs back out.
+
+Authentication Error:
+
+Clicks Log in again, enters Rxbeat!, but enters an incorrect password.
+
+Clicks Log in — an error toast appears: "Error: Incorrect credentials".
+
+Successful Login: Enters the correct password and clicks Log in — successfully authenticates ("Info: You are login").
+
+4. Browsing Albums & Creating a Playlist (01:13 — 01:53)
+   Browsing Albums: Navigates to the Albums tab, where a grid of albums (TriFace, Skaut, Pouce!, etc.) is shown.
+
+Album Selection: Clicks on the Skaut album to view its tracklist on the right side.
+
+Creating a Playlist:
+
+Clicks the Create playlist button.
+
+Types the name Favorite in the modal input field.
+
+Clicks the green Create playlist button to submit.
+
+Tab Navigation:
+
+Switches to the Playlists tab — the newly created Favorite playlist is listed on the left.
+
+Switches to the Tracks tab — displays the track "1. Un Poil De Rellifon".
+
+5. Verifying Session Persistence (01:54 — 02:20)
+   Sign-Out: Clicks Log out.
+
+Re-Login: Clicks Log in, enters credentials for Rxbeat1, and signs in again.
+
+Data Verification: Navigates back to the Playlists tab to verify that the previously created Favorite playlist and its tracks persisted across sessions.
 
 The user:
 
@@ -166,9 +229,18 @@ Created reusable layout components with a wrapper-based approach and improved my
 
 #### Features
 
+Auth guards
+Basic routes
+Custom music player
+Service to manage player state
+Reusable components
+Tests for about page, album, playlist-tracks, play-store service.
+
 ...
 
 #### Learned
+
+During this project, I strengthened my core Angular fundamentals by working with components, templates, signals, lifecycle hooks, and both Zone.js and zoneless change detection. I gained practical experience in Angular routing by configuring nested routes, lazy-loading strategies, and asynchronous route guards with confirmation dialogs. To manage reactive data flow, I deepened my understanding of RxJS, focusing on cold versus hot Observables, higher-order operators, and Subjects for shared state. A major focus was designing a centralized audio player architecture within PlayerStoreService to manage playback states, volume, history, and context-driven queues. I successfully synchronized Angular state with the native HTMLAudioElement using effect, computed, and onCleanup while safely handling asynchronous media events and browser autoplay restrictions. Additionally, I learned how to handle edge cases in audio streams, avoiding race conditions during rapid track switching and preventing duplicate history entries. Finally, I expanded my unit testing capabilities using Vitest and Angular testing tools to verify services and component data bindings.
 
 ...
 
