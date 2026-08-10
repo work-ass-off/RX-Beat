@@ -218,12 +218,14 @@ Reusable API service architecture
 Left Sidebar wrapper
 Loader system with HTTP Interceptor
 Toast
+Tests for abstract service, toast component, modal component etc.
 
 #### Learned
 
 Implemented Jamendo API integration using an abstract service pattern with separate services for Tracks, Albums, and Artists. Used Angular Dependency Injection to dynamically provide different services depending on the route.
 Worked with RxJS streams, Signals, HTTP Interceptors, and HttpContext to build reactive data loading and a reusable loader system.
 Created reusable layout components with a wrapper-based approach and improved my understanding of Angular architecture, dependency injection, and reactive programming.
+I learned advanced unit testing techniques using Vitest and Angular testing tools, leveraging mock data and controlled injection contexts to verify Signals, RxJS streams, and directives.
 
 ### @DzmitryAliakseyeu
 
@@ -236,13 +238,9 @@ Service to manage player state
 Reusable components
 Tests for about page, album, playlist-tracks, play-store service.
 
-...
-
 #### Learned
 
 During this project, I strengthened my core Angular fundamentals by working with components, templates, signals, lifecycle hooks, and both Zone.js and zoneless change detection. I gained practical experience in Angular routing by configuring nested routes, lazy-loading strategies, and asynchronous route guards with confirmation dialogs. To manage reactive data flow, I deepened my understanding of RxJS, focusing on cold versus hot Observables, higher-order operators, and Subjects for shared state. A major focus was designing a centralized audio player architecture within PlayerStoreService to manage playback states, volume, history, and context-driven queues. I successfully synchronized Angular state with the native HTMLAudioElement using effect, computed, and onCleanup while safely handling asynchronous media events and browser autoplay restrictions. Additionally, I learned how to handle edge cases in audio streams, avoiding race conditions during rapid track switching and preventing duplicate history entries. Finally, I expanded my unit testing capabilities using Vitest and Angular testing tools to verify services and component data bindings.
-
-...
 
 ## 🚀 What We Learned
 
