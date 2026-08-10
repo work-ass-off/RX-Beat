@@ -198,10 +198,10 @@ Removing authentication is only one part of logout. Client-side cached data must
 
 #### Features
 
-Login
-Sign Up
-Playlists
-Backend integration
+- Login
+- Sign Up
+- Playlists
+- Backend integration
 
 #### Learned
 
@@ -211,14 +211,14 @@ Worked on backend-oriented features, API integration, authentication flow and sy
 
 #### Features
 
-Tracks
-Albums → Tracks navigation
-Artists → Tracks navigation
-Reusable API service architecture
-Left Sidebar wrapper
-Loader system with HTTP Interceptor
-Toast
-Tests for abstract service, toast component, modal component etc.
+- Tracks
+- Albums → Tracks navigation
+- Artists → Tracks navigation
+- Reusable API service architecture
+- Left Sidebar wrapper
+- Loader system with HTTP Interceptor
+- Toast
+- Tests for abstract service, toast component, modal component etc.
 
 #### Learned
 
@@ -231,12 +231,12 @@ I learned advanced unit testing techniques using Vitest and Angular testing tool
 
 #### Features
 
-Auth guards
-Basic routes
-Custom music player
-Service to manage player state
-Reusable components
-Tests for about page, album, playlist-tracks, play-store service.
+- Auth guards
+- Basic routes
+- Custom music player
+- Service to manage player state
+- Reusable components
+- Tests for about page, album, playlist-tracks, play-store service.
 
 #### Learned
 
